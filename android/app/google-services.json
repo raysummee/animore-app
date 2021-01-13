@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "983071077223",
+    "firebase_url": "https://animore-db.firebaseio.com",
+    "project_id": "animore-db",
+    "storage_bucket": "animore-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983071077223:android:5ab5ac87c65c49f3f2f5c2",
+        "android_client_info": {
+          "package_name": "com.ventricles.animore.animore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983071077223-ub2kpdh20mscvfirggbrnek01fhdu67m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC6xzqmppi9A9ES4gSJ1UIWMq8dzwQH_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983071077223-ub2kpdh20mscvfirggbrnek01fhdu67m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
