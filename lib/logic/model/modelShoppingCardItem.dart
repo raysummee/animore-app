@@ -1,5 +1,4 @@
 import 'package:animore/logic/model/modelReviews.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ModelShoppingCardItem{
@@ -29,7 +28,7 @@ class ModelShoppingCardItem{
       id: doc.data.containsKey("id")?doc.documentID: "Error", 
       allDetails: doc.data.containsKey("all details")?doc.data['title']: "Error", 
       highlights: doc.data.containsKey("highlights")? (doc.data['highlights'] as List).map((element) => element.toString()).toList(): ["Error"], 
-      image: doc.data.containsKey("imageUrl")? CachedNetworkImageProvider(doc.data['imageUrl'],) : AssetImage('lib/assets/images/puppy.jpg'), 
+      image: doc.data.containsKey("imageUrl")? NetworkImage(doc.data['imageUrl'],) : AssetImage('lib/assets/images/puppy.jpg'), 
       price: doc.data.containsKey("price")?doc.data['price']: 0, 
       reviewList: doc.data.containsKey("reviews")?(doc.data['reviews'] as List).map((element) => ModelReviews.fromMap(element)).toList(): []
     );

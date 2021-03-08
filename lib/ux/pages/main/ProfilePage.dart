@@ -1,10 +1,8 @@
-import 'package:animore/logic/auth/universalAuth.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
-import 'package:animore/ux/pages/home/cartPage.dart';
-import 'package:animore/ux/pages/home/contactPage.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:animore/ux/pages/main/cartPage.dart';
+import 'package:animore/ux/pages/main/contactPage.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {

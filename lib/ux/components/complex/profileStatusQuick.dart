@@ -1,32 +1,29 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:flutter/material.dart';
 
 class ProfileStatusQuick extends StatelessWidget {
-  final String type;
-  ProfileStatusQuick({this.type:"basic"});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              FutureBuilder<void>(
-                // future: FirebaseAuth.instance.currentUser(),
-                builder: (context, snapshot) {
-                  return Text(
-                    // snapshot.data!=null&&snapshot.data.displayName!=null?
-                    // snapshot.data.displayName.split(" ").elementAt(0).toUpperCase():
-                    "USER",
+              Container(
+                child: FittedBox(
+                  child: Text(
+                    "${Auth().user().name.toUpperCase()}",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold
                     ),
-                  );
-                }
+                  ),
+                ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(10, 4, 0, 0),
@@ -36,7 +33,7 @@ class ProfileStatusQuick extends StatelessWidget {
                   color: Colors.red
                 ),
                 child: Text(
-                  type.toUpperCase(),
+                  Auth().user().role.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 10,
@@ -54,15 +51,14 @@ class ProfileStatusQuick extends StatelessWidget {
             ),
             width: 50,
             height: 50,
-            child: FutureBuilder<void>(
-              // future: FirebaseAuth.instance.currentUser(),
-              builder: (context, snapshot) {
-                if(snapshot.hasData){
+            child: Builder(
+              builder: (context) {
+                if(Auth().user().image!=null&&Auth().user().image!=""){
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
                       color: Colors.white,
-                      // child: Image(image: CachedNetworkImageProvider(snapshot.data.photoUrl), fit: BoxFit.cover,)
+                      child: Image(image: NetworkImage(Auth().user().image), fit: BoxFit.cover,)
                     )
                   );
                 }else{

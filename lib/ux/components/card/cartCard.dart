@@ -1,6 +1,6 @@
 import 'package:animore/logic/model/modelCart.dart';
 import 'package:animore/logic/model/modelShoppingCardItem.dart';
-import 'package:animore/ux/pages/home/subpagehome/buyExpandedPage.dart';
+import 'package:animore/ux/pages/main/subpagehome/buyExpandedPage.dart';
 import 'package:flutter/material.dart';
 
 class CartCard extends StatelessWidget {

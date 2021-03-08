@@ -1,4 +1,3 @@
-import 'package:animore/logic/auth/universalAuth.dart';
 import 'package:animore/ux/components/card/acceptCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
@@ -23,7 +22,7 @@ class DoctorPage extends StatelessWidget {
                     PopupMenuButton(
                       onSelected: (value){
                         if(value==1){
-                          UniversalAuth().deleteAccount(context);
+                          // UniversalAuth().deleteAccount(context);
                         }else if(value==0){
                           showGeneralDialog(
                             context: context, 
@@ -44,9 +43,7 @@ class DoctorPage extends StatelessWidget {
                         ];
                       }
                     ),
-                    ProfileStatusQuick(
-                      type: "doctor",
-                    )
+                    ProfileStatusQuick()
                   ],
                 ),
               ),

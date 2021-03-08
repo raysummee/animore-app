@@ -1,6 +1,8 @@
-import 'package:animore/logic/db/dbTodos.dart';
+import 'package:animore/logic/Helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/logic/util/dateUtil.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TodoCard extends StatefulWidget {
   final ModelTodos modelTodos;
@@ -30,7 +32,7 @@ class _TodoCardState extends State<TodoCard> {
           Row(
             children: [
               Image(
-                image: AssetImage(widget.modelTodos.imageLeading),
+                image: AssetImage("lib/assets/images/dog_bath.png"),
                 height: 60,
               ),
               Container(
@@ -50,7 +52,7 @@ class _TodoCardState extends State<TodoCard> {
                       ),
                     ),
                     Text(
-                      widget.modelTodos.sub,
+                      DateFormat("hh:mmaa").format(widget.modelTodos.time),
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
@@ -66,17 +68,16 @@ class _TodoCardState extends State<TodoCard> {
           onTap: () {
             setState(() {
               selected = !selected;
-              DbTodos().insertTodos(
-                ModelTodos(
-                  id: widget.modelTodos.id, 
-                  done: selected?DateTime.now().day:0, 
-                  imageLeading: widget.modelTodos.imageLeading, 
-                  sub: widget.modelTodos.sub, 
-                  name: widget.modelTodos.name, 
-                  removable: widget.modelTodos.removable
-                )
-              );
             });
+            TodosHelper().editTodoByWeekName(
+              ModelTodos(
+                id: widget.modelTodos.id, 
+                time: widget.modelTodos.time, 
+                name: widget.modelTodos.name,
+                done: selected?DateTime.now().day:0
+              ),
+              DateUtil().getTodayWeekName()
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

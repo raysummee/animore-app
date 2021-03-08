@@ -1,5 +1,3 @@
-import 'package:animore/logic/auth/googleAuth.dart';
-import 'package:animore/logic/db/dbCart.dart';
 import 'package:animore/logic/model/modelCart.dart';
 import 'package:animore/logic/model/modelShoppingCardItem.dart';
 import 'package:animore/ux/components/button/mediumButton.dart';
@@ -311,9 +309,9 @@ class BuyExpandedPage extends StatelessWidget {
                         color: Colors.white,
                         child: InkWell(
                           onTap: ()async{
-                            await DbCart().insertCart(
-                              ModelCart(name: modelShoppingCardItem.title, id: modelShoppingCardItem.id, price: modelShoppingCardItem.price.toString())
-                            );
+                            // await DbCart().insertCart(
+                            //   ModelCart(name: modelShoppingCardItem.title, id: modelShoppingCardItem.id, price: modelShoppingCardItem.price.toString())
+                            // );
                             Scaffold.of(context).showSnackBar(
                               SnackBar(content: Text("Added to cart"))
                             );

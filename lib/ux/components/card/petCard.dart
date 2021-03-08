@@ -1,9 +1,11 @@
+import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PetCard extends StatelessWidget {
   final String petName;
-  final DateTime dateVaccine;
-  PetCard(this.petName, this.dateVaccine);
+  final ModelImportantEvent importantEvent;
+  PetCard(this.petName, this.importantEvent);
 
   @override
   Widget build(BuildContext context) {
@@ -72,24 +74,11 @@ class PetCard extends StatelessWidget {
                   )
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 5),
+                  padding: EdgeInsets.only(top: 5, right: 8),
                   child: Text(
-                    ((){
-                      if(dateVaccine!=null)
-                        if(dateVaccine.month == DateTime.now().month&&dateVaccine.year == DateTime.now().year){
-                          if(DateTime.now().day-dateVaccine.day==0){
-                            return "Vaccinate - Today";
-                          }else if(DateTime.now().day-dateVaccine.day==1){
-                            return "Vaccinate - Tomorrow";
-                          }else{
-                            return "Vaccinate - in ${dateVaccine.day - DateTime.now().day} days";
-                          }
-                        }else{
-                          return "Vaccinate - in ${(dateVaccine.month - DateTime.now().month)+((dateVaccine.year - DateTime.now().year)*12)} months";
-                        }
-                      else
-                        return "Vaccinate -";
-                    }()),
+                    importantEvent!=null?
+                      "${importantEvent.name} - ${DateFormat("dd-MMM-yy").format(importantEvent.dateTime)}"
+                      :"Upcoming events will show here",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400

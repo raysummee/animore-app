@@ -1,4 +1,3 @@
-import 'package:animore/logic/auth/universalAuth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

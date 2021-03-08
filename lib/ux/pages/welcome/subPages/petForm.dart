@@ -1,9 +1,7 @@
-import 'package:animore/logic/auth/googleAuth.dart';
-import 'package:animore/logic/db/dbTodos.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/ux/components/button/wideRoundedButton.dart';
-import 'package:animore/ux/pages/home/navPages.dart';
+import 'package:animore/ux/pages/main/navPages.dart';
 import 'package:flutter/material.dart';
 
 class PetForm extends StatefulWidget {
@@ -144,32 +142,30 @@ class _PetFormState extends State<PetForm> {
                         if(true){
                           if(true){
                             
-                            List<ModelTodos> todos = await DbTodos().getTodos();
-                            if(todos==null||todos.isEmpty){
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 1, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 10AM", name: "Food")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 2, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 12PM", name: "Play")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 3, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bath.png", sub: "Bath at 2PM", name: "Bath")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 4, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 3PM", name: "Food")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 5, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 5PM", name: "Play")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 6,removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 9PM", name: "Food")
-                              );
-                            } 
+                            // List<ModelTodos> todos = await DbTodos().getTodos();
+                            // if(todos==null||todos.isEmpty){
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 1, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 10AM", name: "Food")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 2, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 12PM", name: "Play")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 3, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bath.png", sub: "Bath at 2PM", name: "Bath")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 4, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 3PM", name: "Food")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 5, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 5PM", name: "Play")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 6,removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 9PM", name: "Food")
+                            //   );
+                            // } 
                             
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_)=>NavPages(
-                                0
-                              )),
+                              MaterialPageRoute(builder: (_)=>NavPages()),
                               (route) => false
                             );
                           }
@@ -199,30 +195,30 @@ class _PetFormState extends State<PetForm> {
                         });
                         if(true){
                           if(true){
-                            List<ModelTodos> todos = await DbTodos().getTodos();
-                            if(todos==null||todos.isEmpty){
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 1, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 10AM", name: "Food")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 2, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 12PM", name: "Play")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 3, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bath.png", sub: "Bath at 2PM", name: "Bath")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 4, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 3PM", name: "Food")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 5, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 5PM", name: "Play")
-                              );
-                              await DbTodos().insertTodos(
-                                ModelTodos(id: 6,removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 9PM", name: "Food")
-                              );
-                            } 
+                            // List<ModelTodos> todos = await DbTodos().getTodos();
+                            // if(todos==null||todos.isEmpty){
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 1, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 10AM", name: "Food")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 2, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 12PM", name: "Play")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 3, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bath.png", sub: "Bath at 2PM", name: "Bath")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 4, removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 3PM", name: "Food")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 5, removable: false, done: 0, imageLeading: "lib/assets/images/dog_bone.png", sub: "Play at 5PM", name: "Play")
+                            //   );
+                            //   await DbTodos().insertTodos(
+                            //     ModelTodos(id: 6,removable: false, done: 0, imageLeading: "lib/assets/images/dog_food.png", sub: "Food at 9PM", name: "Food")
+                            //   );
+                            // } 
                             
                             Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_)=>NavPages(0)),
+                              MaterialPageRoute(builder: (_)=>NavPages()),
                               (route) => false
                             );
                           }else{

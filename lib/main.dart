@@ -1,7 +1,12 @@
-import 'package:animore/logic/auth/universalAuth.dart';
+import 'package:animore/logic/api/apiImportantEvent.dart';
+import 'package:animore/logic/api/apiPet.dart';
+import 'package:animore/logic/api/authentication/apiAuthentication.dart';
+import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
-import 'package:animore/ux/pages/home/homeWelcomePage.dart';
-import 'package:animore/ux/pages/home/navPages.dart';
+import 'package:animore/logic/util/hiveLoader.dart';
+import 'package:animore/ux/pages/main/home/homePage.dart';
+import 'package:animore/ux/pages/main/navPages.dart';
 import 'package:animore/ux/pages/welcome/welcomeHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,16 +14,11 @@ import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  int type;
-    type = 0;
-  runApp(Animore(false, type));
+  await HiveLoader().init();
+  runApp(Animore());
 }
 
 class Animore extends StatelessWidget {
-  // This widget is the root of your application.
-  final bool showWelcome;
-  final int type;
-  Animore(this.showWelcome, this.type);
   @override
   Widget build(BuildContext context) {
     //forcing portait mode only
@@ -30,14 +30,6 @@ class Animore extends StatelessWidget {
         statusBarColor: Colors.cyan
       )
     );
-    precacheImage(AssetImage("lib/assets/images/doctor1.jpg"), context);
-    precacheImage(AssetImage("lib/assets/images/doctor2.jpg"), context);
-    precacheImage(AssetImage("lib/assets/images/dog_anim_2.gif"), context);
-    precacheImage(AssetImage("lib/assets/images/dog_bath.png"), context);
-    precacheImage(AssetImage("lib/assets/images/dog_bone.png"), context);
-    precacheImage(AssetImage("lib/assets/images/dog_food.png"), context);
-    precacheImage(AssetImage("lib/assets/images/profile.png"), context);
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NavBarIndexNotify>(create: (_)=>NavBarIndexNotify(),)
@@ -51,7 +43,7 @@ class Animore extends StatelessWidget {
             backgroundColor: Colors.transparent
           )
         ),
-        home: showWelcome? WelcomeHomePage() : NavPages(type),
+        home: NavPages(),
       ),
     );
   }

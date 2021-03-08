@@ -1,4 +1,3 @@
-import 'package:animore/logic/db/dbCart.dart';
 import 'package:animore/logic/model/modelCart.dart';
 import 'package:animore/ux/components/card/cartCard.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ class CartPage extends StatelessWidget {
         backgroundColor: Colors.cyan,
       ),
       body: FutureBuilder<List<ModelCart>>(
-        future: DbCart().getTodos(),
+        // future: DbCart().getTodos(),
         builder: (context, snapshot) {
           if(snapshot.hasData){
             if(snapshot.data.isNotEmpty){
