@@ -21,7 +21,8 @@ class PetCard extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 1,
-            blurRadius: 5
+            blurRadius: 10,
+            offset: Offset(0, 3)
           )
         ] 
       ),

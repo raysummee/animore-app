@@ -1,6 +1,10 @@
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/ux/components/button/MediumRoundedButton.dart';
+import 'package:animore/ux/components/button/editTodoButton.dart';
+import 'package:animore/ux/components/button/mediumButton.dart';
+import 'package:animore/ux/components/button/ovalBigButton.dart';
 import 'package:animore/ux/components/card/todoCard.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -40,8 +44,31 @@ class TodosPage extends StatelessWidget {
                 );
               }else{
                 return Center(
-                  child: Text(
-                    "No Todos Added! Add some by click on it"
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "No Todos Added! Add some by click on it"
+                      ),
+                      SizedBox(height: 10,),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.cyan,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: Size(50, 50),
+                        ),
+                        onPressed: (){}, 
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.today_outlined),
+                            Icon(Icons.add),
+                          ],
+                        )
+                      )
+                    ],
                   ),
                 );
               }
