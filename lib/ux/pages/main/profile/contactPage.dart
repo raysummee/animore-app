@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
+    return Scaffold(
       body: Container(
         color: Colors.cyan,
         child: Column(
@@ -14,6 +14,24 @@ class ContactPage extends StatelessWidget {
               height: MediaQuery.of(context).size.height/2,
               child: Stack(
                 children: [
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(50),
+                          onTap: (){
+                            Navigator.of(context).pop();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                            child: Icon(Icons.arrow_back_ios, color: Colors.white),
+                          )
+                        ), 
+                      ),
+                    ),
+                  ),
                   WaveBody(size: Size(MediaQuery.of(context).size.width, 100),color: Colors.white,),
                   SafeArea(
                     child: Container(
@@ -37,39 +55,7 @@ class ContactPage extends StatelessWidget {
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "Team Ventricles",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "App Developer: Angshuman Barpujari",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                      Text(
-                        "Team Leader: Saikat Kamal Haldar",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                      Text(
-                        "Supporting Team: Hitesh Saha & Anita Koirala",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Container()
                 ),
               ),
             )

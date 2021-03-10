@@ -3,7 +3,7 @@ import 'package:animore/ux/components/button/navButton.dart';
 import 'package:animore/ux/pages/main/doctorPage.dart';
 import 'package:animore/ux/pages/main/merchantPage.dart';
 import 'package:animore/ux/pages/main/shopPage.dart';
-import 'package:animore/ux/pages/main/ProfilePage.dart';
+import 'package:animore/ux/pages/main/profile/profilePage.dart';
 import 'package:animore/ux/pages/main/healPage.dart';
 import 'package:animore/ux/pages/main/home/homePage.dart';
 import 'package:flutter/cupertino.dart';
