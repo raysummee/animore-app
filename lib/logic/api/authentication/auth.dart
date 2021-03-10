@@ -11,6 +11,18 @@ class Auth{
     }
   }
 
+  Future<void> signup(String name, String email, String password, String passwordConfrim) async{
+    if(await ApiAuthentication().registerEmailApiRequest(name, email, password, passwordConfrim)){
+      print("succeed");
+    }else{
+      print("failed");
+    }
+  }
+
+  Future<void> logout() async{
+    await ApiAuthentication().logoutApiRequest();
+  }
+
   ModelUser user(){
     return AuthenticationHelper().getUser();
   }

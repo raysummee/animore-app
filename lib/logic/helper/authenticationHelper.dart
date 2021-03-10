@@ -14,6 +14,11 @@ class AuthenticationHelper{
     return Hive.box("user").get("user");
   }
 
+  Future<void> deleteUser() async{
+    await (await Hive.openBox("user")).delete("user");
+    await deleteToken(); 
+  }
+
   Future<void> saveToken(String token) async{
     if(!kIsWeb){
       final secureStorage = FlutterSecureStorage();
