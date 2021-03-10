@@ -16,7 +16,7 @@ class TodosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.cyan.withOpacity(0.05),
+      color: Colors.cyan.withOpacity(0.03),
       child: FutureBuilder<void>(
         future: ApiTodos().getTodosAllRequest(),
         builder: (context, snapshot) {

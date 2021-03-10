@@ -3,11 +3,13 @@ import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/model/modelUser.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveLoader{
   Future<void> init() async{
+    if(!kIsWeb)
     await Hive.initFlutter();
     Hive.registerAdapter(ModelPetAdapter());
     Hive.registerAdapter(ModelTodosAdapter());

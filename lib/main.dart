@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await HiveLoader().init();
+  await Auth().login("angshuarin@gmail.com", "tiku1234");
   runApp(Animore());
 }
 

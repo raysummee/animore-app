@@ -19,6 +19,7 @@ class ImportantEventHelper{
 
   ModelImportantEvent getRecentImportantEvent(){
     Box<ModelImportantEvent> box = Hive.box<ModelImportantEvent>("importantEvent");
+    if(box.isEmpty) return null;
     return box.getAt(0);
   }
 

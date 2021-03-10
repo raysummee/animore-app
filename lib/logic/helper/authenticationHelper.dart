@@ -1,4 +1,5 @@
 import 'package:animore/logic/model/modelUser.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 
@@ -9,22 +10,37 @@ class AuthenticationHelper{
     await saveToken(body['access_token']);
   }
 
+  ModelUser getUser(){
+    return Hive.box("user").get("user");
+  }
+
   Future<void> saveToken(String token) async{
-    final secureStorage = FlutterSecureStorage();
-    await secureStorage.write(key: "token", value: token);
+    if(!kIsWeb){
+      final secureStorage = FlutterSecureStorage();
+      await secureStorage.write(key: "token", value: token);
+    }else{
+      //TODO replace this to a better secure db for web
+      await (await Hive.openBox("user")).put("token", token);
+    }
   }
 
   Future<void> deleteToken() async{
-    final secureStorage = FlutterSecureStorage();
-    await secureStorage.delete(key: "token");
+    if(!kIsWeb){
+      final secureStorage = FlutterSecureStorage();
+      await secureStorage.delete(key: "token");
+    }{
+      //TODO replace this to a better secure db for web
+      await (await Hive.openBox("user")).delete("token");
+    }
   }
 
   Future<String> readToken() async{
-    final secureStorage = FlutterSecureStorage();
-    return await secureStorage.read(key: "token");
-  }
-
-  ModelUser getUser(){
-    return Hive.box("user").get("user");
+    if(!kIsWeb){
+      final secureStorage = FlutterSecureStorage();
+      return await secureStorage.read(key: "token");
+    }else{
+      //TODO replace this to a better secure db for web
+      return Future.value((await Hive.openBox("user")).get("token"));
+    }
   }
 }
