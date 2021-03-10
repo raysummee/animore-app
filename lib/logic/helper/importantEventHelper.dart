@@ -7,7 +7,6 @@ class ImportantEventHelper{
     List<ModelImportantEvent> importantEvents = (body['important_dates'] as List).map((importantDate) => ModelImportantEvent.fromJson(importantDate)).toList();
     //sorting according to date so date recent is at the index 0
     importantEvents.sort((a,b)=>a.dateTime.compareTo(b.dateTime));
-    print(importantEvents[0].name);
     await box.clear();
     await box.addAll(importantEvents);
   }

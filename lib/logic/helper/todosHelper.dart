@@ -15,9 +15,9 @@ class TodosHelper{
     await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
  
-  Future<void> editTodoByWeekName(ModelTodos todos, String weekName) async{
+  Future<void> editTodoByWeekName(ModelTodos todos, String weekName, int index) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
-    await box.put(todos.id, todos);
+    await box.put(index, todos);
   }
 
 
@@ -32,8 +32,9 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    Map<dynamic, ModelTodos>  mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
 
     //tuesday//
 
@@ -44,8 +45,9 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
 
     //wednesday//
 
@@ -56,8 +58,10 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
+
 
     //thursday//
 
@@ -68,8 +72,9 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
 
     //friday//
 
@@ -80,8 +85,9 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
 
     //saturday
 
@@ -92,8 +98,9 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
 
     //sunday//
 
@@ -104,7 +111,8 @@ class TodosHelper{
         newTodo.done = box.get(newTodo.id).done;
       }
     });
-    mapTodo = Map.fromIterable(todos, key: (element) => element.id);
-    await box.putAll(mapTodo);
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+    await box.clear();
+    await box.addAll(todos);
   }
 }

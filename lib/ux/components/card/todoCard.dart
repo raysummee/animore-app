@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 
 class TodoCard extends StatefulWidget {
   final ModelTodos modelTodos;
-  TodoCard(this.modelTodos);
+  final int index;
+  TodoCard(this.modelTodos, this.index);
   @override
   _TodoCardState createState() => _TodoCardState();
 }
@@ -35,7 +36,8 @@ class _TodoCardState extends State<TodoCard> {
               name: widget.modelTodos.name,
               done: selected?DateTime.now().day:0
             ),
-            DateUtil().getTodayWeekName()
+            DateUtil().getTodayWeekName(),
+            widget.index
           );
         },
         child: Container(
@@ -94,7 +96,8 @@ class _TodoCardState extends State<TodoCard> {
                     name: widget.modelTodos.name,
                     done: selected?DateTime.now().day:0
                   ),
-                  DateUtil().getTodayWeekName()
+                  DateUtil().getTodayWeekName(),
+                  widget.index
                 );
               },
               child: Padding(

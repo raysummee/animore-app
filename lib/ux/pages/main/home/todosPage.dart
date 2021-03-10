@@ -27,7 +27,7 @@ class TodosPage extends StatelessWidget {
                 return ListView.separated(
                   padding: EdgeInsets.fromLTRB(0, 110, 0, 150),
                   controller: controller,
-                  itemBuilder: (context, index) => TodoCard(box.getAt(index)), 
+                  itemBuilder: (context, index) => TodoCard(box.getAt(index), index), 
                   separatorBuilder: (context, index) {
                     return Divider(
                       indent: 30,
