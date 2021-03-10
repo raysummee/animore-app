@@ -31,7 +31,6 @@ class _PetHomeState extends State<PetHome> {
           return FutureBuilder<void>(
             future: getAllPetHandler,
             builder: (context, snapshotUser) {
-              print("debug ${ImportantEventHelper().getRecentImportantEvent()==null}");
               return ValueListenableBuilder(
                 valueListenable: Hive.box<ModelPet>("pet").listenable(), 
                 builder: (context, Box<ModelPet> box, child) => box.isNotEmpty? PetCard(

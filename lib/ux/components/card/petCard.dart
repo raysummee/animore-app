@@ -41,7 +41,7 @@ class PetCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        petName,
+                        petName.replaceRange(0, 1, petName[0].toUpperCase()),
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold

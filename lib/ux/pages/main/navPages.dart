@@ -26,7 +26,7 @@ class NavPages extends StatelessWidget {
             // HealPage(),
             Container(),
             Container(),
-            ProfilePage(type:"basic")
+            ProfilePage()
 
           ],
         )
