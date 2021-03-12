@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(60),
                                 child: Builder(
                                   builder: (context) {
-                                    if(Auth().user().image!=null&&Auth().user().image!=""){
+                                    if(Auth().user()!=null&&Auth().user().image!=null&&Auth().user().image!=""){
                                       return Image(image: NetworkImage(Auth().user().image), fit: BoxFit.cover,);
                                     }else{
                                       return Image.asset("lib/assets/images/profile.png", fit: BoxFit.cover,);
@@ -53,7 +53,7 @@ class ProfilePage extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                               child: Text(
-                                  Auth().user().name.toUpperCase(),
+                                  Auth().user()!=null? Auth().user().name.toUpperCase():"",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                                 color: Colors.red
                               ),
                               child: Text(
-                                Auth().user().role.toUpperCase(),
+                                Auth().user()!=null?Auth().user().role.toUpperCase():"",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                         border: Border.all(color: Colors.grey.shade200)
                       ),
                       child: CardButton("Log out", Icons.exit_to_app, Colors.cyan.shade50, () async{
-                        await Auth().logout();
+                        await Auth().logout(context);
                       },)
                     ),
                   ],

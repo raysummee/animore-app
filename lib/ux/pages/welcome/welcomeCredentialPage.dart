@@ -1,7 +1,30 @@
+import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/ux/components/button/primaryRoundedButton.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeCredentialPage extends StatelessWidget {
+class WelcomeCredentialPage extends StatefulWidget {
+  final bool isLogin;
+  WelcomeCredentialPage({this.isLogin:true});
+
+  @override
+  _WelcomeCredentialPageState createState() => _WelcomeCredentialPageState();
+}
+
+class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
+  bool isLogin;
+  TextEditingController fullNameController;
+  TextEditingController emailController;
+  TextEditingController passwordController;
+  TextEditingController confirmController;
+  @override
+  void initState() {
+    isLogin = widget.isLogin;
+    fullNameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmController = TextEditingController();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +68,7 @@ class WelcomeCredentialPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 5),
                           child: Text(
-                            "Let's sign you in.",
+                            isLogin? "Let's sign you in.": "Let's setup your account now",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 32,
@@ -53,7 +76,7 @@ class WelcomeCredentialPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Padding(
+                        isLogin? Padding(
                           padding: const EdgeInsets.fromLTRB(16, 5, 16, 8),
                           child: Text(
                             "Welcome back.\nYou've been missed!",
@@ -63,12 +86,27 @@ class WelcomeCredentialPage extends StatelessWidget {
                               fontWeight: FontWeight.w500
                             ),
                           ),
-                        ),
-                        Padding(
+                        ):Container(),
+                        isLogin?Container():Padding(
                           padding: const EdgeInsets.fromLTRB(16, 28, 16, 8),
                           child: TextField(
+                            obscureText: true,
+                            controller: fullNameController,
                             decoration: InputDecoration(
-                              labelText: "Email or Username",
+                              labelText: "Full Name",
+                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                          child: TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              labelText: "Email",
                               contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -80,6 +118,7 @@ class WelcomeCredentialPage extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                           child: TextField(
                             obscureText: true,
+                            controller: passwordController,
                             decoration: InputDecoration(
                               labelText: "Password",
                               contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
@@ -88,7 +127,21 @@ class WelcomeCredentialPage extends StatelessWidget {
                               )
                             ),
                           ),
-                        )
+                        ),
+                        isLogin?Container():Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                          child: TextField(
+                            obscureText: true,
+                            controller: confirmController,
+                            decoration: InputDecoration(
+                              labelText: "Confirm Password",
+                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              )
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -96,21 +149,42 @@ class WelcomeCredentialPage extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("Don't have a account?"),
+                            Text(
+                              isLogin? "Don't have a account?": "Have an account already?"
+                            ),
                             TextButton(
-                              onPressed: (){}, 
+                              onPressed: (){
+                                setState(() {
+                                  isLogin = !isLogin;
+                                });
+                              }, 
                               child: Text(
-                                " Register"
+                                isLogin? "Register": "Login"
                               )
                             )
                           ],
                         ),
-                        SizedBox(height: 6,),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 33),
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 30),
                           child: PrimaryRoundedButton(
                             label: "Sign In", 
-                            onPressed: (){},
+                            onPressed: (){
+                              if(isLogin){
+                                Auth().login(
+                                  emailController.text, 
+                                  passwordController.text,
+                                  context
+                                );
+                              }else{
+                                Auth().signup(
+                                  fullNameController.text,
+                                  emailController.text, 
+                                  passwordController.text, 
+                                  confirmController.text,
+                                  context
+                                );
+                              }
+                            },
                           )
                         )
                       ],

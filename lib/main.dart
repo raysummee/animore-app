@@ -24,10 +24,10 @@ void main() async{
 class Animore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //forcing portait mode only
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    // //forcing portait mode only
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    // ]);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.cyan
