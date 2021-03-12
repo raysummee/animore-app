@@ -1,4 +1,4 @@
-import 'package:animore/ux/components/button/siginButton.dart';
+import 'package:animore/ux/components/button/primaryRoundedButton.dart';
 import 'package:flutter/material.dart';
 
 class DialogLogin extends StatelessWidget {
@@ -25,7 +25,7 @@ class DialogLogin extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: SigninButton()
+                child: PrimaryRoundedButton(label: "lba", onPressed: (){},)
               )
             ],
           ),

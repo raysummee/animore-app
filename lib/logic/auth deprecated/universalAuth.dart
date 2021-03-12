@@ -1,4 +1,4 @@
-import 'package:animore/ux/pages/welcome/welcomeHomePage.dart';
+import 'package:animore/ux/pages/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
 
 class UniversalAuth{

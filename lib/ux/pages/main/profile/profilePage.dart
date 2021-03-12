@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                         border: Border.all(color: Colors.grey.shade200)
                       ),
                       child: CardButton("Log out", Icons.exit_to_app, Colors.cyan.shade50, () async{
-                        // UniversalAuth().logout(context);
+                        await Auth().logout();
                       },)
                     ),
                   ],

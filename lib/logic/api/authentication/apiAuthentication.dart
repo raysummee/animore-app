@@ -68,10 +68,10 @@ class ApiAuthentication{
 
   Future<bool> logoutApiRequest() async{
     var url = Uri.parse("$host/logout");
-
+    var jwt = await AuthenticationHelper().readToken();
     var response = await http.post(
       url,
-      headers: {"Content-Type": "application/json"}
+      headers: {"Authorization":"Bearer $jwt", "Accept": "application/json"}
     );
 
     print(json.decode(response.body));

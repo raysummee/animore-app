@@ -4,7 +4,6 @@ import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/ux/components/button/MediumRoundedButton.dart';
 import 'package:animore/ux/components/button/editTodoButton.dart';
 import 'package:animore/ux/components/button/mediumButton.dart';
-import 'package:animore/ux/components/button/ovalBigButton.dart';
 import 'package:animore/ux/components/card/todoCard.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

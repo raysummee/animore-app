@@ -27,6 +27,9 @@ class ApiTodos{
       if(body.containsKey('message')){
         print(body['message']);
       }
+      if(response.statusCode == 401){
+        //TODO add if log out remotely what to do
+      }
     }
   } 
 }
