@@ -6,9 +6,11 @@ class PrimaryIconButton extends StatelessWidget {
   final Color buttonColor;
   final Color color;
   final bool isOutlined;
+  final VoidCallback onPressed;
   PrimaryIconButton({
     @required this.label,
     @required this.icon,
+    @required this.onPressed,
     this.buttonColor:Colors.blue,
     this.color:Colors.white,
     this.isOutlined:false
@@ -24,7 +26,7 @@ class PrimaryIconButton extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 65),
+          minimumSize: Size(500, 65),
           primary: buttonColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -36,7 +38,7 @@ class PrimaryIconButton extends StatelessWidget {
           )
         ),
         icon: Icon(icon, color: color,),
-        onPressed: (){},
+        onPressed: onPressed,
       ),
     );
   }

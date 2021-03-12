@@ -33,6 +33,7 @@ class WelcomePage extends StatelessWidget {
                       buttonColor: Colors.white,
                       color: Colors.black,
                       isOutlined: true,
+                      onPressed: (){},
                     ),
                   ),
                   Padding(
@@ -40,6 +41,12 @@ class WelcomePage extends StatelessWidget {
                     child: PrimaryIconButton(
                       label: "Login with Email",
                       icon: Icons.alternate_email_rounded,
+                      buttonColor: Colors.black,
+                      onPressed: (){
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_)=>WelcomeCredentialPage())
+                        );
+                      },
                     ),
                   ),
                 ],

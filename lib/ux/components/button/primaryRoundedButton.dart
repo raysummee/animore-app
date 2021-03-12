@@ -14,7 +14,7 @@ class PrimaryRoundedButton extends StatelessWidget {
           primary: Colors.black,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
+            borderRadius: BorderRadius.circular(35)
           )
         ),
         child: Text(
