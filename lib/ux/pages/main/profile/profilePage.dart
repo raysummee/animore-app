@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
@@ -23,7 +24,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   WaveBody(size: Size(MediaQuery.of(context).size.width, 100),color: Colors.white,),
                   ValueListenableBuilder(
-                    valueListenable: Hive.box("user").listenable(),
+                    valueListenable: Hive.box<ModelUser>("user").listenable(),
                     builder: (context, Box box, child) {
                       return Container(
                         alignment: Alignment.center,

@@ -1,6 +1,9 @@
 import 'package:animore/logic/model/modelImportantEvent.dart';
+import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class PetCard extends StatelessWidget {
   final String petName;
@@ -9,6 +12,7 @@ class PetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PetCardEditNotify>(context);
     return Container( 
       width: double.infinity,
       height: 160,
@@ -33,7 +37,7 @@ class PetCard extends StatelessWidget {
             child: Image(image: AssetImage("lib/assets/images/dog_person.png")),
           ),
           Container(
-            width: MediaQuery.of(context).size.width-100,
+            width: MediaQuery.of(context).size.width-150,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,7 +60,9 @@ class PetCard extends StatelessWidget {
                           color: Colors.cyan,
                           borderRadius: BorderRadius.circular(15),
                           child: InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              provider.isEditing = true;
+                            },
                             splashColor: Colors.deepOrange,
                             borderRadius: BorderRadius.circular(15),
                             child: Padding(
@@ -79,7 +85,7 @@ class PetCard extends StatelessWidget {
                   child: Text(
                     importantEvent!=null?
                       "${importantEvent.name} - ${DateFormat("dd-MMM-yy").format(importantEvent.dateTime)}"
-                      :"Upcoming events will show here",
+                      :"Upcoming events will appear here",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400
@@ -101,7 +107,7 @@ class PetCard extends StatelessWidget {
                                 child: Container(
                                   height: 40,
                                   width: 40,
-                                  child: Icon(Icons.account_circle, color: Colors.white,),
+                                  child: Icon(FlutterIcons.pets_mdi, color: Colors.white,),
                                 ),
                               ),
                             ),

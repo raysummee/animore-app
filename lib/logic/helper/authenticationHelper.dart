@@ -6,16 +6,16 @@ import 'package:hive/hive.dart';
 class AuthenticationHelper{
   Future<void> fetchUser(Map<String, dynamic> body) async{
     ModelUser user = ModelUser.fromJson(body['user']);
-    (await Hive.openBox("user")).put("user", user);
+    (await Hive.openBox<ModelUser>("user")).put("user", user);
     await saveToken(body['access_token']);
   }
 
   ModelUser getUser(){
-    return Hive.box("user").get("user");
+    return Hive.box<ModelUser>("user").get("user");
   }
 
   Future<void> deleteUser() async{
-    await (await Hive.openBox("user")).delete("user");
+    await (await Hive.openBox<ModelUser>("user")).delete("user");
     await deleteToken(); 
   }
 
@@ -25,7 +25,7 @@ class AuthenticationHelper{
       await secureStorage.write(key: "token", value: token);
     }else{
       //TODO replace this to a better secure db for web
-      await (await Hive.openBox("user")).put("token", token);
+      await (await Hive.openBox("tokenTemp")).put("token", token);
     }
   }
 
@@ -35,7 +35,7 @@ class AuthenticationHelper{
       await secureStorage.delete(key: "token");
     }{
       //TODO replace this to a better secure db for web
-      await (await Hive.openBox("user")).delete("token");
+      await (await Hive.openBox("tokenTemp")).delete("token");
     }
   }
 
@@ -45,7 +45,7 @@ class AuthenticationHelper{
       return await secureStorage.read(key: "token");
     }else{
       //TODO replace this to a better secure db for web
-      return Future.value((await Hive.openBox("user")).get("token"));
+      return Future.value((await Hive.openBox("tokenTemp")).get("token"));
     }
   }
 }

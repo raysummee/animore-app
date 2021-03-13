@@ -14,6 +14,11 @@ class TodosHelper{
     var weekName = DateUtil().getTodayWeekName();
     await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
+
+  Future<void> openTomorrowWeekTodosBox() async{
+    var weekName = DateUtil().getTomorrowWeekName();
+    await Hive.openBox<ModelTodos>("Todos_$weekName");
+  }
  
   Future<void> editTodoByWeekName(ModelTodos todos, String weekName, int index) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");

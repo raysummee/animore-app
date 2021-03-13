@@ -5,6 +5,7 @@ import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
+import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/logic/util/hiveLoader.dart';
 import 'package:animore/ux/pages/commons/startup.dart';
 import 'package:animore/ux/pages/main/home/homePage.dart';
@@ -36,7 +37,9 @@ class Animore extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NavBarIndexNotify>(create: (_)=>NavBarIndexNotify(),),
-        ChangeNotifierProvider<LandingPageCarouselNotify>(create: (_)=>LandingPageCarouselNotify())
+        ChangeNotifierProvider<LandingPageCarouselNotify>(create: (_)=>LandingPageCarouselNotify()),
+        ChangeNotifierProvider<PetCardEditNotify>(create: (_)=>PetCardEditNotify())
+
       ],
       child: MaterialApp(
         title: 'Animore',

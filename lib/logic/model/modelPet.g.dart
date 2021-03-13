@@ -20,17 +20,16 @@ class ModelPetAdapter extends TypeAdapter<ModelPet> {
       id: fields[0] as int,
       name: fields[1] as String,
       bread: fields[2] as String,
-      dob: fields[3] as String,
+      dob: fields[3] as DateTime,
       image: fields[5] as String,
       type: fields[4] as String,
-      userId: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelPet obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -42,9 +41,7 @@ class ModelPetAdapter extends TypeAdapter<ModelPet> {
       ..writeByte(4)
       ..write(obj.type)
       ..writeByte(5)
-      ..write(obj.image)
-      ..writeByte(6)
-      ..write(obj.userId);
+      ..write(obj.image);
   }
 
   @override

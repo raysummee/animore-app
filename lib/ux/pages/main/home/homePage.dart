@@ -2,12 +2,14 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/logic/util/dateUtil.dart';
 import 'package:animore/ux/components/button/editTodoButton.dart';
 import 'package:animore/ux/components/card/petCard.dart';
 import 'package:animore/ux/components/card/todoCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
 import 'package:animore/ux/components/complex/animated/appearingFromBottomWidget.dart';
+import 'package:animore/ux/components/others/todayWeekCalender.dart';
 import 'package:animore/ux/pages/main/home/petHome.dart';
 import 'package:animore/ux/pages/main/home/todosPage.dart';
 import 'package:flutter/material.dart';
@@ -60,16 +62,10 @@ class _HomeWelcomePageState extends State<HomeWelcomePage> {
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     height: 100,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          padding: EdgeInsets.only(top: 8),
-                          child: IconButton(
-                            icon: Icon(Icons.calendar_today, color: Colors.white, size: 24,), 
-                            onPressed: (){}
-                          ),
-                        ),
+                        TodayWeekCalender(),
                         ProfileStatusQuick()
                       ],
                     ),
