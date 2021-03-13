@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
@@ -10,8 +11,7 @@ class CarouselLanding extends StatefulWidget {
   _CarouselLandingState createState() => _CarouselLandingState();
 }
 
-class _CarouselLandingState extends State<CarouselLanding> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+class _CarouselLandingState extends State<CarouselLanding>{
   int indexPage;
   PageController _pageController;
   final Map<String, dynamic> landing = {
@@ -32,17 +32,25 @@ class _CarouselLandingState extends State<CarouselLanding> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
     indexPage = 0;
     _pageController = PageController(
       initialPage: 0,
     );
+    Timer.periodic(Duration(seconds: 4), (Timer timer) {
+      if (indexPage < (landing['landing'] as List).length-1) {
+        _pageController.nextPage(duration: Duration(milliseconds: 800), curve: Curves.easeInOut);
+        indexPage++;
+      } else {
+        _pageController.animateToPage(0, duration: Duration(milliseconds: 800), curve: Curves.decelerate);
+        indexPage = 0;
+      }
+    });
+
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
   }
 
   @override
