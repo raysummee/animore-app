@@ -37,10 +37,10 @@ class _PetEditCardState extends State<PetEditCard> {
     final provider = Provider.of<PetCardEditNotify>(context);
 
     return Container( 
-      height: 300,
+      height: 335,
       width: double.infinity,
       margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-      padding: EdgeInsets.fromLTRB(26, 20, 0, 36),
+      padding: EdgeInsets.fromLTRB(26, 20, 0, 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -85,43 +85,6 @@ class _PetEditCardState extends State<PetEditCard> {
                                   ),
                                 )
                               ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 16,),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15)
-                                ),
-                                child: Material(
-                                  color: Colors.cyan,
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: InkWell(
-                                    onTap: (){
-                                      ApiPet().editPetsApiRequest(
-                                        widget.index,
-                                        widget.pet.id,
-                                        bread: breadController.text,
-                                        dob: dob,
-                                        type: typeController.text,
-                                        name: nameController.text
-                                      );
-                                      provider.isEditing = false;
-                                    },
-                                    splashColor: Colors.deepOrange,
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(10, 3, 10, 2),
-                                      child: Text(
-                                        "Save",
-                                        style: TextStyle(
-                                          color: Colors.white
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
                             ],
                           )
                         ),
@@ -169,13 +132,17 @@ class _PetEditCardState extends State<PetEditCard> {
                         ),
                         Row(
                           children: [
-                            Material(
+                            ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.cyan,
-                              child: IconButton(
-                                icon: Icon(FlutterIcons.event_available_mdi, color: Colors.white), 
-                                onPressed: (){}
-                              )
+                              child: Material(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.cyan,
+                                child: IconButton(
+                                  splashColor: Colors.deepOrange,
+                                  icon: Icon(FlutterIcons.event_available_mdi, color: Colors.white), 
+                                  onPressed: (){}
+                                )
+                              ),
                             ),
                             SizedBox(
                               width: 12,
@@ -235,6 +202,62 @@ class _PetEditCardState extends State<PetEditCard> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 22,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  child: ElevatedButton(
+                    child: Text(
+                      "Save"
+                    ),
+                    onPressed: (){
+                      ApiPet().editPetsApiRequest(
+                        widget.index, 
+                        widget.pet.id,
+                        bread: breadController.text,
+                        dob: dob,
+                        name: nameController.text,
+                        type: typeController.text
+                      );
+                      provider.isEditing = false;
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(80, 45),
+                      primary: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                  child: ElevatedButton(
+                    child: Text(
+                      "Discard"
+                    ),
+                    onPressed: (){
+                      provider.isEditing = false;
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(80, 45),
+                      primary: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 22,
+                )
+              ],
+            )
           ],
         ),
       ),
