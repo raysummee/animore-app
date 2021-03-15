@@ -2,23 +2,39 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class PetEditCard extends StatelessWidget {
+class PetEditCard extends StatefulWidget {
   final ModelPet pet;
   final int index;
   final ModelImportantEvent importantEvent;
   PetEditCard(this.pet, this.importantEvent, this.index);
 
   @override
+  _PetEditCardState createState() => _PetEditCardState();
+}
+
+class _PetEditCardState extends State<PetEditCard> {
+  TextEditingController nameController;
+  TextEditingController breadController;
+  TextEditingController typeController;
+  DateTime dob;
+
+  @override
+  void initState() {
+    dob = widget.pet.dob;
+    nameController = TextEditingController(text: widget.pet.name.replaceRange(0, 1, widget.pet.name[0].toUpperCase()));
+    breadController = TextEditingController(text: widget.pet.bread.replaceRange(0, 1, widget.pet.bread[0].toUpperCase()));
+    typeController = TextEditingController(text: widget.pet.type.replaceRange(0, 1, widget.pet.type[0].toUpperCase()));
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
-    final nameController = TextEditingController(text: pet.name.replaceRange(0, 1, pet.name[0].toUpperCase()));
-    final breadController = TextEditingController(text: pet.bread.replaceRange(0, 1, pet.bread[0].toUpperCase()));
-    final typeController = TextEditingController(text: pet.type.replaceRange(0, 1, pet.type[0].toUpperCase()));
 
     return Container( 
       height: 300,
@@ -83,10 +99,10 @@ class PetEditCard extends StatelessWidget {
                                   child: InkWell(
                                     onTap: (){
                                       ApiPet().editPetsApiRequest(
-                                        index,
-                                        pet.id,
+                                        widget.index,
+                                        widget.pet.id,
                                         bread: breadController.text,
-                                        dob: pet.dob,
+                                        dob: dob,
                                         type: typeController.text,
                                         name: nameController.text
                                       );
@@ -114,19 +130,34 @@ class PetEditCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Material(
+                            ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.cyan,
-                              child: IconButton(
-                                icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
-                                onPressed: (){}
-                              )
+                              child: Material(
+                                color: Colors.cyan,
+                                child: IconButton(
+                                  splashColor: Colors.deepOrange,
+                                  icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
+                                  onPressed: () async{
+                                    DateTime dateTime = await showDatePicker(
+                                      context: context, 
+                                      initialDate: DateTime.now(), 
+                                      firstDate: DateTime(1980), 
+                                      lastDate: DateTime.now()
+                                    );
+                                    if(dateTime!=null){
+                                      setState(() {
+                                        dob = dateTime;
+                                      });
+                                    }
+                                  }
+                                )
+                              ),
                             ),
                             SizedBox(
                               width: 12,
                             ),
                             Text(
-                              "${DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(pet.dob).toUpperCase()}",
+                              "${DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(dob).toUpperCase()}",
                               style: TextStyle(
                                 fontWeight: FontWeight.w600
                               ),
