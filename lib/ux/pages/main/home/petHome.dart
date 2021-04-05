@@ -33,7 +33,7 @@ class _PetHomeState extends State<PetHome> {
               if (box.isNotEmpty) {
                 return AnimatedCrossFade(
                     firstChild: PetEditCard(box.get(0),
-                        ImportantEventHelper().getRecentImportantEvent(), 0),
+                        ImportantEventHelper().getAllImportantEvents(), 0),
                     secondChild: PetCard("${box.get(0).name}",
                         ImportantEventHelper().getRecentImportantEvent()),
                     crossFadeState: provider.isEditing

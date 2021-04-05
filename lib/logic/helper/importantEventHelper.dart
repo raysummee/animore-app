@@ -13,7 +13,7 @@ class ImportantEventHelper{
 
   List<ModelImportantEvent> getAllImportantEvents(){
     Box<ModelImportantEvent> box = Hive.box<ModelImportantEvent>("importantEvent");
-    return box.values;
+    return box.values.toList();
   }
 
   ModelImportantEvent getRecentImportantEvent(){

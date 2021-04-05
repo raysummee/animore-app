@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 class PetEditCard extends StatefulWidget {
   final ModelPet pet;
   final int index;
-  final ModelImportantEvent importantEvent;
+  final List<ModelImportantEvent> importantEvent;
   PetEditCard(this.pet, this.importantEvent, this.index);
 
   @override
@@ -142,7 +142,7 @@ class _PetEditCardState extends State<PetEditCard> {
                                   splashColor: Colors.deepOrange,
                                   icon: Icon(FlutterIcons.event_available_mdi, color: Colors.white), 
                                   onPressed: (){
-                                    EventEditListDialog.show(context);
+                                    EventEditListDialog.show(context, widget.importantEvent);
                                   }
                                 )
                               ),
