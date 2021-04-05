@@ -2,88 +2,92 @@ import 'dart:convert';
 
 import 'package:animore/logic/api/apiConfig.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
-import 'package:http/http.dart' as http;
+import 'package:animore/logic/api/base/baseHttp.dart';
+import 'package:flutter/material.dart';
 
-class ApiAuthentication{
-  Future<bool> loginEmailApiRequest(String email, String password) async{
+class ApiAuthentication {
+  Future<bool> loginEmailApiRequest(String email, String password, BuildContext context) async {
     var url = Uri.parse("$host/login");
 
-    String bodyToSend = json.encode({
-      "email" : email,
-      "password" : password
-    });
+    String bodyToSend = json.encode({"email": email, "password": password});
 
     print(bodyToSend);
 
-    var response = await http.post(
-      url,
-      body: bodyToSend,
-      headers: {"Content-Type": "application/json"}
+    var returnValue = await post(
+      url, 
+      bodyToSend, 
+      context, 
+
+      onSuccess: (map) async {
+        await AuthenticationHelper().fetchUser(map);
+        print("true");
+        return true;
+      }, 
+
+      onUnathorized: (map) async{
+        print(map['message']);
+        return false;
+      },
+      needAuth: false
     );
 
-    print(json.decode(response.body));
-    Map<String, dynamic> body =  json.decode(response.body);
-    if(response.statusCode==200){
-      await AuthenticationHelper().fetchUser(body);
-      return true;
-    }else{
-      if(body.containsKey('message')){
-        print(body['message']);
-      }
-      return false;
-    }
+    return returnValue ?? false;
   }
 
-  Future<bool> registerEmailApiRequest(String name ,String email, String password, String passwordConfirm) async{
+  Future<bool> registerEmailApiRequest(String name, String email,String password, String passwordConfirm, BuildContext context) async {
     var url = Uri.parse("$host/register");
 
     String bodyToSend = json.encode({
-      "name": name, 
-      "email" : email,
-      "password" : password,
+      "name": name,
+      "email": email,
+      "password": password,
       "password_confirmation": passwordConfirm
     });
 
     print(bodyToSend);
 
-    var response = await http.post(
-      url,
-      body: bodyToSend,
-      headers: {"Content-Type": "application/json"}
+    var returnValue = await post(
+      url, 
+      bodyToSend, 
+      context, 
+
+      onSuccess: (map) async {
+        await AuthenticationHelper().fetchUser(map);
+        print("true");
+        return true;
+      }, 
+
+      onUnathorized: (map) async{
+        print(map['message']);
+        return false;
+      },
+      needAuth: false
     );
 
-    print(json.decode(response.body));
-    Map<String, dynamic> body =  json.decode(response.body);
-    if(response.statusCode==200){
-      await AuthenticationHelper().fetchUser(body);
-      return true;
-    }else{
-      if(body.containsKey('message')){
-        print(body['message']);
-      }
-      return false;
-    }
+    return returnValue ?? false;
   }
 
-
-  Future<bool> logoutApiRequest() async{
+  Future<bool> logoutApiRequest(BuildContext context) async {
     var url = Uri.parse("$host/logout");
-    var jwt = await AuthenticationHelper().readToken();
-    var response = await http.post(
-      url,
-      headers: {"Authorization":"Bearer $jwt", "Accept": "application/json"}
+    
+    var returnValue = await post(
+      url, 
+      null, 
+      context, 
+
+      onSuccess: (map) async {
+        await AuthenticationHelper().deleteUser();
+        print("true");
+        return true;
+      }, 
+
+      onUnathorized: (map) async{
+        print(map['message']);
+        return false;
+      },
+      needAuth: false
     );
 
-    print(json.decode(response.body));
-    Map<String, dynamic> body =  json.decode(response.body);
-    if(response.statusCode==200){
-      await AuthenticationHelper().deleteUser();
-      return true;
-    }else{
-      if(body.containsKey('message')){
-        print(body['message']);
-      }
-      return false;
-    }
+    return returnValue ?? false;
   }
 }

@@ -16,51 +16,33 @@ class PetHome extends StatefulWidget {
 }
 
 class _PetHomeState extends State<PetHome> {
-  Future<void> getAllPetHandler;
-  Future<void> getAllImportantEvent;
-
   @override
-  void initState() {
-    getAllPetHandler = ApiPet().getPetsApiRequest();
-    getAllImportantEvent =  ApiImportantEvent().getImportantEventAll();
-    super.initState();
+  void didChangeDependencies() {
+    ApiPet().getPetsApiRequest();
+    ApiImportantEvent().getImportantEventAll(context);
+    super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container(
-      child:  FutureBuilder<void>(
-        future: getAllImportantEvent,
-        builder: (context, snapshot) {
-          return FutureBuilder<void>(
-            future: getAllPetHandler,
-            builder: (context, snapshotUser) {
-              return ValueListenableBuilder(
-                valueListenable: Hive.box<ModelPet>("pet").listenable(), 
-                builder: (context, Box<ModelPet> box, child) {
-                  if(box.isNotEmpty){
-                    return AnimatedCrossFade(
-                      firstChild: PetEditCard(
-                        box.get(0), 
-                        ImportantEventHelper().getRecentImportantEvent(),
-                        0
-                      ), 
-                      secondChild: PetCard(
-                        "${box.get(0).name}",
-                        ImportantEventHelper().getRecentImportantEvent()
-                      ), 
-                      crossFadeState: provider.isEditing?CrossFadeState.showFirst:CrossFadeState.showSecond, 
-                      duration: Duration(milliseconds: 300)
-                    );
-                  }else{
-                    return PetCard("...", null);
-                  }
-                }
-              );
-            }
-          );
-        }
-      ),
-    );
+        child: ValueListenableBuilder(
+            valueListenable: Hive.box<ModelPet>("pet").listenable(),
+            builder: (context, Box<ModelPet> box, child) {
+              if (box.isNotEmpty) {
+                return AnimatedCrossFade(
+                    firstChild: PetEditCard(box.get(0),
+                        ImportantEventHelper().getRecentImportantEvent(), 0),
+                    secondChild: PetCard("${box.get(0).name}",
+                        ImportantEventHelper().getRecentImportantEvent()),
+                    crossFadeState: provider.isEditing
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                    duration: Duration(milliseconds: 300));
+              } else {
+                return PetCard("...", null);
+              }
+            }));
   }
 }

@@ -2,6 +2,7 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
+import 'package:animore/ux/components/dialog/eventEditListDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -140,7 +141,9 @@ class _PetEditCardState extends State<PetEditCard> {
                                 child: IconButton(
                                   splashColor: Colors.deepOrange,
                                   icon: Icon(FlutterIcons.event_available_mdi, color: Colors.white), 
-                                  onPressed: (){}
+                                  onPressed: (){
+                                    EventEditListDialog.show(context);
+                                  }
                                 )
                               ),
                             ),
