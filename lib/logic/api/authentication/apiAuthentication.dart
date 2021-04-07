@@ -15,9 +15,9 @@ class ApiAuthentication {
 
     var returnValue = await post(
       url, 
-      bodyToSend, 
-      context, 
-
+      body: bodyToSend, 
+      needAuth: false,
+      
       onSuccess: (map) async {
         await AuthenticationHelper().fetchUser(map);
         print("true");
@@ -28,7 +28,6 @@ class ApiAuthentication {
         print(map['message']);
         return false;
       },
-      needAuth: false
     );
 
     return returnValue ?? false;
@@ -48,8 +47,8 @@ class ApiAuthentication {
 
     var returnValue = await post(
       url, 
-      bodyToSend, 
-      context, 
+      body: bodyToSend, 
+      
 
       onSuccess: (map) async {
         await AuthenticationHelper().fetchUser(map);
@@ -72,8 +71,6 @@ class ApiAuthentication {
     
     var returnValue = await post(
       url, 
-      null, 
-      context, 
 
       onSuccess: (map) async {
         await AuthenticationHelper().deleteUser();

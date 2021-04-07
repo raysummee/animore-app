@@ -6,25 +6,19 @@ import 'package:animore/ux/pages/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
 
 class Auth {
-  Future<void> login(
-      String email, String password, BuildContext context) async {
-    if (await ApiAuthentication()
-        .loginEmailApiRequest(email, password, context)) {
+  Future<void> login(String email, String password, BuildContext context) async {
+    if (await ApiAuthentication().loginEmailApiRequest(email, password, context)) {
       print("succeed");
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
     }
   }
 
-  Future<void> signup(String name, String email, String password,
-      String passwordConfrim, BuildContext context) async {
-    if (await ApiAuthentication()
-        .registerEmailApiRequest(name, email, password, passwordConfrim, context)) {
+  Future<void> signup(String name, String email, String password,String passwordConfrim, BuildContext context) async {
+    if (await ApiAuthentication().registerEmailApiRequest(name, email, password, passwordConfrim, context)) {
       print("succeed");
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
     }
@@ -33,8 +27,7 @@ class Auth {
   Future<bool> logout(BuildContext context) async {
     bool result = await ApiAuthentication().logoutApiRequest(context);
     if (result)
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     return result;
   }
 
