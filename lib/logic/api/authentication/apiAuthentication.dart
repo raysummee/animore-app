@@ -17,7 +17,7 @@ class ApiAuthentication {
       url, 
       body: bodyToSend, 
       needAuth: false,
-      
+
       onSuccess: (map) async {
         await AuthenticationHelper().fetchUser(map);
         print("true");
@@ -81,8 +81,7 @@ class ApiAuthentication {
       onUnathorized: (map) async{
         print(map['message']);
         return false;
-      },
-      needAuth: false
+      }, 
     );
 
     return returnValue ?? false;

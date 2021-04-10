@@ -29,7 +29,7 @@ class DoctorCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 10, 10),
+            margin: EdgeInsets.fromLTRB(20, 24, 10, 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: Colors.cyan,
@@ -41,7 +41,7 @@ class DoctorCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+              padding: EdgeInsets.fromLTRB(10, 24, 20, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -83,11 +83,12 @@ class DoctorCard extends StatelessWidget {
                       ],
                     )
                   ),
+                  StarMeter(modelDoctor.star),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      StarMeter(modelDoctor.star),
+                      Container(),
                       SmallRoundedButton(
                         "Book",
                         ()async{

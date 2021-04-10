@@ -6,17 +6,18 @@ class SmallRoundedButton extends StatelessWidget {
   SmallRoundedButton(this.title, this.onClick);
   @override
   Widget build(BuildContext context) {
-    return ButtonTheme(
-      buttonColor: Colors.green,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: RaisedButton(
-        onPressed: onClick,
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.white
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.green,
+        minimumSize: Size(80, 38),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+      onPressed: onClick,
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 12,
+          color: Colors.white
         ),
       ),
     );

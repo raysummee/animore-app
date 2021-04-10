@@ -22,10 +22,8 @@ class NavPages extends StatelessWidget {
           index: appstate.index,          
           children: [
             HomeWelcomePage(),
-            // ShopPage(),
-            // HealPage(),
-            Container(),
-            Container(),
+            ShopPage(),
+            HealPage(),
             ProfilePage()
 
           ],
