@@ -79,9 +79,19 @@ class ApiAuthentication {
       }, 
 
       onUnathorized: (map) async{
+        await AuthenticationHelper().deleteUser();
         print(map['message']);
-        return false;
+        return true;
       }, 
+
+      onCustomRequest: (response) async{
+        if(response.statusCode == 302){
+          AuthenticationHelper().deleteUser();
+          return true;
+        }else{
+          return false;
+        }
+      }
     );
 
     return returnValue ?? false;

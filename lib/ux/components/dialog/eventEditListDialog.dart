@@ -175,7 +175,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
-                    onPressed: nameChange||dateChange?(){
+                    onPressed: nameChange||dateChange?() async{
                       events[pageNo].name = controller.text;
                       ApiImportantEvent().updateImportantEvent(context, events[pageNo]);
                       setState(() {

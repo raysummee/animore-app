@@ -25,7 +25,9 @@ class Auth {
   }
 
   Future<bool> logout(BuildContext context) async {
+    print("logging out");
     bool result = await ApiAuthentication().logoutApiRequest(context);
+    print("result: $result");
     if (result)
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     return result;

@@ -11,28 +11,28 @@ class HealPage extends StatelessWidget {
       name: "Dr John Doe",
       location: "11 S Road VIP road, Guwahati, Assam",
       star: 3,
-      type: "Therapist"
+      desc: "Therapist"
     ),
     ModelDoctor(
       id: 1,
       name: "Dr Sarina Leo",
       location: "13 L Road Karbi road, Guwahati, Assam",
       star: 4,
-      type: "Medicine Specialist"
+      desc: "Medicine Specialist"
     ),
     ModelDoctor(
       id: 1,
       name: "Dr Sarina Leo",
       location: "13 L Road Karbi road, Guwahati, Assam",
       star: 4,
-      type: "Medicine Specialist"
+      desc: "Medicine Specialist"
     ),
     ModelDoctor(
       id: 1,
       name: "Dr Sarina Leo",
       location: "13 L Road Karbi road, Guwahati, Assam",
       star: 4,
-      type: "Medicine Specialist"
+      desc: "Medicine Specialist"
     ),
   ];
   @override

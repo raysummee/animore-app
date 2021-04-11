@@ -3,24 +3,30 @@ import 'package:flutter/material.dart';
 class ModelDoctor{
   dynamic id;
   String name;
-  String type;
-  int star;
-  String location;
+  String email;
+  bool available;
+  String desc;
+  int star;//
+  String location;//
   ModelDoctor({
     @required this.id,
     @required this.name,
     @required this.star,
     @required this.location,
-    @required this.type
+    @required this.desc,
+    @required this.available,
+    @required this.email
   });
 
-  factory ModelDoctor.fromFirestore( doc){
+  factory ModelDoctor.fromJson(Map<String, dynamic> map){
     return ModelDoctor(
-      id: doc.data.containsKey('id')?doc.data['id']:doc.documentID,
-      name: doc.data.containsKey("name")?doc.data['name']:"Error", 
-      star: doc.data.containsKey("star")?(doc.data['star']).toInt():0, 
-      location: doc.data.containsKey("location")?doc.data['location']:"Error", 
-      type: doc.data.containsKey("type")?doc.data['type']:"Error"
+      id: map.containsKey('id')?map['id']:0,
+      name: map.containsKey("name")?map['name']:"", 
+      star: map.containsKey("star")?(map['star']).toInt():0, 
+      location: map.containsKey("location")?map['location']:"", 
+      desc: map.containsKey("desc")?map['desc']:"",
+      available: map.containsKey("avaialble")?map['available']:false,
+      email: map.containsKey("email")?map['email']:""
     );
   }
 }

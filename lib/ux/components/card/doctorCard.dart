@@ -57,7 +57,7 @@ class DoctorCard extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                     child: Text(
-                      modelDoctor.type,
+                      modelDoctor.desc,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400
