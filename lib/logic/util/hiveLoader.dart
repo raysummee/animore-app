@@ -1,4 +1,5 @@
 import 'package:animore/logic/helper/todosHelper.dart';
+import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
@@ -15,6 +16,7 @@ class HiveLoader{
     Hive.registerAdapter(ModelTodosAdapter());
     Hive.registerAdapter(ModelUserAdapter());
     Hive.registerAdapter(ModelImportantEventAdapter());
+    Hive.registerAdapter(ModelDoctorAdapter());
 
     await Hive.openBox<ModelPet>("pet");
     await TodosHelper().openTodayWeekTodosBox();
@@ -22,6 +24,8 @@ class HiveLoader{
     await Hive.openBox<ModelUser>("user");
     await Hive.openBox("tokenTemp");//TODO need to delete when found alt for storing jwt in web
     await Hive.openBox<ModelImportantEvent>("importantEvent");
+
+    await Hive.openBox<ModelDoctor>("veterinary");
  
   }
 

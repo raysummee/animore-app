@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+part 'modelDoctor.g.dart';
 
+@HiveType(typeId: 6)
 class ModelDoctor{
-  dynamic id;
+  @HiveField(0)
+  int id;
+  @HiveField(1)
   String name;
+  @HiveField(2)
   String email;
+  @HiveField(3)
   bool available;
+  @HiveField(4)
   String desc;
+  @HiveField(5)
   int star;//
+  @HiveField(6)
   String location;//
   ModelDoctor({
     @required this.id,
