@@ -1,5 +1,6 @@
 
 import 'package:animore/logic/api/apiConfig.dart';
+import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'modelUser.g.dart';
@@ -13,7 +14,7 @@ class ModelUser{
   @HiveField(2)
   String email;
   @HiveField(3)
-  String role;
+  RoleEnum role;
   @HiveField(4)
   String phone;
   @HiveField(5)
@@ -39,7 +40,7 @@ class ModelUser{
       dob: body.containsKey("dob")?DateTime.tryParse(body['dob']):null, 
       image: body.containsKey("image")?"$host/${body['image']}": "", 
       phone: body.containsKey("phone")?body['phone'].toString(): "", 
-      role: body.containsKey("role")?body['role'] as String: ""
+      role: body.containsKey("role")?roleEnumFromString(body['role']): RoleEnum.basic
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
+import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:flutter/material.dart';
 
 class ProfileStatusQuick extends StatelessWidget {
@@ -33,7 +34,7 @@ class ProfileStatusQuick extends StatelessWidget {
                   color: Colors.red
                 ),
                 child: Text(
-                  Auth().user().role.toUpperCase(),
+                  roleEnumToString(Auth().user().role).toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 10,

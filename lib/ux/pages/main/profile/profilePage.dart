@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
@@ -70,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                                 color: Colors.red
                               ),
                               child: Text(
-                                Auth().user()!=null?Auth().user().role.toUpperCase():"",
+                                Auth().user()!=null?roleEnumToString(Auth().user().role).toUpperCase():"",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,

@@ -23,7 +23,7 @@ class ModelUserAdapter extends TypeAdapter<ModelUser> {
       dob: fields[5] as DateTime,
       image: fields[6] as String,
       phone: fields[4] as String,
-      role: fields[3] as String,
+      role: fields[3] as RoleEnum,
     );
   }
 
