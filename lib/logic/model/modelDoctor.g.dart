@@ -24,13 +24,14 @@ class ModelDoctorAdapter extends TypeAdapter<ModelDoctor> {
       desc: fields[4] as String,
       available: fields[3] as bool,
       email: fields[2] as String,
+      status: fields[7] as BookStatusEnum,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelDoctor obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ModelDoctorAdapter extends TypeAdapter<ModelDoctor> {
       ..writeByte(5)
       ..write(obj.star)
       ..writeByte(6)
-      ..write(obj.location);
+      ..write(obj.location)
+      ..writeByte(7)
+      ..write(obj.status);
   }
 
   @override

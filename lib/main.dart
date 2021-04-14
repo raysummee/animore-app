@@ -3,6 +3,7 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/api/authentication/apiAuthentication.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/socket/pusher.dart';
+import 'package:animore/logic/api/socket/veterinarySocket.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
@@ -19,8 +20,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await HiveLoader().init();
-  Pusher();
-  // await Auth().login("angshuarin@gmail.com", "tiku1234");
+  VeterinarySocket().onBookVeterinary();
   runApp(Animore());
 }
 

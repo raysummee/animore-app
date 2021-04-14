@@ -17,30 +17,33 @@ class ModelUserAdapter extends TypeAdapter<ModelUser> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ModelUser(
-      name: fields[0] as String,
-      email: fields[1] as String,
-      dob: fields[4] as DateTime,
-      image: fields[5] as String,
-      phone: fields[3] as String,
-      role: fields[2] as String,
+      id: fields[0] as int,
+      name: fields[1] as String,
+      email: fields[2] as String,
+      dob: fields[5] as DateTime,
+      image: fields[6] as String,
+      phone: fields[4] as String,
+      role: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelUser obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.email)
+      ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.role)
+      ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.phone)
+      ..write(obj.role)
       ..writeByte(4)
-      ..write(obj.dob)
+      ..write(obj.phone)
       ..writeByte(5)
+      ..write(obj.dob)
+      ..writeByte(6)
       ..write(obj.image);
   }
 

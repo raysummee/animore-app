@@ -1,3 +1,4 @@
+import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
@@ -17,6 +18,7 @@ class HiveLoader{
     Hive.registerAdapter(ModelUserAdapter());
     Hive.registerAdapter(ModelImportantEventAdapter());
     Hive.registerAdapter(ModelDoctorAdapter());
+    Hive.registerAdapter(BookStatusEnumAdapter());
 
     await Hive.openBox<ModelPet>("pet");
     await TodosHelper().openTodayWeekTodosBox();

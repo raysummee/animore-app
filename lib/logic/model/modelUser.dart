@@ -7,19 +7,22 @@ part 'modelUser.g.dart';
 @HiveType(typeId: 4)
 class ModelUser{
   @HiveField(0)
-  String name;
+  int id;
   @HiveField(1)
-  String email;
+  String name;
   @HiveField(2)
-  String role;
+  String email;
   @HiveField(3)
-  String phone;
+  String role;
   @HiveField(4)
-  DateTime dob;
+  String phone;
   @HiveField(5)
+  DateTime dob;
+  @HiveField(6)
   String image;
 
   ModelUser({
+    @required this.id,
     @required this.name,
     @required this.email,
     @required this.dob,
@@ -30,6 +33,7 @@ class ModelUser{
 
   factory ModelUser.fromJson(Map<String, dynamic> body){
     return ModelUser(
+      id: body.containsKey("id")?body['id'] as int:0,
       name: body.containsKey("name")?body['name'] as String:"User", 
       email: body.containsKey("email")?body['email'] as String:"", 
       dob: body.containsKey("dob")?DateTime.tryParse(body['dob']):null, 

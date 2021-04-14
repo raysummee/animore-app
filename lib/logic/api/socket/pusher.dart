@@ -5,7 +5,7 @@ class Pusher{
   static Pusher _instance;
   factory Pusher() => _instance ??= new Pusher._();
 
-  static FlutterPusher pusher;
+  static FlutterPusher _pusher;
 
   Pusher._(){
     _initPusher();
@@ -20,15 +20,13 @@ class Pusher{
       cluster: "mt1",
       encrypted: false,
     );
-    pusher = FlutterPusher('12345', options, enableLogging: true, onConnectionStateChange: (connectionStateChange){
+    _pusher = FlutterPusher('12345', options, enableLogging: true, onConnectionStateChange: (connectionStateChange){
       print(connectionStateChange.currentState);
     });
+  }
 
-
-    // pusher.subscribe('book-vet-1').bind('pusher_internal:subscription_succeeded', (event) => {
-    //   print("event")
-    // });
-
+  FlutterPusher connection(){
+    return _pusher;
   }
 
 }

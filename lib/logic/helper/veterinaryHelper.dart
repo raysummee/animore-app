@@ -5,7 +5,15 @@ class VeterinaryHelper{
   Future<void> fetchAll(Map body) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
     List<ModelDoctor>  medics = (body['veterinary'] as List).map((e) => ModelDoctor.fromJson(e)).toList();
+    
     await box.clear();
-    await box.addAll(medics);
+    for(var medic in medics){
+      await box.put(medic.id, medic);
+    }
+  }
+
+  Future<void> updateOne(ModelDoctor modelDoctor) async{
+    Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
+    await box.put(modelDoctor.id, modelDoctor);
   }
 }

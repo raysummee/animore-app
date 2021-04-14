@@ -1,3 +1,4 @@
+import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'modelDoctor.g.dart';
@@ -15,9 +16,12 @@ class ModelDoctor{
   @HiveField(4)
   String desc;
   @HiveField(5)
-  int star;//
+  int star;
   @HiveField(6)
-  String location;//
+  String location;
+  @HiveField(7)
+  BookStatusEnum status;
+
   ModelDoctor({
     @required this.id,
     @required this.name,
@@ -25,7 +29,8 @@ class ModelDoctor{
     @required this.location,
     @required this.desc,
     @required this.available,
-    @required this.email
+    @required this.email,
+    @required this.status
   });
 
   factory ModelDoctor.fromJson(Map<String, dynamic> map){
@@ -36,7 +41,10 @@ class ModelDoctor{
       location: map.containsKey("location")?map['location']:"", 
       desc: map.containsKey("desc")?map['desc']:"",
       available: map.containsKey("avaialble")?map['available']:false,
-      email: map.containsKey("email")?map['email']:""
+      email: map.containsKey("email")?map['email']:"",
+      status: map.containsKey("status")?statusEnumFromString(map['status']):BookStatusEnum.none
     );
   }
+
+  
 }

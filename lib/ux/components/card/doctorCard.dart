@@ -1,3 +1,4 @@
+import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:animore/ux/components/complex/starMeter/starMeter.dart';
@@ -90,8 +91,8 @@ class DoctorCard extends StatelessWidget {
                     children: [
                       Container(),
                       SmallRoundedButton(
-                        "Book",
-                        ()async{
+                        modelDoctor.status==BookStatusEnum.booked||modelDoctor.status==BookStatusEnum.accepted? "Booked":"Book",
+                        modelDoctor.status==BookStatusEnum.booked||modelDoctor.status==BookStatusEnum.accepted?(){}:()async{
                           if(true)
                           {
                             showDialog(
