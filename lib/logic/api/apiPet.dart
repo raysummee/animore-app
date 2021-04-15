@@ -15,7 +15,7 @@ class ApiPet{
       url,
       onSuccess: (map) async{
         print("api pet");
-        List<ModelPet> pets = (map['pet'] as List).map((e) => ModelPet.fromMap(e)).toList();
+        List<ModelPet> pets = (map['pet'] as List).map((e) => ModelPet.fromJson(e)).toList();
         (await Hive.openBox<ModelPet>("pet")).addAll(pets);
         return true;
       }

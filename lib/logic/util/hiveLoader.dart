@@ -6,6 +6,7 @@ import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/model/modelUser.dart';
+import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -21,6 +22,7 @@ class HiveLoader{
     Hive.registerAdapter(ModelDoctorAdapter());
     Hive.registerAdapter(BookStatusEnumAdapter());
     Hive.registerAdapter(RoleEnumAdapter());
+    Hive.registerAdapter(ModelVetBookAdapter());
 
     await Hive.openBox<ModelPet>("pet");
     await TodosHelper().openTodayWeekTodosBox();
@@ -30,6 +32,7 @@ class HiveLoader{
     await Hive.openBox<ModelImportantEvent>("importantEvent");
 
     await Hive.openBox<ModelDoctor>("veterinary");
+    await Hive.openBox<ModelVetBook>("vetBook");
  
   }
 

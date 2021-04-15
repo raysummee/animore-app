@@ -1,3 +1,5 @@
+import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/ux/components/button/navButton.dart';
 import 'package:animore/ux/pages/main/doctorPage.dart';
@@ -23,7 +25,7 @@ class NavPages extends StatelessWidget {
           children: [
             HomeWelcomePage(),
             ShopPage(),
-            HealPage(),
+            Auth().user().role==RoleEnum.doctor? DoctorPage():HealPage(),
             ProfilePage()
 
           ],

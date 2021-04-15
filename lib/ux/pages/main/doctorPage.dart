@@ -1,114 +1,83 @@
+import 'package:animore/logic/api/apiVeterinary.dart';
+import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/card/acceptCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 class DoctorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.cyan,
-        child: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                height: 100,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PopupMenuButton(
-                      onSelected: (value){
-                        if(value==1){
-                          // UniversalAuth().deleteAccount(context);
-                        }else if(value==0){
-                          showGeneralDialog(
-                            context: context, 
-                            barrierDismissible: false,
-                            transitionDuration: Duration(milliseconds: 200),
-                            pageBuilder: (context, animation, secondaryAnimation) {
-                              return AnimalAbuseDialog();
-                            },
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height/2,
+            color: Colors.cyan,
+            alignment: Alignment.topLeft,
+            child: Container(
+              height: 200,
+              color: Colors.cyan,
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.fromLTRB(16, 0, 32, 0),
+              child: Text(
+                "Medic Dashboard",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Transform.translate(
+              offset: Offset(0, 140),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25)
+                ),
+                child: Container(
+                  color: Colors.white,
+                  constraints: BoxConstraints(
+                    minHeight: 500,
+                    minWidth: MediaQuery.of(context).size.width,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      FutureBuilder(
+                        future: ApiVeterinary().getAllBookingsRequest(),
+                        builder: (context, snapshot) {
+                          return ValueListenableBuilder(
+                            valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(),
+                            builder: (context, Box<ModelVetBook> box, child) {
+                              return ListView.builder(
+                                itemCount: box.length,
+                                padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 160),
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) => AcceptCard(box.getAt(index)),
+                              );
+                            }
                           );
                         }
-                      },
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      icon: Icon(Icons.more_vert, color: Colors.white,),
-                      itemBuilder: (context){
-                        return [
-                          PopupMenuItem(child: Text("Report animal abuse"), value: 0,),
-                          PopupMenuItem(child: Text("Delete account"), value: 1,)
-                        ];
-                      }
-                    ),
-                    ProfileStatusQuick()
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  child: Stack(
-                    children: [
-                      Transform.translate(
-                        offset: Offset(0, 70),
-                        child: Container(
-                          color: Colors.white,
-                          child: Container(
-                            color: Colors.cyan.withOpacity(0.05),
-                            child: FutureBuilder<void>(
-                              // future:  FirebaseAuth.instance.currentUser(),
-                              builder: (context, snapshotUser){
-                                if(snapshotUser.hasData){
-                                  return StreamBuilder<void>(
-                                    // stream: Firestore.instance.collection("doctorBook").where('doctorId', isEqualTo: (snapshotUser.data).uid).snapshots(),
-                                    builder: (context, snapshot) {
-                                      if(snapshot.hasData){
-                                        if(true){
-                                          return ListView.builder(
-                                            padding: EdgeInsets.fromLTRB(0, 10, 0, 80),
-                                            itemBuilder: (context, index) {
-                                              return AcceptCard(
-                                                "",
-                                                "",
-                                                true,
-                                                "",
-                                                "doctorBook"
-                                              );
-                                            },
-                                            itemCount: 5,
-                                          );
-                                        }else{
-                                          return Center(
-                                            child: Text("No Booking yet!")
-                                          );
-                                        }
-                                      }else{
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                    }
-                                  );
-                                }else{
-                                  return Center(
-                                    child: CircularProgressIndicator()
-                                  );
-                                }
-                              }
-                            ),
-                          )
-                        ),
-                      ),      
+                      )
                     ],
-                  )
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
-        )
+        ],
       ),
     );
   }

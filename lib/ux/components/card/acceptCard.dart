@@ -1,13 +1,12 @@
+import 'package:animore/logic/enum/bookStatusEnum.dart';
+import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AcceptCard extends StatelessWidget {
-  final String name;
-  final String details;
-  final bool booked;
-  final String docId;
-  final String collection;
-  AcceptCard(this.name, this.details, this.booked, this.docId, this.collection);
+  final ModelVetBook vetBook;
+  AcceptCard(this.vetBook);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +21,7 @@ class AcceptCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
                 child: Text(
-                  name,
+                  toBeginningOfSentenceCase(vetBook.user.name),
                   style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold
@@ -31,7 +30,7 @@ class AcceptCard extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  "$details",
+                  "details",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold
@@ -43,8 +42,8 @@ class AcceptCard extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: SmallRoundedButton(
-                      booked? "Accepted" : "Accept", 
-                      booked? null: (){
+                      vetBook.status==BookStatusEnum.booked? "Accept" : "Accepted", 
+                      vetBook.status!=BookStatusEnum.booked? null: (){
                         
                       }
                     )

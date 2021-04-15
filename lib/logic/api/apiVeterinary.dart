@@ -63,4 +63,17 @@ class ApiVeterinary{
       },
     );
   }
+
+  Future<void> getAllBookingsRequest() async{
+    var url = Uri.parse("$host/veterinary/book");
+
+    await http.get(
+      url,
+      needAuth: true,
+      onSuccess: (map) async{
+        VeterinaryHelper().fetchAllBookings(map);
+        return true;
+      }
+    );
+  }
 }

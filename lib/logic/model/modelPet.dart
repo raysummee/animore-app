@@ -27,14 +27,14 @@ class ModelPet{
     @required this.type,
   });
 
-  factory ModelPet.fromMap(Map<String, dynamic> map){
+  factory ModelPet.fromJson(Map<String, dynamic> body){
     return ModelPet(
-      id: map.containsKey('id')?map['id']:0, 
-      name: map.containsKey('name')?map['name']:"unknown",
-      bread: map.containsKey("bread")?map['bread']:"unknown",
-      dob: map.containsKey("dob")?DateTime.tryParse(map['dob']):null,
-      image: map.containsKey("image")?map['image']:"",
-      type: map.containsKey("type")?map['type']:"unknown",
+      id: body.containsKey('id')?body['id']:0, 
+      name: body.containsKey('name')?body['name']:"unknown",
+      bread: body.containsKey("bread")?body['bread']:"unknown",
+      dob: body.containsKey("dob")?DateTime.tryParse(body['dob']):null,
+      image: body.containsKey("image")?body['image']:"",
+      type: body.containsKey("type")?body['type']:"unknown",
     );
   }
 }

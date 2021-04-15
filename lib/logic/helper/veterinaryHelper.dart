@@ -1,4 +1,5 @@
 import 'package:animore/logic/model/modelDoctor.dart';
+import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:hive/hive.dart';
 
 class VeterinaryHelper{
@@ -15,5 +16,18 @@ class VeterinaryHelper{
   Future<void> updateOne(ModelDoctor modelDoctor) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
     await box.put(modelDoctor.id, modelDoctor);
+  }
+
+  Future<void> fetchAllBookings(Map body) async{
+    Box<ModelVetBook> box = await Hive.openBox<ModelVetBook>("vetBook");
+    List<ModelVetBook>  bookings = (body['vetBook'] as List).map((e) => ModelVetBook.fromJson(e)).toList();
+
+    print("booking");
+    print(bookings[0]);
+    
+    await box.clear();
+    for(var booking in bookings){
+      await box.put(booking.id, booking);
+    }
   }
 }

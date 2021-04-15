@@ -67,11 +67,7 @@ class MerchantPage extends StatelessWidget {
                                       padding: EdgeInsets.fromLTRB(0, 10, 0, 80),
                                       itemBuilder: (context, index) {
                                         return AcceptCard(
-                                          ",",
-                                          "",
-                                          true,
-                                          "",
-                                          "orders"
+                                          null
                                         );
                                       },
                                       itemCount: 5,
