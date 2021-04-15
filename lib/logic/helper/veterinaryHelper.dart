@@ -5,6 +5,8 @@ import 'package:hive/hive.dart';
 class VeterinaryHelper{
   Future<void> fetchAll(Map body) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
+    if((body['veterinary'] as List).isEmpty) return await box.clear();
+
     List<ModelDoctor>  medics = (body['veterinary'] as List).map((e) => ModelDoctor.fromJson(e)).toList();
     
     await box.clear();
@@ -20,6 +22,9 @@ class VeterinaryHelper{
 
   Future<void> fetchAllBookings(Map body) async{
     Box<ModelVetBook> box = await Hive.openBox<ModelVetBook>("vetBook");
+
+    if((body['vetBook'] as List).isEmpty) return await box.clear();
+
     List<ModelVetBook>  bookings = (body['vetBook'] as List).map((e) => ModelVetBook.fromJson(e)).toList();
 
     print("booking");
@@ -29,5 +34,10 @@ class VeterinaryHelper{
     for(var booking in bookings){
       await box.put(booking.id, booking);
     }
+  }
+
+  Future<void> updateBooking(ModelVetBook vetBook) async{
+    Box<ModelVetBook> box = await Hive.openBox<ModelVetBook>("vetBook");
+    await box.put(vetBook.id, vetBook);
   }
 }
