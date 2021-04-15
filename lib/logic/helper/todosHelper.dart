@@ -20,104 +20,39 @@ class TodosHelper{
     await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
  
-  Future<void> editTodoByWeekName(ModelTodos todos, String weekName, int index) async{
+  Future<void> editTodoByWeekName(ModelTodos todos, String weekName) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
-    await box.put(index, todos);
+    await box.put(todos.id, todos);
   }
 
 
+  Future<void> fetchTodosWeekwise(Map<String, dynamic> body, String weekName) async{
+    Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
+
+    List<ModelTodos> todos = (body['todos']['fri'] as List).map((e) => ModelTodos.fromMap(e)).toList();
+    todos.sort((a,b)=>a.time.compareTo(b.time));
+
+    Map<int, ModelTodos> todosMap = Map();
+    todos.forEach((newTodo) {
+      if(box.containsKey(newTodo.id)){
+        newTodo.done = box.get(newTodo.id).done;
+      }else{
+        newTodo.done = 0;
+      }
+      todosMap.putIfAbsent(newTodo.id, () => newTodo);
+    });
+
+    await box.clear();
+    await box.putAll(todosMap);
+  }
+
   Future<void> fetchTodos(Map<String, dynamic> body) async{
-
-    //monday//
-
-    Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_Mon");
-    List<ModelTodos> todos = (body['todos']['mon'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-    //tuesday//
-
-    box = await Hive.openBox<ModelTodos>("Todos_Tue");
-    todos = (body['todos']['tues'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-    //wednesday//
-
-    box = await Hive.openBox<ModelTodos>("Todos_Wed");
-    todos = (body['todos']['wed'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-
-    //thursday//
-
-    box = await Hive.openBox<ModelTodos>("Todos_Thu");
-    todos = (body['todos']['thus'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-    //friday//
-
-    box = await Hive.openBox<ModelTodos>("Todos_Fri");
-    todos = (body['todos']['fri'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-    //saturday
-
-    box = await Hive.openBox<ModelTodos>("Todos_Sat");
-    todos = (body['todos']['sat'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
-
-    //sunday//
-
-    box = await Hive.openBox<ModelTodos>("Todos_Sun");
-    todos = (body['todos']['sun'] as List).map((e) => ModelTodos.fromMap(e)).toList();
-    todos.forEach((newTodo) {
-      if(box.containsKey(newTodo.id)){
-        newTodo.done = box.get(newTodo.id).done;
-      }
-    });
-    todos.sort((a,b)=>a.time.compareTo(b.time));
-    await box.clear();
-    await box.addAll(todos);
+    await fetchTodosWeekwise(body, "Mon");
+    await fetchTodosWeekwise(body, "Tue");
+    await fetchTodosWeekwise(body, "Wed");
+    await fetchTodosWeekwise(body, "Thu");
+    await fetchTodosWeekwise(body, "Fri");
+    await fetchTodosWeekwise(body, "Sat");
+    await fetchTodosWeekwise(body, "Sun");
   }
 }
