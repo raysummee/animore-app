@@ -22,13 +22,14 @@ class ModelVetBookAdapter extends TypeAdapter<ModelVetBook> {
       pet: fields[3] as ModelPet,
       onDate: fields[1] as DateTime,
       status: fields[4] as BookStatusEnum,
+      subject: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelVetBook obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class ModelVetBookAdapter extends TypeAdapter<ModelVetBook> {
       ..writeByte(3)
       ..write(obj.pet)
       ..writeByte(4)
-      ..write(obj.status);
+      ..write(obj.status)
+      ..writeByte(5)
+      ..write(obj.subject);
   }
 
   @override

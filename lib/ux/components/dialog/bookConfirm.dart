@@ -56,7 +56,7 @@ class _BookConfirmState extends State<BookConfirm> {
                               setState(() {
                                 isLoading = true;
                               });
-                              await ApiVeterinary().bookVeterinaryRequest(widget.modelDoctor);
+                              await ApiVeterinary().bookNewVeterinary(widget.modelDoctor);
                               setState(() {
                                 isLoading = false;
                               });

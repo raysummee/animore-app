@@ -17,13 +17,16 @@ class ModelVetBook{
   ModelPet pet;
   @HiveField(4)
   BookStatusEnum status; 
+  @HiveField(5)
+  String subject;
 
   ModelVetBook({
     @required this.id,
     @required this.user,
     @required this.pet,
     @required this.onDate,
-    @required this.status
+    @required this.status,
+    @required this.subject
   });
 
   factory ModelVetBook.fromJson(Map<String, dynamic> body){
@@ -32,7 +35,8 @@ class ModelVetBook{
       user: body.containsKey("pet")&&body['pet'].containsKey("user")? ModelUser.fromJson(body['pet']['user']):null, 
       pet: body.containsKey("pet")? ModelPet.fromJson(body['pet']):null, 
       onDate: body.containsKey("onDate")?DateTime.tryParse(body['onDate']):null,
-      status: body.containsKey("status")? statusEnumFromString(body['status']):BookStatusEnum.booked
+      status: body.containsKey("status")? statusEnumFromString(body['status']):BookStatusEnum.booked,
+      subject: body.containsKey("subject")? body['subject']: null
     );
   }
 }

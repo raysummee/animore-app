@@ -37,7 +37,7 @@ class ModelUser{
       id: body.containsKey("id")?body['id'] as int:0,
       name: body.containsKey("name")?body['name'] as String:"User", 
       email: body.containsKey("email")?body['email'] as String:"", 
-      dob: body.containsKey("dob")?DateTime.tryParse(body['dob']):null, 
+      dob: body.containsKey("dob")&&body['dob']!=null?DateTime.tryParse(body['dob']):null, 
       image: body.containsKey("image")?"$host/${body['image']}": "", 
       phone: body.containsKey("phone")?body['phone'].toString(): "", 
       role: body.containsKey("role")?roleEnumFromString(body['role']): RoleEnum.basic

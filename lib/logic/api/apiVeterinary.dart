@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'base/baseHttp.dart' as http;
 
 class ApiVeterinary{
-  Future<void> getAllVeterinaryRequest() async{
+  Future<void> getAllVeterinary() async{
     var url = Uri.parse("$host/veterinary");
 
     http.get(
@@ -22,7 +22,7 @@ class ApiVeterinary{
     );
   }
 
-  Future<bool> bookVeterinaryRequest(ModelDoctor doctor) async{
+  Future<bool> bookNewVeterinary(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
     var pet = 1;
     var inputBody = json.encode({
@@ -64,7 +64,7 @@ class ApiVeterinary{
     );
   }
 
-  Future<void> getAllBookingsRequest() async{
+  Future<void> getAllBookingsOfCurrentVeterinary() async{
     var url = Uri.parse("$host/veterinary/book");
 
     await http.get(

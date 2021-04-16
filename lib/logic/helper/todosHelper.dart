@@ -29,7 +29,9 @@ class TodosHelper{
   Future<void> fetchTodosWeekwise(Map<String, dynamic> body, String weekName) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
 
-    List<ModelTodos> todos = (body['todos']['fri'] as List).map((e) => ModelTodos.fromMap(e)).toList();
+    if(body['todos'][weekName.toLowerCase()]==null||(body['todos'][weekName.toLowerCase()] as List).isEmpty) return;
+
+    List<ModelTodos> todos = (body['todos'][weekName.toLowerCase()] as List).map((e) => ModelTodos.fromMap(e)).toList();
     todos.sort((a,b)=>a.time.compareTo(b.time));
 
     Map<int, ModelTodos> todosMap = Map();

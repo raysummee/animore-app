@@ -9,40 +9,44 @@ class ProfileStatusQuick extends StatelessWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                child: FittedBox(
-                  child: Text(
-                    "${Auth().user().name.toUpperCase()}",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  child: FittedBox(
+                    child: Text(
+                      "${Auth().user().name.toUpperCase()}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(10, 4, 0, 0),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.red
-                ),
-                child: Text(
-                  roleEnumToString(Auth().user().role).toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 4, 0, 0),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.red
                   ),
-                ),
-              )
-            ],
+                  child: Text(
+                    roleEnumToString(Auth().user().role).toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           Container(
             margin: EdgeInsets.fromLTRB(20, 0, 10, 0),

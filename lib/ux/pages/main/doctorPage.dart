@@ -1,8 +1,10 @@
 import 'package:animore/logic/api/apiVeterinary.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/card/acceptCard.dart';
+import 'package:animore/ux/components/card/vetAppointmentCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
+import 'package:animore/ux/components/slider/vetAppointmentSlider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -54,22 +56,28 @@ class DoctorPage extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
+                      VetAppointmentSlider(),
+                      SizedBox(
+                        height: 16,
+                      ),
                       FutureBuilder(
-                        future: ApiVeterinary().getAllBookingsRequest(),
+                        future: ApiVeterinary().getAllBookingsOfCurrentVeterinary(),
                         builder: (context, snapshot) {
                           return ValueListenableBuilder(
-                            valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(),
+                            valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 
                             builder: (context, Box<ModelVetBook> box, child) {
                               return ListView.builder(
-                                itemCount: box.length,
-                                padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 160),
                                 shrinkWrap: true,
+                                itemCount: box.length,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) => AcceptCard(box.getAt(index)),
+                                padding: EdgeInsets.only(
+                                  bottom: 160
+                                ),
+                                itemBuilder:  (context, index) => VetAppointmentCard(box.getAt(index)),
                               );
-                            }
+                            },
                           );
-                        }
+                        },
                       )
                     ],
                   ),

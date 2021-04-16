@@ -66,7 +66,8 @@ class _HomeWelcomePageState extends State<HomeWelcomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TodayWeekCalender(),
-                        ProfileStatusQuick()
+                        SizedBox(width: 32,),
+                        Expanded(child: ProfileStatusQuick())
                       ],
                     ),
                   ),
