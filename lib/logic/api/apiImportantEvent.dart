@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:animore/logic/Helper/importantEventHelper.dart';
 import 'package:animore/logic/api/base/baseHttp.dart' as http;
+import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:animore/logic/api/apiConfig.dart';
@@ -10,7 +11,9 @@ import 'package:path/path.dart';
 
 class ApiImportantEvent {
   Future<void> getImportantEventAll(BuildContext context) async {
-    const petId = 1;
+    //TODO replace index 0 with the index of pet which is currenty choosed
+    final petId = (await PetHelper().getPetAt(0)).id;
+    
     var url = Uri.parse("$host/important_date/$petId");
 
     http.get(
@@ -26,7 +29,8 @@ class ApiImportantEvent {
   }
 
   Future<bool> updateImportantEvent(BuildContext context, ModelImportantEvent event) async {
-    const petId = 1;
+    //TODO replace index 0 with the index of pet which is currenty choosed
+    final petId = (await PetHelper().getPetAt(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
 
     var inputBody = json.encode({

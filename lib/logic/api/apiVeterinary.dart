@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animore/logic/api/apiConfig.dart';
 import 'package:animore/logic/enum/bookStatusEnum.dart';
+import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/helper/veterinaryHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:intl/intl.dart';
@@ -24,9 +25,10 @@ class ApiVeterinary{
 
   Future<bool> bookNewVeterinary(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
-    var pet = 1;
+    //TODO replace index 0 with the index of pet which is currenty choosed
+    final petId = (await PetHelper().getPetAt(0)).id;    
     var inputBody = json.encode({
-      "pet_id": pet,
+      "pet_id": petId,
       "veterinary_id": doctor.id,
       "onDate": DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now())
     });
