@@ -49,4 +49,26 @@ class ApiImportantEvent {
       }
     );
   }
+
+  Future<bool> addNewImportantEvent(BuildContext context, ModelImportantEvent event) async {
+    //TODO replace index 0 with the index of pet which is currenty choosed
+    final petId = (await PetHelper().getPetAt(0)).id;
+    var url = Uri.parse("$host/important_date/$petId");
+
+    var inputBody = json.encode({
+        "name" : event.name,
+        "date_time": DateFormat("yyyy-MM-dd HH:mm:ss").format(event.dateTime)
+      });
+
+    print(inputBody);
+
+    return await http.post(
+      url,
+      body: inputBody,
+      onSuccess: (map) async{
+        SnackBar(content: Text("Event created"));
+        return true;
+      }
+    );
+  }
 }

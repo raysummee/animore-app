@@ -32,7 +32,10 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
   bool dateChange = false;
   @override
   void initState() {
-    events = List.from(widget.events);
+    if(widget.events!=null&&widget.events.isNotEmpty){
+      events = List.from(widget.events);
+    }
+    events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
     controller  = TextEditingController(text: events.elementAt(pageNo).name);
     super.initState();
   }
@@ -46,7 +49,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Edit Events - ${pageNo+1}",
+              pageNo==events.length-1? "Add Events" :"Edit Events - ${pageNo+1}",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18
@@ -56,7 +59,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
               height: 16,
             ),
             Text(
-              DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(events[pageNo].dateTime),
+              events[pageNo].dateTime==null? "Select Date": DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(events[pageNo].dateTime),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold
@@ -101,7 +104,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                       splashColor: Colors.deepOrange,
                       icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
                       onPressed: () async{
-                        DateTime temp = await showDatePicker(context: context, initialDate: events[pageNo].dateTime, firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
+                        DateTime temp = await showDatePicker(context: context, initialDate: events[pageNo].dateTime??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
                         if(temp!=null){
                           setState(() {
                             events[pageNo].dateTime = temp;
@@ -158,7 +161,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                                 controller.text = events[pageNo].name;
                               });
                             }:null,
-                            child: Icon(FlutterIcons.right_ant),
+                            child: Icon(pageNo>=events.length-2? FlutterIcons.addfile_ant :FlutterIcons.right_ant),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
                               minimumSize: Size(400, 50)
@@ -177,7 +180,13 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                   child: ElevatedButton(
                     onPressed: nameChange||dateChange?() async{
                       events[pageNo].name = controller.text;
-                      ApiImportantEvent().updateImportantEvent(context, events[pageNo]);
+                      if(events[pageNo].id!=null){
+                        ApiImportantEvent().updateImportantEvent(context, events[pageNo]);
+                      }else{
+                        ApiImportantEvent().addNewImportantEvent(context, events[pageNo]);
+                        widget.events.add(events.last);
+                        events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
+                      }
                       setState(() {
                         nameChange = false;
                         dateChange = false;

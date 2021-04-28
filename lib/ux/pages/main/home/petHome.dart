@@ -19,7 +19,7 @@ class _PetHomeState extends State<PetHome> {
   @override
   void didChangeDependencies() {
     ApiPet().getPetsApiRequest();
-    ApiImportantEvent().getImportantEventAll(context);
+    ApiImportantEvent().getImportantEventAll(context: context);
     super.didChangeDependencies();
   }
 
