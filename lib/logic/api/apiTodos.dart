@@ -1,4 +1,5 @@
 
+import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/base/baseHttp.dart' as http;
 import 'package:animore/logic/helper/todosHelper.dart';
 

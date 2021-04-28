@@ -105,6 +105,7 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                           child: TextField(
                             controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               labelText: "Email",
                               contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
