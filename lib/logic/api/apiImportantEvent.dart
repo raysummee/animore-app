@@ -10,10 +10,10 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 class ApiImportantEvent {
-  Future<void> getImportantEventAll(BuildContext context) async {
+  Future<void> getImportantEventAll({BuildContext context}) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
-    
+
     var url = Uri.parse("$host/important_date/$petId");
 
     http.get(

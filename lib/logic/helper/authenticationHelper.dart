@@ -1,3 +1,5 @@
+import 'package:animore/logic/api/apiImportantEvent.dart';
+import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -8,6 +10,9 @@ class AuthenticationHelper {
     ModelUser user = ModelUser.fromJson(body['user']);
     (await Hive.openBox<ModelUser>("user")).put("user", user);
     await saveToken(body['access_token']);
+    //explicitly fetching new pet and important values
+    ApiPet().getPetsApiRequest();
+    ApiImportantEvent().getImportantEventAll();
     return true;
   }
 
