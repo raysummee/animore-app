@@ -5,7 +5,7 @@ import 'package:animore/logic/helper/todosHelper.dart';
 import 'apiConfig.dart';
 class ApiTodos{
   Future<void> getTodosAllRequest() async{
-    const petId = 1;
+    const petId = 2;
     var url = Uri.parse("$host/todos/$petId");
     http.get(
       url,
