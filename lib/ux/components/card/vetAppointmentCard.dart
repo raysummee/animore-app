@@ -3,6 +3,7 @@ import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/button/primaryRoundedButton.dart';
 import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:animore/ux/components/group/horizontalIconAndTextGroup.dart';
+import 'package:animore/ux/components/others/customCircleAvatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
@@ -27,9 +28,7 @@ class VetAppointmentCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  foregroundImage: NetworkImage(vetBook.user.image),
-                ),
+                CustomCircleAvatar(image: NetworkImage(vetBook.user.image,), fallbackString: vetBook.user.name[0].toUpperCase(),),
                 SizedBox(
                   width: 12,
                 ),
