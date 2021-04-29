@@ -58,7 +58,7 @@ class VetAppointmentCard extends StatelessWidget {
               child: Divider(
               ),
             ),
-            HorizontalIconAndTextGroup(vetBook.user.phone, FlutterIcons.phone_faw),
+            HorizontalIconAndTextGroup(vetBook.user.phone??"Not avaiable", FlutterIcons.phone_faw),
             SizedBox(
               height: 8,
             ),

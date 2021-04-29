@@ -42,7 +42,7 @@ class ModelUser{
       email: body.containsKey("email")?body['email'] as String:"", 
       dob: body.containsKey("dob")&&body['dob']!=null?DateTime.tryParse(body['dob']):null, 
       image: body.containsKey("image")?"$host/${body['image']}": "", 
-      phone: body.containsKey("phone")?body['phone'].toString(): "", 
+      phone: body.containsKey("phone")&&body["phone"]!=null?body['phone'].toString(): null, 
       role: body.containsKey("role")?roleEnumFromString(body['role']): RoleEnum.basic,
       vetId: body.containsKey("veterinary_id")?body['veterinary_id'] as int: null
     );
