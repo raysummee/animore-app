@@ -1,3 +1,5 @@
+import 'package:animore/logic/api/apiImportantEvent.dart';
+import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
@@ -10,10 +12,25 @@ import 'package:animore/ux/pages/main/healPage.dart';
 import 'package:animore/ux/pages/main/home/homePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 
-class NavPages extends StatelessWidget {
+class NavPages extends StatefulWidget {
+  
+  @override
+  _NavPagesState createState() => _NavPagesState();
+}
+
+class _NavPagesState extends State<NavPages> {
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      ApiPet().getPetsApiRequest();
+      ApiImportantEvent().getImportantEventAll(context: context);
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var appstate = Provider.of<NavBarIndexNotify>(context);

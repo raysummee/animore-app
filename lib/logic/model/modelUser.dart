@@ -21,6 +21,8 @@ class ModelUser{
   DateTime dob;
   @HiveField(6)
   String image;
+  @HiveField(7)
+  int vetId;
 
   ModelUser({
     @required this.id,
@@ -29,7 +31,8 @@ class ModelUser{
     @required this.dob,
     @required this.image,
     @required this.phone,
-    @required this.role
+    @required this.role,
+    @required this.vetId
   });
 
   factory ModelUser.fromJson(Map<String, dynamic> body){
@@ -40,7 +43,8 @@ class ModelUser{
       dob: body.containsKey("dob")&&body['dob']!=null?DateTime.tryParse(body['dob']):null, 
       image: body.containsKey("image")?"$host/${body['image']}": "", 
       phone: body.containsKey("phone")?body['phone'].toString(): "", 
-      role: body.containsKey("role")?roleEnumFromString(body['role']): RoleEnum.basic
+      role: body.containsKey("role")?roleEnumFromString(body['role']): RoleEnum.basic,
+      vetId: body.containsKey("veterinary_id")?body['veterinary_id'] as int: null
     );
   }
 }

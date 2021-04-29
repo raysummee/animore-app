@@ -18,9 +18,11 @@ class VeterinarySocket{
 
     print("role is $role");
 
-    Channel channel = Pusher().connection().subscribe('book-vet-${Auth().user().id}');
 
     if(role=="doctor"){
+
+      Channel channel = Pusher().connection().subscribe('book-vet-${Auth().user().vetId}');
+
       channel.bind('App\\Events\\VetBook\\onCreateVetBook', (event) {
         print(event);
         
@@ -28,6 +30,9 @@ class VeterinarySocket{
         VeterinaryHelper().updateBooking(vetBook);
       });
     }else if(role=="user"){
+
+      Channel channel = Pusher().connection().subscribe('book-vet-${Auth().user().id}');
+
       channel.bind('App\\Events\\VetBook\\onStatusChangeVetBook', (Map event) {
         print(event);
 

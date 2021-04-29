@@ -15,12 +15,9 @@ class Pusher{
   static void _initPusher(){
     print("init pusher");
     PusherOptions options = PusherOptions(
-      host: '0.0.0.0',
-      port: 6001,
-      cluster: "mt1",
-      encrypted: false,
+      cluster: "ap2",
     );
-    _pusher = FlutterPusher('12345', options, enableLogging: true, onConnectionStateChange: (connectionStateChange){
+    _pusher = FlutterPusher('19c58a49eb2e09c65327', options, enableLogging: true, onConnectionStateChange: (connectionStateChange){
       print(connectionStateChange.currentState);
     });
   }

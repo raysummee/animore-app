@@ -17,13 +17,6 @@ class PetHome extends StatefulWidget {
 
 class _PetHomeState extends State<PetHome> {
   @override
-  void didChangeDependencies() {
-    ApiPet().getPetsApiRequest();
-    ApiImportantEvent().getImportantEventAll(context: context);
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container(

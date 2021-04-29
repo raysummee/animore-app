@@ -24,13 +24,14 @@ class ModelUserAdapter extends TypeAdapter<ModelUser> {
       image: fields[6] as String,
       phone: fields[4] as String,
       role: fields[3] as RoleEnum,
+      vetId: fields[7] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelUser obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class ModelUserAdapter extends TypeAdapter<ModelUser> {
       ..writeByte(5)
       ..write(obj.dob)
       ..writeByte(6)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(7)
+      ..write(obj.vetId);
   }
 
   @override
