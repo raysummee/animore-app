@@ -11,7 +11,7 @@ class ApiTodos{
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
     var url = Uri.parse("$host/todos/$petId");
-    http.get(
+    await http.get(
       url,
       context: context,
       onSuccess: (map) async{

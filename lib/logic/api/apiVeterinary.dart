@@ -17,63 +17,33 @@ class ApiVeterinary{
       url,
       needAuth: true,
       onSuccess: (map) async{
-        await VeterinaryHelper().fetchAll(map);
+        await VeterinaryHelper().fetchAllVeterinary(map);
         return true;
       }
     );
   }
 
-  Future<bool> bookNewVeterinary(ModelDoctor doctor) async{
-    var url = Uri.parse("$host/veterinary/book");
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;    
-    var inputBody = json.encode({
-      "pet_id": petId,
-      "veterinary_id": doctor.id,
-      "onDate": DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now())
-    });
+  Future<void> getSpecificVeterinary(int vetId) async{
+    var url = Uri.parse("$host/veterinary/$vetId");
 
-    return await http.post(
+    http.get(
       url,
-      body: inputBody,
       needAuth: true,
       onSuccess: (map) async{
-        doctor.status = BookStatusEnum.booked;
-        VeterinaryHelper().updateOne(doctor);
+        // await VeterinaryHelper().fetchAll(map);
         return true;
-      },
-      onServerError: (map) async{
-        return false;
-      },
-      onServerUnavailable: (map) async{
-        return false;
-      },
-      onBadRequest: (map) async{
-        return false;
-      },
-      onForibidded: (map) async{
-        return false;
-      },
-      onNotFound: (map) async{
-        return false;
-      },
-      onTooManyRequest: (map) async{
-        return false;
-      },
-      onUnathorized: (map) async{
-        return false;
-      },
+      }
     );
   }
 
-  Future<void> getAllBookingsOfCurrentVeterinary() async{
-    var url = Uri.parse("$host/veterinary/book");
+  Future<void> getAuthenticatedVeterinary() async{
+    var url = Uri.parse("$host/veterinary/auth");
 
-    await http.get(
+    http.get(
       url,
       needAuth: true,
       onSuccess: (map) async{
-        VeterinaryHelper().fetchAllBookings(map);
+        // await VeterinaryHelper().fetchAll(map);
         return true;
       }
     );

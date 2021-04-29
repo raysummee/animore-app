@@ -3,17 +3,22 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class IndeterminateLoader extends StatelessWidget {
   static GlobalKey<State> _keyLoader;
-  static show(BuildContext context){
-    if(_keyLoader==null)
+  static void show(BuildContext context){
+    if(_keyLoader==null){
       _keyLoader = new GlobalKey<State>();
+      hide();
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => IndeterminateLoader()
     );
   }
-  static hide(){
-    if(_keyLoader!=null&&Navigator.of(_keyLoader.currentContext,rootNavigator: true).canPop()){
+  static void hide(){
+    if(_keyLoader!=null
+        &&_keyLoader.currentContext!=null
+        &&Navigator.of(_keyLoader.currentContext,rootNavigator: true).canPop()
+      ){
       Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
     }
   }

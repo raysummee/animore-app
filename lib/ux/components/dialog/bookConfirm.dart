@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/apiVeterinary.dart';
+import 'package:animore/logic/api/apiVeterinaryBook.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +57,7 @@ class _BookConfirmState extends State<BookConfirm> {
                               setState(() {
                                 isLoading = true;
                               });
-                              await ApiVeterinary().bookNewVeterinary(widget.modelDoctor);
+                              await ApiVeterinaryBook().bookNewVeterinary(widget.modelDoctor);
                               setState(() {
                                 isLoading = false;
                               });

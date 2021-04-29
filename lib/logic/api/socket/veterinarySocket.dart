@@ -5,6 +5,7 @@ import 'package:animore/logic/api/socket/pusher.dart';
 import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/helper/authenticationHelper.dart';
+import 'package:animore/logic/helper/veterinaryBookHelper.dart';
 import 'package:animore/logic/helper/veterinaryHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
@@ -27,7 +28,7 @@ class VeterinarySocket{
         print(event);
         
         ModelVetBook vetBook = ModelVetBook.fromJson(event['vetBook']);
-        VeterinaryHelper().updateBooking(vetBook);
+        VeterinaryBookHelper().updateBooking(vetBook);
       });
     }else if(role=="user"){
 
@@ -40,7 +41,7 @@ class VeterinarySocket{
         ModelDoctor modelDoctor = ModelDoctor.fromJson(event['vetBook']["veterinary"]);
  
         modelDoctor.status = statusEnumFromString(event['vetBook']['status']);
-        VeterinaryHelper().updateOne(modelDoctor);
+        VeterinaryHelper().updateVeterinary(modelDoctor);
       });
     }
   }

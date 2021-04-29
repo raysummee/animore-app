@@ -12,7 +12,7 @@ class ApiPet{
 
   Future<void> getPetsApiRequest() async{
     var url = Uri.parse("$host/pet");
-    http.get(
+    await http.get(
       url,
       onSuccess: (map) async{
         return await PetHelper().fetchPet(map);

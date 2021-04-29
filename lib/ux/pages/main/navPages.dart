@@ -25,9 +25,9 @@ class NavPages extends StatefulWidget {
 class _NavPagesState extends State<NavPages> {
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      ApiPet().getPetsApiRequest();
-      ApiImportantEvent().getImportantEventAll(context: context);
+    SchedulerBinding.instance.addPostFrameCallback((_) async{
+      await ApiPet().getPetsApiRequest();
+      await ApiImportantEvent().getImportantEventAll(context: context);
     });
     super.initState();
   }

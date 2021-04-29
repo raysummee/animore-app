@@ -16,7 +16,7 @@ class ApiImportantEvent {
 
     var url = Uri.parse("$host/important_date/$petId");
 
-    http.get(
+    await http.get(
       url,
       context: context,
       onSuccess: (map) async {

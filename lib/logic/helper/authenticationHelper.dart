@@ -8,11 +8,11 @@ import 'package:hive/hive.dart';
 class AuthenticationHelper {
   Future<bool> fetchUser(Map<String, dynamic> body) async {
     ModelUser user = ModelUser.fromJson(body['user']);
-    (await Hive.openBox<ModelUser>("user")).put("user", user);
+    await(await Hive.openBox<ModelUser>("user")).put("user", user);
     await saveToken(body['access_token']);
     //explicitly fetching new pet and important values
-    ApiPet().getPetsApiRequest();
-    ApiImportantEvent().getImportantEventAll();
+    await ApiPet().getPetsApiRequest();
+    await ApiImportantEvent().getImportantEventAll();
     return true;
   }
 

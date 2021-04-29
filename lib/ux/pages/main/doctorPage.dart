@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/apiVeterinary.dart';
+import 'package:animore/logic/api/apiVeterinaryBook.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/card/acceptCard.dart';
 import 'package:animore/ux/components/card/vetAppointmentCard.dart';
@@ -61,7 +62,7 @@ class DoctorPage extends StatelessWidget {
                         height: 16,
                       ),
                       FutureBuilder(
-                        future: ApiVeterinary().getAllBookingsOfCurrentVeterinary(),
+                        future: ApiVeterinaryBook().getAllBookingsOfCurrentVeterinary(),
                         builder: (context, snapshot) {
                           return ValueListenableBuilder(
                             valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 
