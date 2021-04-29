@@ -7,21 +7,24 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as Http;
 
+typedef _ValueGetterSetterDynamic<T> = Future Function(T);
 typedef _ValueGetterSetter<T> = Future<bool> Function(T);
 
-Future<void> get(
+
+Future get(
   Uri uri,{
   BuildContext context,
-  _ValueGetterSetter<Map> onSuccess,
-  _ValueGetterSetter<Map> onNotFound,
-  _ValueGetterSetter<Map> onServerError,
-  _ValueGetterSetter<Map> onServerUnavailable,
-  _ValueGetterSetter<Map> onBadRequest,
-  _ValueGetterSetter<Map> onUnathorized,
-  _ValueGetterSetter<Map> onForibidded,
-  _ValueGetterSetter<Map> onTooManyRequest,
-  _ValueGetterSetter<Http.Response> onCustomRequest,
-  bool needAuth:true
+  _ValueGetterSetterDynamic<Map> onSuccess,
+  _ValueGetterSetterDynamic<Map> onNotFound,
+  _ValueGetterSetterDynamic<Map> onServerError,
+  _ValueGetterSetterDynamic<Map> onServerUnavailable,
+  _ValueGetterSetterDynamic<Map> onBadRequest,
+  _ValueGetterSetterDynamic<Map> onUnathorized,
+  _ValueGetterSetterDynamic<Map> onForibidded,
+  _ValueGetterSetterDynamic<Map> onTooManyRequest,
+  _ValueGetterSetterDynamic<Http.Response> onCustomRequest,
+  bool needAuth:true,
+  bool needBool:true
 }) async {
   var response = await Http.get(uri, headers:   needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -29,9 +32,8 @@ Future<void> get(
   }:{ 
     "Accept": "application/json" 
   });
-  
 
-  return await _util(
+  var result = await _util(
     response: response, 
     context: context, 
     onSuccess: onSuccess, 
@@ -42,7 +44,16 @@ Future<void> get(
     onUnathorized: onUnathorized, 
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
-    onCustomRequest: onCustomRequest);
+    onCustomRequest: onCustomRequest,
+    needBool: needBool);
+  
+  if(needBool&&result is bool){
+    return result;
+  }else if(needBool){
+    return false;
+  }else{
+    return result;
+  }
 }
 
 Future<bool> post(
@@ -58,7 +69,8 @@ Future<bool> post(
   _ValueGetterSetter<Map> onForibidded,
   _ValueGetterSetter<Map> onTooManyRequest,
   _ValueGetterSetter<Http.Response> onCustomRequest,
-  bool needAuth:true
+  bool needAuth:true,
+  bool needBool:true
 }) async {
   var response = await Http.post(uri, body: body, headers: needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -78,7 +90,8 @@ Future<bool> post(
     onUnathorized: onUnathorized, 
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
-    onCustomRequest: onCustomRequest);
+    onCustomRequest: onCustomRequest,
+    needBool: needBool);
 }
 
 
@@ -95,7 +108,8 @@ Future<bool> put(
   _ValueGetterSetter<Map> onForibidded,
   _ValueGetterSetter<Map> onTooManyRequest,
   _ValueGetterSetter<Http.Response> onCustomRequest,
-  bool needAuth:true
+  bool needAuth:true,
+  bool needBool:true
 }) async {
   var response = await Http.put(uri, body: body, headers: needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -115,10 +129,11 @@ Future<bool> put(
     onUnathorized: onUnathorized, 
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
-    onCustomRequest: onCustomRequest);
+    onCustomRequest: onCustomRequest,
+    needBool: needBool);
 }
 
-Future<bool> _util({
+Future _util({
   @required Http.Response response,
   @required BuildContext context,
   @required _ValueGetterSetter<Map> onSuccess,
@@ -130,6 +145,7 @@ Future<bool> _util({
   @required _ValueGetterSetter<Map> onForibidded,
   @required _ValueGetterSetter<Map> onTooManyRequest,
   @required _ValueGetterSetter<Http.Response> onCustomRequest,
+  @required bool needBool
 
 }) async {
   if(kDebugMode)
@@ -144,7 +160,7 @@ Future<bool> _util({
     }else{
       print("not logged");
       print(context!=null);
-      return context!=null?await Auth().logout(context):false;
+      return context!=null?await Auth().logout(context):needBool?false:null;
     }
   }
   else if (response.statusCode == 403 && onForibidded!=null)
@@ -161,7 +177,7 @@ Future<bool> _util({
     return await onTooManyRequest(json.decode(response.body));
   else if(onCustomRequest!=null)
     return await onCustomRequest(response);
-  return false;
+  return needBool?false:null;
 }
 
 

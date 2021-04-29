@@ -15,8 +15,23 @@ class VeterinaryHelper{
     }
   }
 
+  Future<ModelDoctor> fetchSpecificVeterinary(Map body) async{
+    return ModelDoctor.fromJson(body['veterinary']);
+  }
+
+  Future<void> fetchAuthenticatedVeterinary(Map body) async{
+    Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinaryAuth");
+    ModelDoctor vet = ModelDoctor.fromJson(body['veterinary']);
+    await box.put("veterinaryAuth", vet);
+  }
+
   Future<void> updateVeterinary(ModelDoctor modelDoctor) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
     await box.put(modelDoctor.id, modelDoctor);
+  }
+
+  Future<void> updateAuthenticatedVeterinary(ModelDoctor modelDoctor) async{
+    Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinaryAuth");
+    await box.put("veterinaryAuth", modelDoctor);
   }
 }

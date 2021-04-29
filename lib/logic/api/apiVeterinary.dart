@@ -23,15 +23,15 @@ class ApiVeterinary{
     );
   }
 
-  Future<void> getSpecificVeterinary(int vetId) async{
+  Future<ModelDoctor> getSpecificVeterinary(int vetId) async{
     var url = Uri.parse("$host/veterinary/$vetId");
 
-    http.get(
+    return await http.get(
       url,
       needAuth: true,
+      needBool: false,
       onSuccess: (map) async{
-        // await VeterinaryHelper().fetchAll(map);
-        return true;
+        return await VeterinaryHelper().fetchSpecificVeterinary(map);
       }
     );
   }
@@ -43,7 +43,7 @@ class ApiVeterinary{
       url,
       needAuth: true,
       onSuccess: (map) async{
-        // await VeterinaryHelper().fetchAll(map);
+        await VeterinaryHelper().fetchAuthenticatedVeterinary(map);
         return true;
       }
     );
