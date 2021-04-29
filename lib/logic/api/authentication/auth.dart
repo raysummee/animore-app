@@ -32,6 +32,7 @@ class Auth {
   Future<bool> logout(BuildContext context) async {
     print("logging out");
     IndeterminateLoader.show(context);
+    await AuthenticationHelper().deleteUser();
     await Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     IndeterminateLoader.hide();
     bool result = await ApiAuthentication().logoutApiRequest();

@@ -13,13 +13,14 @@ class IndeterminateLoader extends StatelessWidget {
     );
   }
   static hide(){
-    if(_keyLoader!=null){
+    if(_keyLoader!=null&&Navigator.of(_keyLoader.currentContext,rootNavigator: true).canPop()){
       Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
     }
   }
   @override
   Widget build(BuildContext context) {
     return Material(
+      key: _keyLoader,
       color: Colors.transparent,
       child: WillPopScope(
         onWillPop: () async => false,
