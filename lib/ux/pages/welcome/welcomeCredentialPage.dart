@@ -1,5 +1,6 @@
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/ux/components/button/primaryRoundedButton.dart';
+import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeCredentialPage extends StatefulWidget {

@@ -66,27 +66,24 @@ class ApiAuthentication {
     return returnValue ?? false;
   }
 
-  Future<bool> logoutApiRequest(BuildContext context) async {
+  Future<bool> logoutApiRequest() async {
     var url = Uri.parse("$host/logout");
     
     var returnValue = await post(
       url, 
 
       onSuccess: (map) async {
-        await AuthenticationHelper().deleteUser();
         print("true");
         return true;
       }, 
 
       onUnathorized: (map) async{
-        await AuthenticationHelper().deleteUser();
         print(map['message']);
         return true;
       }, 
 
       onCustomRequest: (response) async{
         if(response.statusCode == 302){
-          AuthenticationHelper().deleteUser();
           return true;
         }else{
           return false;
