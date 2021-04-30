@@ -1,3 +1,4 @@
+import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/button/primaryRoundedButton.dart';
@@ -50,7 +51,28 @@ class VetAppointmentCard extends StatelessWidget {
                       ),
                     ],
                   ) 
-                )
+                ),
+                vetBook.status==BookStatusEnum.booked? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ClipOval(
+                      child: Container(
+                        color: Colors.deepOrange,
+                        width: 15,
+                        height: 15,
+                      ),
+                    ),
+                    SizedBox(width: 5,),
+                    Text(
+                      "NEW",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.w900
+                      ),
+                    ),
+                  ],
+                ):SizedBox.shrink()
               ],
             ),
             Padding(

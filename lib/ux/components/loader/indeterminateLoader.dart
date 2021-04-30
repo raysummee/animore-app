@@ -4,10 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class IndeterminateLoader extends StatelessWidget {
   static GlobalKey<State> _keyLoader;
   static void show(BuildContext context){
-    if(_keyLoader==null){
-      _keyLoader = new GlobalKey<State>();
-      hide();
-    }
+    _keyLoader = new GlobalKey<State>();
+    hide();
     showDialog(
       context: context,
       barrierDismissible: false,

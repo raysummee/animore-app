@@ -1,6 +1,9 @@
 import 'package:animore/logic/api/apiVeterinary.dart';
 import 'package:animore/logic/api/apiVeterinaryBook.dart';
+import 'package:animore/logic/enum/bookStatusEnum.dart';
+import 'package:animore/logic/helper/veterinaryBookHelper.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
+import 'package:animore/logic/provider/vetBookSliderNotify.dart';
 import 'package:animore/ux/components/card/acceptCard.dart';
 import 'package:animore/ux/components/card/vetAppointmentCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
@@ -10,10 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DoctorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<VetBookSliderNotify>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -61,25 +66,31 @@ class DoctorPage extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      FutureBuilder(
+                      provider.index==1?FutureBuilder(
                         future: ApiVeterinaryBook().getAllBookingsOfCurrentVeterinary(),
                         builder: (context, snapshot) {
                           return ValueListenableBuilder(
                             valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 
                             builder: (context, Box<ModelVetBook> box, child) {
-                              return ListView.builder(
+                              return box.isNotEmpty? ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: box.length,
+                                reverse: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.only(
                                   bottom: 160
                                 ),
-                                itemBuilder:  (context, index) => VetAppointmentCard(box.getAt(index)),
+                                itemBuilder:  (context, index) {
+                                  return VetAppointmentCard(box.getAt(index));
+                                }
+                              ):Container(
+                                padding: EdgeInsets.only(top: 16),
+                                child: Text("No bookings yet")
                               );
                             },
                           );
                         },
-                      )
+                      ):Container()
                     ],
                   ),
                 ),

@@ -37,7 +37,7 @@ class VetAppointmentSlider extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: Text(
-                          "Pending",
+                          "Profile",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: provider.index==0? Colors.white: Colors.black
@@ -49,7 +49,7 @@ class VetAppointmentSlider extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.center,
                         child: Text(
-                          "Completed",
+                          "Message",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: provider.index==1? Colors.white: Colors.black

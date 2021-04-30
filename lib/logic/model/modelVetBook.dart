@@ -30,6 +30,7 @@ class ModelVetBook{
   });
 
   factory ModelVetBook.fromJson(Map<String, dynamic> body){
+    print("status: ${body['status']}");
     return ModelVetBook(
       id: body.containsKey("id")?body['id']:0, 
       user: body.containsKey("pet")&&body['pet'].containsKey("user")? ModelUser.fromJson(body['pet']['user']):null, 

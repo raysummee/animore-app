@@ -35,12 +35,9 @@ class _CustomCircleAvatarState extends State<CustomCircleAvatar> {
 
   void _setImage(ImageInfo image, bool sync) {
     setState(() => _checkLoading = false);
-    //DO NOT DISPOSE IF IT WILL REBUILD (e.g. Sliver/Builder ListView)
-    dispose();
   }
 
   void _setError(dynamic dyn, StackTrace st) {
     setState(() => _checkLoading = true);
-    dispose();
   }
 }
