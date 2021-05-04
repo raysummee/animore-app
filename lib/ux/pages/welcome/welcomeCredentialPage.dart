@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/util/validator.dart';
 import 'package:animore/ux/components/button/primaryRoundedButton.dart';
 import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
   TextEditingController emailController;
   TextEditingController passwordController;
   TextEditingController confirmController;
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   @override
   void initState() {
     isLogin = widget.isLogin;
@@ -51,100 +53,122 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: (){
-                              Navigator.of(context).pop();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(Icons.arrow_back, size: 34,),
+                    new Form(
+                      key: this._formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.of(context).pop();
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.arrow_back, size: 34,),
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 5),
-                          child: Text(
-                            isLogin? "Let's sign you in.": "Let's setup your account now",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w700
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 8, 16, 5),
+                            child: Text(
+                              isLogin? "Let's sign you in.": "Let's setup your account now",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w700
+                              ),
                             ),
                           ),
-                        ),
-                        isLogin? Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 5, 16, 8),
-                          child: Text(
-                            "Welcome back.\nYou've been missed!",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w500
+                          isLogin? Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 5, 16, 8),
+                            child: Text(
+                              "Welcome back.\nYou've been missed!",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w500
+                              ),
+                            ),
+                          ):Container(),
+                          isLogin?Container():Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 28, 16, 8),
+                            child: TextFormField(
+                              controller: fullNameController,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: Validator.validateFullname(),
+                              decoration: InputDecoration(
+                                labelText: "Full Name",
+                                contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                )
+                              ),
                             ),
                           ),
-                        ):Container(),
-                        isLogin?Container():Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 28, 16, 8),
-                          child: TextField(
-                            obscureText: true,
-                            controller: fullNameController,
-                            decoration: InputDecoration(
-                              labelText: "Full Name",
-                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              )
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                            child: TextFormField(
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              validator: Validator.validateEmail(),
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              onChanged: (val){
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Email",
+                                contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                )
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                          child: TextField(
-                            controller: emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: "Email",
-                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              )
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                            child: TextFormField(
+                              obscureText: true,
+                              controller: passwordController,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              onChanged: (val){
+                              },
+                              validator: isLogin? null:Validator.validatePassword(),
+                              decoration: InputDecoration(
+                                labelText: "Password",
+                                contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                )
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                          child: TextField(
-                            obscureText: true,
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              labelText: "Password",
-                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              )
+                          isLogin?Container():Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                            child: TextFormField(
+                              obscureText: true,
+                              controller: confirmController,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              onChanged: (val){
+                              },
+                              validator: (val){
+                                if(val==passwordController.text){
+                                  return null;
+                                }else{
+                                  return "confirm password doesn't match";
+                                }
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Confirm Password",
+                                contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                )
+                              ),
                             ),
                           ),
-                        ),
-                        isLogin?Container():Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                          child: TextField(
-                            obscureText: true,
-                            controller: confirmController,
-                            decoration: InputDecoration(
-                              labelText: "Confirm Password",
-                              contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              )
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Column(
                       children: [
@@ -171,6 +195,7 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
                           child: PrimaryRoundedButton(
                             label: "Sign In", 
                             onPressed: (){
+                              if(!this._formKey.currentState.validate()) return;
                               if(isLogin){
                                 Auth().login(
                                   emailController.text, 
