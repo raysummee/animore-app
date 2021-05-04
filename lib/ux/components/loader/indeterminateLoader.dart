@@ -19,6 +19,7 @@ class IndeterminateLoader extends StatelessWidget {
       ){
       Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();
     }
+    _keyLoader = null;
   }
   @override
   Widget build(BuildContext context) {

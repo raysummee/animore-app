@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/helper/authenticationHelper.dart';
+import 'package:animore/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,6 @@ typedef _ValueGetterSetter<T> = Future<bool> Function(T);
 
 Future get(
   Uri uri,{
-  BuildContext context,
   _ValueGetterSetterDynamic<Map> onSuccess,
   _ValueGetterSetterDynamic<Map> onNotFound,
   _ValueGetterSetterDynamic<Map> onServerError,
@@ -35,7 +35,6 @@ Future get(
 
   var result = await _util(
     response: response, 
-    context: context, 
     onSuccess: onSuccess, 
     onNotFound: onNotFound, 
     onServerError: onServerError, 
@@ -59,7 +58,6 @@ Future get(
 Future<bool> post(
   Uri uri,{
   String body,
-  BuildContext context,
   _ValueGetterSetter<Map> onSuccess,
   _ValueGetterSetter<Map> onNotFound,
   _ValueGetterSetter<Map> onServerError,
@@ -81,7 +79,6 @@ Future<bool> post(
 
   return await _util(
     response: response, 
-    context: context, 
     onSuccess: onSuccess, 
     onNotFound: onNotFound, 
     onServerError: onServerError, 
@@ -98,7 +95,6 @@ Future<bool> post(
 Future<bool> put(
   Uri uri,{
   String body,
-  BuildContext context,
   _ValueGetterSetter<Map> onSuccess,
   _ValueGetterSetter<Map> onNotFound,
   _ValueGetterSetter<Map> onServerError,
@@ -120,7 +116,6 @@ Future<bool> put(
 
   return await _util(
     response: response, 
-    context: context, 
     onSuccess: onSuccess, 
     onNotFound: onNotFound, 
     onServerError: onServerError, 
@@ -135,7 +130,6 @@ Future<bool> put(
 
 Future _util({
   @required Http.Response response,
-  @required BuildContext context,
   @required _ValueGetterSetter<Map> onSuccess,
   @required _ValueGetterSetter<Map> onNotFound,
   @required _ValueGetterSetter<Map> onServerError,
@@ -155,12 +149,12 @@ Future _util({
     return await onSuccess(json.decode(response.body));
   else if (response.statusCode == 401){
     if(onUnathorized!=null){
-      print("found ");
       return await onUnathorized(json.decode(response.body));
     }else{
       print("not logged");
-      print(context!=null);
-      return context!=null?await Auth().logout(context):needBool?false:null;
+      return navigatorKey!=null&&navigatorKey.currentContext!=null?
+        await Auth().logoutRemote(navigatorKey.currentContext)
+        :needBool?false:null;
     }
   }
   else if (response.statusCode == 403 && onForibidded!=null)

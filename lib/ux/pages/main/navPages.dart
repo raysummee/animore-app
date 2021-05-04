@@ -4,6 +4,7 @@ import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/ux/components/button/navButton.dart';
+import 'package:animore/ux/components/dialog/remoteLogoutDialog.dart';
 import 'package:animore/ux/pages/main/doctorPage.dart';
 import 'package:animore/ux/pages/main/merchantPage.dart';
 import 'package:animore/ux/pages/main/shopPage.dart';
@@ -14,6 +15,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+
+import '../../../main.dart';
 
 
 class NavPages extends StatefulWidget {
@@ -27,7 +30,7 @@ class _NavPagesState extends State<NavPages> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) async{
       await ApiPet().getPetsApiRequest();
-      await ApiImportantEvent().getImportantEventAll(context: context);
+      await ApiImportantEvent().getImportantEventAll();
     });
     super.initState();
   }

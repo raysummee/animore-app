@@ -181,9 +181,9 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                     onPressed: nameChange||dateChange?() async{
                       events[pageNo].name = controller.text;
                       if(events[pageNo].id!=null){
-                        ApiImportantEvent().updateImportantEvent(context, events[pageNo]);
+                        ApiImportantEvent().updateImportantEvent(events[pageNo]);
                       }else{
-                        ApiImportantEvent().addNewImportantEvent(context, events[pageNo]);
+                        ApiImportantEvent().addNewImportantEvent(events[pageNo]);
                         widget.events.add(events.last);
                         events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
                       }

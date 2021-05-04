@@ -18,10 +18,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+GlobalKey<NavigatorState> navigatorKey;
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await HiveLoader().init();
   VeterinarySocket().onBookVeterinary();
+  navigatorKey = new GlobalKey<NavigatorState>();
   runApp(Animore());
 }
 
@@ -47,6 +50,7 @@ class Animore extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Animore',
+        navigatorKey: navigatorKey,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,

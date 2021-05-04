@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 class ApiImportantEvent {
-  Future<void> getImportantEventAll({BuildContext context}) async {
+  Future<void> getImportantEventAll() async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
 
@@ -18,7 +18,6 @@ class ApiImportantEvent {
 
     await http.get(
       url,
-      context: context,
       onSuccess: (map) async {
         print("success");
         await ImportantEventHelper().fetchImportantEvent(map);
@@ -28,7 +27,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> updateImportantEvent(BuildContext context, ModelImportantEvent event) async {
+  Future<bool> updateImportantEvent(ModelImportantEvent event) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
@@ -50,7 +49,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> addNewImportantEvent(BuildContext context, ModelImportantEvent event) async {
+  Future<bool> addNewImportantEvent(ModelImportantEvent event) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
     var url = Uri.parse("$host/important_date/$petId");

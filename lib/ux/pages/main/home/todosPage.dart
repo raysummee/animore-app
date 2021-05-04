@@ -17,7 +17,7 @@ class TodosPage extends StatelessWidget {
     return Container(
       color: Colors.cyan.withOpacity(0.03),
       child: FutureBuilder<void>(
-        future: ApiTodos().getTodosAllRequest(context: context),
+        future: ApiTodos().getTodosAllRequest(),
         builder: (context, snapshot) {
           return ValueListenableBuilder(
             valueListenable: TodosHelper().getTodayWeekTodosBox().listenable(), 

@@ -37,7 +37,7 @@ class _CarouselLandingState extends State<CarouselLanding>{
       initialPage: 0,
     );
     Timer.periodic(Duration(seconds: 4), (Timer timer) {
-      if(_pageController.hasClients)
+      if(_pageController.hasClients&&_pageController.position.hasContentDimensions)
       if (indexPage < (landing['landing'] as List).length-1) {
         _pageController.nextPage(duration: Duration(milliseconds: 600), curve: Curves.easeInOut);
         indexPage++;

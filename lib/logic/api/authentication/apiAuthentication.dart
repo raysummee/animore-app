@@ -71,7 +71,7 @@ class ApiAuthentication {
     
     var returnValue = await post(
       url, 
-
+      needAuth: true,
       onSuccess: (map) async {
         print("true");
         return true;
