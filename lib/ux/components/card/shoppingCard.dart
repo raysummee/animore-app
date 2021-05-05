@@ -1,5 +1,5 @@
 import 'package:animore/logic/model/modelShoppingCardItem.dart';
-import 'package:animore/ux/pages/main/subpagehome/buyExpandedPage.dart';
+import 'package:animore/ux/pages/main/shop/buyExpandedPage.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingCard extends StatelessWidget {

@@ -5,6 +5,7 @@ import 'package:animore/ux/components/button/primaryRoundedButton.dart';
 import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:animore/ux/components/group/horizontalIconAndTextGroup.dart';
 import 'package:animore/ux/components/others/customCircleAvatar.dart';
+import 'package:animore/ux/pages/main/doctor/messageDoctorPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
@@ -25,7 +26,13 @@ class VetAppointmentCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         splashColor: Colors.cyan,
-        onTap: (){},
+        onTap: (){
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_)=> MessageDoctorPage(vetBook)
+            )
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.all(22.0),
           child: Column(

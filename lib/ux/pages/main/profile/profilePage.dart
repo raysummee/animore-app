@@ -4,7 +4,7 @@ import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
-import 'package:animore/ux/pages/main/cartPage.dart';
+import 'package:animore/ux/pages/main/shop/cartPage.dart';
 import 'package:animore/ux/pages/main/profile/contactPage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
