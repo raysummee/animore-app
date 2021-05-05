@@ -64,11 +64,7 @@ class DoctorPage extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      VetAppointmentSlider(),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      provider.index==1?DoctorMessagePage():DoctorProfilePage()
+                      DoctorMessagePage()
                     ],
                   ),
                 ),
