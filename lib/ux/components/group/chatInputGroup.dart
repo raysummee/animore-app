@@ -69,10 +69,6 @@ Widget chatInputButtons = Row(
   mainAxisSize: MainAxisSize.min,
   children: [
     IconButton(
-      icon: Icon(FlutterIcons.emoji_happy_ent, color: Colors.black54,), 
-      onPressed: (){}
-    ),
-    IconButton(
       icon: Icon(FlutterIcons.image_mco, color: Colors.black54,), 
       onPressed: (){}
     ),
@@ -80,6 +76,18 @@ Widget chatInputButtons = Row(
       icon: Icon(FlutterIcons.attachment_ent, color: Colors.black54,), 
       onPressed: (){}
     ),
+    PopupMenuButton(
+      icon: Icon(Icons.more_vert),
+      offset: Offset(0, -120),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15)
+      ),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Text("Appointment")
+        )
+      ],
+    )
   ],
 );
 

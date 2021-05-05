@@ -1,3 +1,5 @@
+import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/model/modelMessage.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/appbar/chatAppbar.dart';
 import 'package:animore/ux/components/group/chatInputGroup.dart';
@@ -8,6 +10,26 @@ import 'package:intl/intl.dart';
 
 class MessageDoctorPage extends StatelessWidget {
   final ModelVetBook vetBook;
+  final List<ModelMessage> msgs = [
+    ModelMessage(
+      id: 0,
+      dateTime: DateTime.now().add(Duration(days: -1)),
+      messageBody: "Hi!",
+      recepinetId: 0
+    ),
+    ModelMessage(
+      id: 1,
+      dateTime: DateTime.now().add(Duration(days: -1)),
+      messageBody: "How are you!",
+      recepinetId: 0
+    ),
+    ModelMessage(
+      id: 2,
+      dateTime: DateTime.now().add(Duration(days: -1)),
+      messageBody: "I am fine",
+      recepinetId: 3
+    ),
+  ];
   MessageDoctorPage(this.vetBook);
   @override
   Widget build(BuildContext context) {
@@ -29,9 +51,13 @@ class MessageDoctorPage extends StatelessWidget {
               ),
               child: ListView.builder(
                 padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
-                itemCount: 10,
+                itemCount: msgs.length,
                 itemBuilder: (context, index) {
-                  return index%2==0?recievedMessage("Hello"):sentMessage("Hello, back");
+                  if(msgs[index].recepinetId==Auth().user().id){
+                    return sentMessage(msgs[index].messageBody);
+                  }else{
+                    return recievedMessage(msgs[index].messageBody);
+                  }
                 },
               ),
             ) 
