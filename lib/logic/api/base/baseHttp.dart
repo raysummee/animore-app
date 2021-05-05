@@ -24,7 +24,8 @@ Future get(
   _ValueGetterSetterDynamic<Map> onTooManyRequest,
   _ValueGetterSetterDynamic<Http.Response> onCustomRequest,
   bool needAuth:true,
-  bool needBool:true
+  bool needBool:true,
+  bool needLogoutSupport:true
 }) async {
   var response = await Http.get(uri, headers:   needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -44,7 +45,9 @@ Future get(
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
     onCustomRequest: onCustomRequest,
-    needBool: needBool);
+    needBool: needBool,
+    needLogoutSupport: needLogoutSupport
+  );
   
   if(needBool&&result is bool){
     return result;
@@ -68,7 +71,8 @@ Future<bool> post(
   _ValueGetterSetter<Map> onTooManyRequest,
   _ValueGetterSetter<Http.Response> onCustomRequest,
   bool needAuth:true,
-  bool needBool:true
+  bool needBool:true,
+  bool needLogoutSupport:true
 }) async {
   var response = await Http.post(uri, body: body, headers: needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -88,7 +92,9 @@ Future<bool> post(
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
     onCustomRequest: onCustomRequest,
-    needBool: needBool);
+    needBool: needBool,
+    needLogoutSupport: needLogoutSupport
+  );
 }
 
 
@@ -105,7 +111,8 @@ Future<bool> put(
   _ValueGetterSetter<Map> onTooManyRequest,
   _ValueGetterSetter<Http.Response> onCustomRequest,
   bool needAuth:true,
-  bool needBool:true
+  bool needBool:true,
+  bool needLogoutSupport:true
 }) async {
   var response = await Http.put(uri, body: body, headers: needAuth? {
     "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
@@ -125,7 +132,9 @@ Future<bool> put(
     onForibidded: onForibidded, 
     onTooManyRequest: onTooManyRequest,
     onCustomRequest: onCustomRequest,
-    needBool: needBool);
+    needBool: needBool,
+    needLogoutSupport: needBool
+  );
 }
 
 Future _util({
@@ -139,8 +148,8 @@ Future _util({
   @required _ValueGetterSetter<Map> onForibidded,
   @required _ValueGetterSetter<Map> onTooManyRequest,
   @required _ValueGetterSetter<Http.Response> onCustomRequest,
-  @required bool needBool
-
+  @required bool needBool,
+  @required bool needLogoutSupport
 }) async {
   if(kDebugMode)
   print("${response.statusCode} : ${response.body}");
@@ -152,9 +161,11 @@ Future _util({
       return await onUnathorized(json.decode(response.body));
     }else{
       print("not logged");
-      return navigatorKey!=null&&navigatorKey.currentContext!=null?
-        await Auth().logoutRemote(navigatorKey.currentContext)
-        :needBool?false:null;
+      if(needLogoutSupport&&navigatorKey!=null&&navigatorKey.currentContext!=null){
+        return await Auth().logoutRemote(navigatorKey.currentContext);
+      }else{
+        return needBool?false:null;
+      }
     }
   }
   else if (response.statusCode == 403 && onForibidded!=null)

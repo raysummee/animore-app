@@ -33,23 +33,20 @@ class Auth {
 
   Future<bool> logout(BuildContext context) async {
     print("logging out");
-    IndeterminateLoader.show(context);
-    await AuthenticationHelper().deleteUser();
-    IndeterminateLoader.hide();
-    await Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
+    AuthenticationHelper().deleteUser();
     bool result = await ApiAuthentication().logoutApiRequest();
     print("result: $result");
     return result;
   }
 
-  Future<bool> logoutRemote(BuildContext context) async{
+  Future<void> logoutRemote(BuildContext context) async{
+    if(user()==null) return false;
     print("remote logout");
-    if(user()==null) return
     logout(context);
     Future.delayed(Duration(milliseconds: 400), (){
       RemoteLogoutDialog.show(context);
     });
-    return await logout(context);
   }
 
   ModelUser user() {

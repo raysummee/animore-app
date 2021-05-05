@@ -22,70 +22,75 @@ class VetAppointmentCard extends StatelessWidget {
       shadowColor: Colors.black26,
       elevation: 15,
       margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-      child: Padding(
-        padding: const EdgeInsets.all(22.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomCircleAvatar(image: NetworkImage(vetBook.user.image,), fallbackString: vetBook.user.name[0].toUpperCase(),),
-                SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(15),
+        splashColor: Colors.cyan,
+        onTap: (){},
+        child: Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CustomCircleAvatar(image: NetworkImage(vetBook.user.image,), fallbackString: vetBook.user.name[0].toUpperCase(),),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          vetBook.user.name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                        SizedBox(height: 5,),
+                        Text(
+                          DateFormat("dd MMM yyyy, hh:mm a").format(vetBook.onDate)
+                        ),
+                      ],
+                    ) 
+                  ),
+                  vetBook.status==BookStatusEnum.booked? Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        vetBook.user.name,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600
+                      ClipOval(
+                        child: Container(
+                          color: Colors.deepOrange,
+                          width: 15,
+                          height: 15,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(width: 5,),
                       Text(
-                        DateFormat("dd MMM yyyy, hh:mm a").format(vetBook.onDate)
+                        "NEW",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.w900
+                        ),
                       ),
                     ],
-                  ) 
-                ),
-                vetBook.status==BookStatusEnum.booked? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ClipOval(
-                      child: Container(
-                        color: Colors.deepOrange,
-                        width: 15,
-                        height: 15,
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Text(
-                      "NEW",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.w900
-                      ),
-                    ),
-                  ],
-                ):SizedBox.shrink()
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Divider(
+                  ):SizedBox.shrink()
+                ],
               ),
-            ),
-            HorizontalIconAndTextGroup(vetBook.user.phone??"Not avaiable", FlutterIcons.phone_faw),
-            SizedBox(
-              height: 8,
-            ),
-            HorizontalIconAndTextGroup(vetBook.subject, FlutterIcons.notes_medical_faw5s, iconColor: Colors.orange,),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Divider(
+                ),
+              ),
+              HorizontalIconAndTextGroup(vetBook.user.phone??"Not avaiable", FlutterIcons.phone_faw),
+              SizedBox(
+                height: 8,
+              ),
+              HorizontalIconAndTextGroup(vetBook.subject, FlutterIcons.notes_medical_faw5s, iconColor: Colors.orange,),
+            ],
+          ),
         ),
       ),
     );
