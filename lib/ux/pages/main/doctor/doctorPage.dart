@@ -8,7 +8,9 @@ import 'package:animore/ux/components/card/acceptCard.dart';
 import 'package:animore/ux/components/card/vetAppointmentCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
+import 'package:animore/ux/components/list/doctorMessageList.dart';
 import 'package:animore/ux/components/slider/vetAppointmentSlider.dart';
+import 'package:animore/ux/pages/main/doctor/doctorProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -66,31 +68,7 @@ class DoctorPage extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      provider.index==1?FutureBuilder(
-                        future: ApiVeterinaryBook().getAllBookingsOfCurrentVeterinary(),
-                        builder: (context, snapshot) {
-                          return ValueListenableBuilder(
-                            valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 
-                            builder: (context, Box<ModelVetBook> box, child) {
-                              return box.isNotEmpty? ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: box.length,
-                                reverse: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.only(
-                                  bottom: 160
-                                ),
-                                itemBuilder:  (context, index) {
-                                  return VetAppointmentCard(box.getAt(index));
-                                }
-                              ):Container(
-                                padding: EdgeInsets.only(top: 16),
-                                child: Text("No bookings yet")
-                              );
-                            },
-                          );
-                        },
-                      ):Container()
+                      provider.index==1?DoctorMessagePage():DoctorProfilePage()
                     ],
                   ),
                 ),

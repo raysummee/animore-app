@@ -6,30 +6,12 @@ import 'package:animore/ux/components/group/chatInputGroup.dart';
 import 'package:animore/ux/components/others/customCircleAvatar.dart';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 class MessageDoctorPage extends StatelessWidget {
   final ModelVetBook vetBook;
-  final List<ModelMessage> msgs = [
-    ModelMessage(
-      id: 0,
-      dateTime: DateTime.now().add(Duration(days: -1)),
-      messageBody: "Hi!",
-      recepinetId: 0
-    ),
-    ModelMessage(
-      id: 1,
-      dateTime: DateTime.now().add(Duration(days: -1)),
-      messageBody: "How are you!",
-      recepinetId: 0
-    ),
-    ModelMessage(
-      id: 2,
-      dateTime: DateTime.now().add(Duration(days: -1)),
-      messageBody: "I am fine",
-      recepinetId: 3
-    ),
-  ];
   MessageDoctorPage(this.vetBook);
   @override
   Widget build(BuildContext context) {
@@ -49,16 +31,17 @@ class MessageDoctorPage extends StatelessWidget {
                   image: AssetImage("lib/assets/images/chatBGCyan.png"),
                 )
               ),
-              child: ListView.builder(
-                padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
-                itemCount: msgs.length,
-                itemBuilder: (context, index) {
-                  if(msgs[index].recepinetId==Auth().user().id){
-                    return sentMessage(msgs[index].messageBody);
-                  }else{
-                    return recievedMessage(msgs[index].messageBody);
-                  }
-                },
+              child: ValueListenableBuilder(
+                valueListenable: Hive.box<ModelMessage>("messages").listenable(),
+                builder: (context, Box<ModelMessage> box, child) {
+                  return ListView.builder(
+                    padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
+                    itemCount: box.length,
+                    itemBuilder: (context, index) {
+                      return message(index, box.getAt(index), index==0?box.getAt(index-1):null);
+                    }
+                  );
+                }
               ),
             ) 
           ),
@@ -131,4 +114,38 @@ Widget dateBubble(DateTime date){
     color: Color.fromRGBO(212, 234, 244, 1.0),
     child: Text(dateString.toUpperCase(), textAlign: TextAlign.center, style: TextStyle(fontSize: 11.0)),
   );
+}
+
+Widget informationMessage(String message){
+ return Bubble(
+    alignment: Alignment.center,
+    color: Color.fromRGBO(212, 234, 244, 1.0),
+    child: Text(message, textAlign: TextAlign.center, style: TextStyle(fontSize: 11.0)),
+  );
+}
+
+Widget message(int index, ModelMessage message, ModelMessage prevMessage){
+  if(index==0||message.dateTime.isAfter(prevMessage.dateTime)){
+    if(message.recepinetId==Auth().user().id){
+        return Column(
+          children: [
+            dateBubble(message.dateTime),
+            sentMessage(message.messageBody),
+          ],
+        );
+    }else{
+      return Column(
+        children: [
+          dateBubble(message.dateTime),
+          recievedMessage(message.messageBody),
+        ],
+      );
+    }
+  }else{
+    if(message.recepinetId==Auth().user().id){
+      return sentMessage(message.messageBody);
+    }else{
+      return recievedMessage(message.messageBody);
+    }
+  }
 }
