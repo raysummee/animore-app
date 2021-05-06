@@ -33,4 +33,9 @@ class ImportantEventHelper{
     await box.putAt(index, event);
   }
 
+  Future<void> deleteLocalImportantEvent(int index) async{
+    Box<ModelImportantEvent> box = await Hive.openBox<ModelImportantEvent>("importantEvent");
+    await box.deleteAt(index);
+  }
+
 }
