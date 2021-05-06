@@ -69,4 +69,19 @@ class ApiImportantEvent {
       }
     );
   }
+
+  Future<bool> deleteImportantEvent(ModelImportantEvent event, int index) async {
+    //TODO replace index 0 with the index of pet which is currenty choosed
+    final petId = (await PetHelper().getPetAt(0)).id;
+    var url = Uri.parse("$host/important_date/$petId/${event.id}");
+    print(url);
+
+    return await http.delete(
+      url,
+      onSuccess: (map) async{
+        await ImportantEventHelper().deleteLocalImportantEvent(index);
+        return true;
+      }
+    );
+  }
 }
