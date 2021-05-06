@@ -48,8 +48,10 @@ class EditPetEventPage extends StatelessWidget {
 
       persistentFooterButtons: [
         TextButton(
-          onPressed: (){}, 
-          child: Text("Save")
+          onPressed: (){
+            Navigator.of(context).pop();
+          }, 
+          child: Text("Close")
         ),
         TextButton(
           onPressed: (){}, 
