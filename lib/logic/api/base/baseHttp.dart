@@ -137,6 +137,45 @@ Future<bool> put(
   );
 }
 
+Future<bool> delete(
+  Uri uri,{
+  String body,
+  _ValueGetterSetter<Map> onSuccess,
+  _ValueGetterSetter<Map> onNotFound,
+  _ValueGetterSetter<Map> onServerError,
+  _ValueGetterSetter<Map> onServerUnavailable,
+  _ValueGetterSetter<Map> onBadRequest,
+  _ValueGetterSetter<Map> onUnathorized,
+  _ValueGetterSetter<Map> onForibidded,
+  _ValueGetterSetter<Map> onTooManyRequest,
+  _ValueGetterSetter<Http.Response> onCustomRequest,
+  bool needAuth:true,
+  bool needBool:true,
+  bool needLogoutSupport:true
+}) async {
+  var response = await Http.delete(uri, body: body, headers: needAuth? {
+    "Authorization": "Bearer ${await AuthenticationHelper().readToken()}",
+    "Content-Type": "application/json", 
+  }:{    
+     "Content-Type": "application/json",
+  });
+
+  return await _util(
+    response: response, 
+    onSuccess: onSuccess, 
+    onNotFound: onNotFound, 
+    onServerError: onServerError, 
+    onServerUnavailable: onServerUnavailable, 
+    onBadRequest: onBadRequest, 
+    onUnathorized: onUnathorized, 
+    onForibidded: onForibidded, 
+    onTooManyRequest: onTooManyRequest,
+    onCustomRequest: onCustomRequest,
+    needBool: needBool,
+    needLogoutSupport: needBool
+  );
+}
+
 Future _util({
   @required Http.Response response,
   @required _ValueGetterSetter<Map> onSuccess,
