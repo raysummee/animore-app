@@ -19,16 +19,13 @@ class ImportantEventHelper{
   ModelImportantEvent getRecentImportantEvent(){
     Box<ModelImportantEvent> box = Hive.box<ModelImportantEvent>("importantEvent");
     if(box.isEmpty) return null;
-    return box.getAt(0);
+    DateTime compareTime = DateTime.now().subtract(Duration(days: 1));
+    return box.values.where((element) => element.dateTime.isAfter(compareTime)).first;
   }
 
   Future<void> addIntoLocalImportantEvent(ModelImportantEvent event) async{
     Box<ModelImportantEvent> box = await Hive.openBox<ModelImportantEvent>("importantEvent");
-    List<ModelImportantEvent> events = box.values.toList();
-    events.add(event);
-    events.sort((a,b)=>a.dateTime.compareTo(b.dateTime));
-    await box.clear();
-    await box.addAll(events);
+    await box.add(event);
   }
 
   Future<void> updateLocalImportantEvent(ModelImportantEvent event, int index) async{
