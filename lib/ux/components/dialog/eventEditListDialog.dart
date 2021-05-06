@@ -128,20 +128,15 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
               children: [
                 Expanded(
                   flex: 2,
-                  child: AnimatedCrossFade(
-                    duration: Duration(milliseconds: 250),
-                    crossFadeState: change||change?CrossFadeState.showSecond:CrossFadeState.showFirst,
-                    secondChild: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Text("Save changes to continue"),
-                    ),
-                    firstChild:  Row(
+                  child: Row(
                       children: [
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: null,
-                            child: Icon(FlutterIcons.left_ant),
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Icon(FlutterIcons.back_ant),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
                               minimumSize: Size(400, 50)
@@ -154,8 +149,8 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed:null,
-                            child: Icon(FlutterIcons.addfile_ant),
+                            onPressed: widget.event==null?null:(){},
+                            child: Icon(FlutterIcons.trash_fea),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
                               minimumSize: Size(400, 50)
@@ -163,8 +158,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                           )
                         ),
                       ],
-                    ),
-                  ),
+                    )
                 ),
                 SizedBox(
                   width: 8,
@@ -172,7 +166,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
-                    onPressed: change||change?() async{
+                    onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
                       // events[pageNo].name = controller.text;
                       // if(events[pageNo].id!=null){
                       //   ApiImportantEvent().updateImportantEvent(events[pageNo]);
@@ -181,14 +175,8 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                       //   events.add(events.last);
                       //   events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
                       // }
-                      setState(() {
-                        change = false;
-                        change = false;
-                      });
-                    }:(){
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(change||change?"SAVE":"CLOSE"),
+                    }:null,
+                    child: Text("SAVE"),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.cyan,
                       minimumSize: Size(400, 50)
