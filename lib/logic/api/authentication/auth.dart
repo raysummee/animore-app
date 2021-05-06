@@ -7,13 +7,14 @@ import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:animore/ux/pages/main/navPages.dart';
 import 'package:animore/ux/pages/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class Auth {
   Future<void> login(String email, String password, BuildContext context) async {
     IndeterminateLoader.show(context);
     if (await ApiAuthentication().loginEmailApiRequest(email, password, context)) {
       print("succeed");
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
     }
@@ -24,7 +25,7 @@ class Auth {
     IndeterminateLoader.show(context);
     if (await ApiAuthentication().registerEmailApiRequest(name, email, password, passwordConfrim, context)) {
       print("succeed");
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => NavPages()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
     }
