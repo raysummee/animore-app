@@ -1,5 +1,6 @@
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
+import 'package:animore/ux/components/dialog/eventEditListDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
@@ -54,7 +55,9 @@ class EditPetEventPage extends StatelessWidget {
           child: Text("Close")
         ),
         TextButton(
-          onPressed: (){}, 
+          onPressed: (){
+            EventEditListDialog.show(context);
+          }, 
           child: Text("Add New Event")
         ),
       ],

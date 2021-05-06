@@ -8,15 +8,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 class EventEditListDialog extends StatefulWidget{
-  final List<ModelImportantEvent> events;
+  final ModelImportantEvent event;
 
-  EventEditListDialog(this.events);
+  EventEditListDialog(this.event);
 
-  static show(BuildContext context, List<ModelImportantEvent> events){
+  static show(BuildContext context, {ModelImportantEvent event}){
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        child: EventEditListDialog(events)
+        child: EventEditListDialog(event)
       )
     );
   }
@@ -25,18 +25,20 @@ class EventEditListDialog extends StatefulWidget{
 }
 
 class _EventEditListDialogState extends State<EventEditListDialog> {
-  int pageNo = 0;
   TextEditingController controller;
-  List<ModelImportantEvent> events;
-  bool nameChange = false;
-  bool dateChange = false;
+  ModelImportantEvent event;
+
+  bool change = false;
   @override
   void initState() {
-    if(widget.events!=null&&widget.events.isNotEmpty){
-      events = List.from(widget.events);
+    
+    if(widget.event==null){
+      event = ModelImportantEvent(dateTime: null, id: 0, name: "");
+    }else{
+      event = widget.event;
     }
-    events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
-    controller  = TextEditingController(text: events.elementAt(pageNo).name);
+    controller  = TextEditingController(text: event.name);
+
     super.initState();
   }
   @override
@@ -49,7 +51,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              pageNo==events.length-1? "Add Events" :"Edit Events - ${pageNo+1}",
+              "Add Events",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18
@@ -59,7 +61,9 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
               height: 16,
             ),
             Text(
-              events[pageNo].dateTime==null? "Select Date": DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(events[pageNo].dateTime),
+              event.dateTime==null? 
+                "Select Date": 
+                DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(event.dateTime),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold
@@ -74,13 +78,13 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                   child: TextField(
                     controller: controller,
                     onChanged: (val){
-                      if(val==events[pageNo].name&&nameChange){
+                      if(val==event.name&&change){
                         setState(() {
-                          nameChange = false;
+                          change = false;
                         });
-                      }else if(val!=events[pageNo].name&&!nameChange){
+                      }else if(val!=event.name&&!change){
                         setState(() {
-                          nameChange = true;
+                          change = true;
                         });
                       }
                     },
@@ -104,11 +108,11 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                       splashColor: Colors.deepOrange,
                       icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
                       onPressed: () async{
-                        DateTime temp = await showDatePicker(context: context, initialDate: events[pageNo].dateTime??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
+                        DateTime temp = await showDatePicker(context: context, initialDate: event.dateTime??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
                         if(temp!=null){
                           setState(() {
-                            events[pageNo].dateTime = temp;
-                            dateChange = true;
+                            event.dateTime = temp;
+                            change = true;
                           });
                         }
                       }
@@ -126,7 +130,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                   flex: 2,
                   child: AnimatedCrossFade(
                     duration: Duration(milliseconds: 250),
-                    crossFadeState: nameChange||dateChange?CrossFadeState.showSecond:CrossFadeState.showFirst,
+                    crossFadeState: change||change?CrossFadeState.showSecond:CrossFadeState.showFirst,
                     secondChild: Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: Text("Save changes to continue"),
@@ -136,12 +140,7 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: 0<pageNo? (){
-                              setState(() {
-                                pageNo--;
-                                controller.text = events[pageNo].name;
-                              });
-                            }: null,
+                            onPressed: null,
                             child: Icon(FlutterIcons.left_ant),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
@@ -155,13 +154,8 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: events.length-1>pageNo?(){
-                              setState(() {
-                                pageNo++;
-                                controller.text = events[pageNo].name;
-                              });
-                            }:null,
-                            child: Icon(pageNo>=events.length-2? FlutterIcons.addfile_ant :FlutterIcons.right_ant),
+                            onPressed:null,
+                            child: Icon(FlutterIcons.addfile_ant),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
                               minimumSize: Size(400, 50)
@@ -178,23 +172,23 @@ class _EventEditListDialogState extends State<EventEditListDialog> {
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
-                    onPressed: nameChange||dateChange?() async{
-                      events[pageNo].name = controller.text;
-                      if(events[pageNo].id!=null){
-                        ApiImportantEvent().updateImportantEvent(events[pageNo]);
-                      }else{
-                        ApiImportantEvent().addNewImportantEvent(events[pageNo]);
-                        widget.events.add(events.last);
-                        events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
-                      }
+                    onPressed: change||change?() async{
+                      // events[pageNo].name = controller.text;
+                      // if(events[pageNo].id!=null){
+                      //   ApiImportantEvent().updateImportantEvent(events[pageNo]);
+                      // }else{
+                      //   ApiImportantEvent().addNewImportantEvent(events[pageNo]);
+                      //   events.add(events.last);
+                      //   events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
+                      // }
                       setState(() {
-                        nameChange = false;
-                        dateChange = false;
+                        change = false;
+                        change = false;
                       });
                     }:(){
                       Navigator.of(context).pop();
                     },
-                    child: Text(nameChange||dateChange?"SAVE":"CLOSE"),
+                    child: Text(change||change?"SAVE":"CLOSE"),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.cyan,
                       minimumSize: Size(400, 50)
