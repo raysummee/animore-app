@@ -1,3 +1,4 @@
+import 'package:animated_size_and_fade/animated_size_and_fade.dart';
 import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/helper/importantEventHelper.dart';
@@ -15,27 +16,35 @@ class PetHome extends StatefulWidget {
   _PetHomeState createState() => _PetHomeState();
 }
 
-class _PetHomeState extends State<PetHome> {
+class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container(
-        child: ValueListenableBuilder(
-            valueListenable: Hive.box<ModelPet>("pet").listenable(),
-            builder: (context, Box<ModelPet> box, child) {
-              if (box.isNotEmpty) {
-                return AnimatedCrossFade(
-                    firstChild: PetEditCard(box.get(0),
-                        ImportantEventHelper().getAllImportantEvents(), 0),
-                    secondChild: PetCard("${box.get(0).name}",
-                        ImportantEventHelper().getRecentImportantEvent()),
-                    crossFadeState: provider.isEditing
-                        ? CrossFadeState.showFirst
-                        : CrossFadeState.showSecond,
-                    duration: Duration(milliseconds: 300));
-              } else {
-                return PetCard("...", null);
-              }
-            }));
+      child: ValueListenableBuilder(
+        valueListenable: Hive.box<ModelPet>("pet").listenable(),
+        builder: (context, Box<ModelPet> box, child) {
+          if (box.isNotEmpty) {
+            return AnimatedSizeAndFade(
+              vsync: this,
+              child: provider.isEditing?
+                PetEditCard(
+                  box.get(0),
+                  ImportantEventHelper().getAllImportantEvents(), 
+                  0
+                ):
+                PetCard(
+                  "${box.get(0).name}",
+                  ImportantEventHelper().getRecentImportantEvent()
+                ),
+              fadeDuration: Duration(milliseconds: 300),
+              sizeDuration: Duration(milliseconds: 300),
+            );
+          } else {
+            return PetCard("...", null);
+          }
+        }
+      )
+    );
   }
 }
