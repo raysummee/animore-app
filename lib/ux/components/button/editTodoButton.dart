@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:animore/ux/pages/main/pets/editPetTodosPage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class EditTodoButton extends StatelessWidget {
   @override
@@ -8,7 +13,19 @@ class EditTodoButton extends StatelessWidget {
         color: Colors.cyan.shade100,
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
-          onTap: (){},
+          onTap: (){
+            if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
+              showCupertinoModalBottomSheet(
+                context: context, 
+                builder: (context) => EditPetTodosPage(),
+              );
+            }else{
+              showMaterialModalBottomSheet(
+                context: context, 
+                builder: (context) => EditPetTodosPage(),
+              );
+            }
+          },
           splashColor: Colors.deepOrange,
           borderRadius: BorderRadius.circular(15),
           child: Container(
