@@ -13,4 +13,9 @@ class DateUtil{
     var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(dateToday);
     return weekName;
   }
+
+  String getWeekName(DateTime date){
+    var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(date);
+    return weekName;   
+  }
 }
