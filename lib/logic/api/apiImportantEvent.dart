@@ -5,7 +5,6 @@ import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:animore/logic/api/apiConfig.dart';
-import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
@@ -27,7 +26,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> updateImportantEvent(ModelImportantEvent event) async {
+  Future<bool> updateImportantEvent(ModelImportantEvent event, int index) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().getPetAt(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
@@ -43,7 +42,7 @@ class ApiImportantEvent {
       url,
       body: inputBody,
       onSuccess: (map) async{
-        SnackBar(content: Text("Event updated"));
+        await ImportantEventHelper().updateLocalImportantEvent(event, index);
         return true;
       }
     );
@@ -65,7 +64,7 @@ class ApiImportantEvent {
       url,
       body: inputBody,
       onSuccess: (map) async{
-        SnackBar(content: Text("Event created"));
+        await ImportantEventHelper().addIntoLocalImportantEvent(event);
         return true;
       }
     );

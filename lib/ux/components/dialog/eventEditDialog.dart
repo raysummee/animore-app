@@ -9,14 +9,15 @@ import 'package:intl/intl.dart';
 
 class EventEditDialog extends StatefulWidget{
   final ModelImportantEvent event;
+  final int index;
 
-  EventEditDialog(this.event);
+  EventEditDialog(this.event, this.index);
 
-  static show(BuildContext context, {ModelImportantEvent event}){
+  static show(BuildContext context, {ModelImportantEvent event, int index}){
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        child: EventEditDialog(event)
+        child: EventEditDialog(event, index)
       )
     );
   }
@@ -169,7 +170,7 @@ class _EventEditDialogState extends State<EventEditDialog> {
                     onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
                       event.name = controller.text;
                       if(event.id!=null){
-                        ApiImportantEvent().updateImportantEvent(event);
+                        ApiImportantEvent().updateImportantEvent(event, widget.index);
                       }else{
                         ApiImportantEvent().addNewImportantEvent(event);
                       }

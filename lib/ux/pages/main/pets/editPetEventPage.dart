@@ -37,7 +37,7 @@ class EditPetEventPage extends StatelessWidget {
                 FlutterIcons.event_sli,
                 Colors.white, 
                 (){
-                  EventEditDialog.show(context, event: box.getAt(index));
+                  EventEditDialog.show(context, event: box.getAt(index), index: index);
                 },
                 subtitle: DateFormat("dd MMM yy").format(box.getAt(index).dateTime),
               )

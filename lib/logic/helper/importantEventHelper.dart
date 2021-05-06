@@ -22,4 +22,18 @@ class ImportantEventHelper{
     return box.getAt(0);
   }
 
+  Future<void> addIntoLocalImportantEvent(ModelImportantEvent event) async{
+    Box<ModelImportantEvent> box = await Hive.openBox<ModelImportantEvent>("importantEvent");
+    List<ModelImportantEvent> events = box.values.toList();
+    events.add(event);
+    events.sort((a,b)=>a.dateTime.compareTo(b.dateTime));
+    await box.clear();
+    await box.addAll(events);
+  }
+
+  Future<void> updateLocalImportantEvent(ModelImportantEvent event, int index) async{
+    Box<ModelImportantEvent> box = await Hive.openBox<ModelImportantEvent>("importantEvent");
+    await box.putAt(index, event);
+  }
+
 }
