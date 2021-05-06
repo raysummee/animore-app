@@ -150,7 +150,10 @@ class _EventEditDialogState extends State<EventEditDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: widget.event==null?null:(){},
+                            onPressed: widget.event==null?null:(){
+                              ApiImportantEvent().deleteImportantEvent(event, widget.index);
+                              Navigator.of(context).pop();
+                            },
                             child: Icon(FlutterIcons.trash_fea),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.cyan,
