@@ -20,32 +20,38 @@ class MessageDoctorPage extends StatelessWidget {
         vetBook.user.name,
         vetBook.user.image
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.6), BlendMode.color),
-                  image: AssetImage("lib/assets/images/chatBGCyan.png"),
-                )
-              ),
-              child: ValueListenableBuilder(
-                valueListenable: Hive.box<ModelMessage>("messages").listenable(),
-                builder: (context, Box<ModelMessage> box, child) {
-                  return ListView.builder(
-                    padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
-                    itemCount: box.length,
-                    itemBuilder: (context, index) {
-                      return message(index, box.getAt(index), index==0?box.getAt(index-1):null);
-                    }
-                  );
-                }
-              ),
-            ) 
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.6), BlendMode.color),
+                image: AssetImage("lib/assets/images/chatBGCyan.png"),
+              )
+            ),
           ),
-          ChatInputGroup()
+          Column(
+            children: [
+              Expanded(
+                child: Container(
+                  child: ValueListenableBuilder(
+                    valueListenable: Hive.box<ModelMessage>("messages").listenable(),
+                    builder: (context, Box<ModelMessage> box, child) {
+                      return ListView.builder(
+                        padding: EdgeInsets.fromLTRB(22, 16, 22, 16),
+                        itemCount: box.length,
+                        itemBuilder: (context, index) {
+                          return message(index, box.getAt(index), index==0?box.getAt(index-1):null);
+                        }
+                      );
+                    }
+                  ),
+                ) 
+              ),
+              ChatInputGroup()
+            ],
+          ),
         ],
       )
     );

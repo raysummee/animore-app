@@ -16,49 +16,51 @@ class _ChatInputGroupState extends State<ChatInputGroup> with TickerProviderStat
         color: Colors.white,
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 2.0,spreadRadius: 2)]
       ),
-      padding: EdgeInsets.fromLTRB(26, 10, 26, 40),
-      height: 100,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: TextField(
-                cursorHeight: 16,
-                onChanged: (val){
-                  if(val!=null&&val.isNotEmpty&&!willSendMsg){
-                    setState(() {
-                      willSendMsg = true;
-                    });
-                  }else if(val==null||val.isEmpty&&willSendMsg){
-                    setState(() {
-                      willSendMsg = false;
-                    });
-                  }
-                },
-                cursorColor: Colors.cyan,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Colors.grey.shade200.withOpacity(0.9),
-                  filled: true,
-                  contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  hintStyle: TextStyle(
-                    color: Colors.black45,
+      padding: EdgeInsets.fromLTRB(26, 10, 26, 10),
+      child: SafeArea(
+        top: false,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: TextField(
+                  cursorHeight: 16,
+                  onChanged: (val){
+                    if(val!=null&&val.isNotEmpty&&!willSendMsg){
+                      setState(() {
+                        willSendMsg = true;
+                      });
+                    }else if(val==null||val.isEmpty&&willSendMsg){
+                      setState(() {
+                        willSendMsg = false;
+                      });
+                    }
+                  },
+                  cursorColor: Colors.cyan,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    fillColor: Colors.grey.shade200.withOpacity(0.9),
+                    filled: true,
+                    contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    hintStyle: TextStyle(
+                      color: Colors.black45,
+                    ),
+                    hintText: "Write a reply...",
                   ),
-                  hintText: "Write a reply...",
                 ),
               ),
             ),
-          ),
-          AnimatedSizeAndFade(
-            vsync: this,
-            sizeDuration: Duration(milliseconds: 300),
-            fadeDuration: Duration(milliseconds: 300),
-            child: willSendMsg? chatSendButton: chatInputButtons,
-          )
-        ],
+            AnimatedSizeAndFade(
+              vsync: this,
+              sizeDuration: Duration(milliseconds: 300),
+              fadeDuration: Duration(milliseconds: 300),
+              child: willSendMsg? chatSendButton: chatInputButtons,
+            )
+          ],
+        ),
       ),
     );
   }
