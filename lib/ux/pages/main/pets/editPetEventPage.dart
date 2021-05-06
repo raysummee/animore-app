@@ -56,7 +56,7 @@ class EditPetEventPage extends StatelessWidget {
         ),
         TextButton(
           onPressed: (){
-            EventEditListDialog.show(context);
+            EventEditDialog.show(context);
           }, 
           child: Text("Add New Event")
         ),

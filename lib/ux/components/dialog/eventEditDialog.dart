@@ -7,24 +7,24 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
-class EventEditListDialog extends StatefulWidget{
+class EventEditDialog extends StatefulWidget{
   final ModelImportantEvent event;
 
-  EventEditListDialog(this.event);
+  EventEditDialog(this.event);
 
   static show(BuildContext context, {ModelImportantEvent event}){
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        child: EventEditListDialog(event)
+        child: EventEditDialog(event)
       )
     );
   }
    @override
-  _EventEditListDialogState createState() => _EventEditListDialogState();
+  _EventEditDialogState createState() => _EventEditDialogState();
 }
 
-class _EventEditListDialogState extends State<EventEditListDialog> {
+class _EventEditDialogState extends State<EventEditDialog> {
   TextEditingController controller;
   ModelImportantEvent event;
 
