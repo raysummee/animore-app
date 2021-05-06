@@ -33,7 +33,7 @@ class _EventEditDialogState extends State<EventEditDialog> {
   void initState() {
     
     if(widget.event==null){
-      event = ModelImportantEvent(dateTime: null, id: 0, name: "");
+      event = ModelImportantEvent(dateTime: null, id: null, name: "");
     }else{
       event = widget.event;
     }
@@ -167,14 +167,13 @@ class _EventEditDialogState extends State<EventEditDialog> {
                   flex: 2,
                   child: ElevatedButton(
                     onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
-                      // events[pageNo].name = controller.text;
-                      // if(events[pageNo].id!=null){
-                      //   ApiImportantEvent().updateImportantEvent(events[pageNo]);
-                      // }else{
-                      //   ApiImportantEvent().addNewImportantEvent(events[pageNo]);
-                      //   events.add(events.last);
-                      //   events.add(ModelImportantEvent(dateTime: null, id: null, name: ""));
-                      // }
+                      event.name = controller.text;
+                      if(event.id!=null){
+                        ApiImportantEvent().updateImportantEvent(event);
+                      }else{
+                        ApiImportantEvent().addNewImportantEvent(event);
+                      }
+                      Navigator.of(context).pop();
                     }:null,
                     child: Text("SAVE"),
                     style: ElevatedButton.styleFrom(
