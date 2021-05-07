@@ -29,7 +29,7 @@ class _NavPagesState extends State<NavPages> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) async{
-      await ApiPet().getPetsApiRequest();
+      await ApiPet().all();
       await ApiImportantEvent().getImportantEventAll();
     });
     super.initState();

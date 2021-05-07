@@ -232,7 +232,7 @@ class _PetEditCardState extends State<PetEditCard> {
                       "Save"
                     ),
                     onPressed: (){
-                      ApiPet().editPetsApiRequest(
+                      ApiPet().edit(
                         widget.index, 
                         widget.pet.id,
                         bread: breadController.text,

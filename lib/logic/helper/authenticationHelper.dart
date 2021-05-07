@@ -11,7 +11,7 @@ class AuthenticationHelper {
     await(await Hive.openBox<ModelUser>("user")).put("user", user);
     await saveToken(body['access_token']);
     //explicitly fetching new pet and important values
-    await ApiPet().getPetsApiRequest();
+    await ApiPet().all();
     await ApiImportantEvent().getImportantEventAll();
     return true;
   }

@@ -10,7 +10,7 @@ import 'package:hive/hive.dart';
 
 class ApiPet{
 
-  Future<void> getPetsApiRequest() async{
+  Future<void> all() async{
     var url = Uri.parse("$host/pet");
     await http.get(
       url,
@@ -20,7 +20,7 @@ class ApiPet{
     );
   } 
 
-  Future<bool> editPetsApiRequest(int index,int petId, {String name, String bread, String type, DateTime dob}) async{
+  Future<bool> edit(int index,int petId, {String name, String bread, String type, DateTime dob}) async{
 
     var url = Uri.parse("$host/pet/$petId");
     var inputBody = json.encode({
