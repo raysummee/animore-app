@@ -6,7 +6,7 @@ import 'package:animore/logic/api/base/baseHttp.dart';
 import 'package:flutter/material.dart';
 
 class ApiAuthentication {
-  Future<bool> loginEmailApiRequest(String email, String password, BuildContext context) async {
+  Future<bool> loginEmail(String email, String password, BuildContext context) async {
     var url = Uri.parse("$host/login");
 
     String bodyToSend = json.encode({"email": email, "password": password});
@@ -33,7 +33,7 @@ class ApiAuthentication {
     return returnValue ?? false;
   }
 
-  Future<bool> registerEmailApiRequest(String name, String email,String password, String passwordConfirm, BuildContext context) async {
+  Future<bool> registerEmail(String name, String email,String password, String passwordConfirm, BuildContext context) async {
     var url = Uri.parse("$host/register");
 
     String bodyToSend = json.encode({
@@ -66,7 +66,7 @@ class ApiAuthentication {
     return returnValue ?? false;
   }
 
-  Future<bool> logoutApiRequest() async {
+  Future<bool> logout() async {
     var url = Uri.parse("$host/logout");
     
     var returnValue = await post(

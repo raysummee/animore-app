@@ -12,7 +12,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class Auth {
   Future<void> login(String email, String password, BuildContext context) async {
     IndeterminateLoader.show(context);
-    if (await ApiAuthentication().loginEmailApiRequest(email, password, context)) {
+    if (await ApiAuthentication().loginEmail(email, password, context)) {
       print("succeed");
       Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
@@ -23,7 +23,7 @@ class Auth {
 
   Future<void> signup(String name, String email, String password,String passwordConfrim, BuildContext context) async {
     IndeterminateLoader.show(context);
-    if (await ApiAuthentication().registerEmailApiRequest(name, email, password, passwordConfrim, context)) {
+    if (await ApiAuthentication().registerEmail(name, email, password, passwordConfrim, context)) {
       print("succeed");
       Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
@@ -36,7 +36,7 @@ class Auth {
     print("logging out");
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     AuthenticationHelper().deleteUser();
-    bool result = await ApiAuthentication().logoutApiRequest();
+    bool result = await ApiAuthentication().logout();
     print("result: $result");
     return result;
   }
