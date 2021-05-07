@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 class ApiImportantEvent {
-  Future<void> getImportantEventAll() async {
+  Future<void> all() async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
 
@@ -26,7 +26,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> updateImportantEvent(ModelImportantEvent event, int index) async {
+  Future<bool> update(ModelImportantEvent event, int index) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
@@ -48,7 +48,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> addNewImportantEvent(ModelImportantEvent event) async {
+  Future<bool> addNew(ModelImportantEvent event) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId");
@@ -70,7 +70,7 @@ class ApiImportantEvent {
     );
   }
 
-  Future<bool> deleteImportantEvent(ModelImportantEvent event, int index) async {
+  Future<bool> delete(ModelImportantEvent event, int index) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");

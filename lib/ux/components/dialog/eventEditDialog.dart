@@ -151,7 +151,7 @@ class _EventEditDialogState extends State<EventEditDialog> {
                           flex: 1,
                           child: ElevatedButton(
                             onPressed: widget.event==null?null:(){
-                              ApiImportantEvent().deleteImportantEvent(event, widget.index);
+                              ApiImportantEvent().delete(event, widget.index);
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
@@ -173,9 +173,9 @@ class _EventEditDialogState extends State<EventEditDialog> {
                     onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
                       event.name = controller.text;
                       if(event.id!=null){
-                        ApiImportantEvent().updateImportantEvent(event, widget.index);
+                        ApiImportantEvent().update(event, widget.index);
                       }else{
-                        ApiImportantEvent().addNewImportantEvent(event);
+                        ApiImportantEvent().addNew(event);
                       }
                       Navigator.of(context).pop();
                     }:null,

@@ -12,7 +12,7 @@ class AuthenticationHelper {
     await saveToken(body['access_token']);
     //explicitly fetching new pet and important values
     await ApiPet().all();
-    await ApiImportantEvent().getImportantEventAll();
+    await ApiImportantEvent().all();
     return true;
   }
 
