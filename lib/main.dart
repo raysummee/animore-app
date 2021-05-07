@@ -9,6 +9,7 @@ import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/logic/provider/vetBookSliderNotify.dart';
+import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/logic/util/hiveLoader.dart';
 import 'package:animore/ux/pages/commons/startup.dart';
 import 'package:animore/ux/pages/main/home/homePage.dart';
@@ -45,8 +46,8 @@ class Animore extends StatelessWidget {
         ChangeNotifierProvider<NavBarIndexNotify>(create: (_)=>NavBarIndexNotify(),),
         ChangeNotifierProvider<LandingPageCarouselNotify>(create: (_)=>LandingPageCarouselNotify()),
         ChangeNotifierProvider<PetCardEditNotify>(create: (_)=>PetCardEditNotify()),
-        ChangeNotifierProvider<VetBookSliderNotify>(create: (_)=>VetBookSliderNotify())
-
+        ChangeNotifierProvider<VetBookSliderNotify>(create: (_)=>VetBookSliderNotify()),
+        ChangeNotifierProvider<WeekSelectNotify>(create: (_)=>WeekSelectNotify())
       ],
       child: MaterialApp(
         title: 'Animore',
