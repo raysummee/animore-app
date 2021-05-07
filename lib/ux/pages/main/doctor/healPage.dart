@@ -55,7 +55,7 @@ class HealPage extends StatelessWidget {
                       ),
                       MediicHeaderListHorizontal(),
                       FutureBuilder<void>(
-                        future: ApiVeterinary().getAllVeterinary(),
+                        future: ApiVeterinary().all(),
                         builder: (context, snapshot) {
                           return ValueListenableBuilder(
                             valueListenable: Hive.box<ModelDoctor>("veterinary").listenable(),

@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'base/baseHttp.dart' as http;
 
 class ApiVeterinary{
-  Future<void> getAllVeterinary() async{
+  Future<void> all() async{
     var url = Uri.parse("$host/veterinary");
 
     http.get(
@@ -23,7 +23,7 @@ class ApiVeterinary{
     );
   }
 
-  Future<ModelDoctor> getSpecificVeterinary(int vetId) async{
+  Future<ModelDoctor> specific(int vetId) async{
     var url = Uri.parse("$host/veterinary/$vetId");
 
     return await http.get(
@@ -36,7 +36,7 @@ class ApiVeterinary{
     );
   }
 
-  Future<void> getAuthenticatedVeterinary() async{
+  Future<void> authenticated() async{
     var url = Uri.parse("$host/veterinary/auth");
 
     http.get(
