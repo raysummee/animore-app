@@ -6,22 +6,22 @@ import 'package:intl/intl.dart';
 class TodosHelper{
 
   Box<ModelTodos> todayBox(){
-    var weekName = DateUtil().getTodayWeekName();
+    var weekName = DateUtil().todayWeekName();
     return Hive.box<ModelTodos>("Todos_$weekName");
   }
 
   Future<Box<ModelTodos>> openTodayBox() async{
-    var weekName = DateUtil().getTodayWeekName();
+    var weekName = DateUtil().todayWeekName();
     return await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
 
   Future<Box<ModelTodos>> openBox(DateTime date) async{
-    var weekName = DateUtil().getWeekName(date);
+    var weekName = DateUtil().weekName(date);
     return await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
 
   Future<void> closeForceBox(DateTime date) async{
-    var weekName = DateUtil().getWeekName(date);
+    var weekName = DateUtil().weekName(date);
     bool isOpen = Hive.isBoxOpen("Todos_$weekName");
     if(!isOpen) return;
     await Hive.box<ModelTodos>("Todos_$weekName").close();
@@ -29,17 +29,17 @@ class TodosHelper{
 
 
   Future<void> safeCloseBox(DateTime date) async{
-    var weekName = DateUtil().getWeekName(date);
-    if(weekName==DateUtil().getTodayWeekName()) return;
-    if(weekName==DateUtil().getTomorrowWeekName()) return;
+    var weekName = DateUtil().weekName(date);
+    if(weekName==DateUtil().todayWeekName()) return;
+    if(weekName==DateUtil().tomorrowWeekName()) return;
     await closeForceBox(date);
   }
 
   Future<void> retainDefaultBox() async{
     var weekNames = ["mon", "tue", "wed", "thu", "fri", "sat"];
     weekNames.forEach((weekName) async{
-      if(weekName==DateUtil().getTodayWeekName()) return;
-      if(weekName==DateUtil().getTomorrowWeekName()) return;
+      if(weekName==DateUtil().todayWeekName()) return;
+      if(weekName==DateUtil().tomorrowWeekName()) return;
       bool isOpen = Hive.isBoxOpen("Todos_$weekName");
       if(!isOpen) return;
       print("closing $weekName");
@@ -48,7 +48,7 @@ class TodosHelper{
   }
 
   Future<void> openTomorrowBox() async{
-    var weekName = DateUtil().getTomorrowWeekName();
+    var weekName = DateUtil().tomorrowWeekName();
     await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
  

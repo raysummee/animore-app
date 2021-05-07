@@ -36,7 +36,7 @@ class _TodoCardState extends State<TodoCard> {
               name: widget.modelTodos.name,
               done: selected?DateTime.now().day:0
             ),
-            DateUtil().getTodayWeekName(),
+            DateUtil().todayWeekName(),
           );
         },
         child: Container(
@@ -95,7 +95,7 @@ class _TodoCardState extends State<TodoCard> {
                     name: widget.modelTodos.name,
                     done: selected?DateTime.now().day:0
                   ),
-                  DateUtil().getTodayWeekName(),
+                  DateUtil().todayWeekName(),
                 );
               },
               child: Padding(

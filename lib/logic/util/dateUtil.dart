@@ -1,20 +1,20 @@
 import 'package:intl/intl.dart';
 
 class DateUtil{
-  String getTodayWeekName(){
+  String todayWeekName(){
     DateTime dateToday = DateTime.now();
     var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(dateToday);
     return weekName;
   }
 
-  String getTomorrowWeekName(){
+  String tomorrowWeekName(){
     DateTime dateToday = DateTime.now();
     dateToday = dateToday.add(Duration(days: 1));
     var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(dateToday);
     return weekName;
   }
 
-  String getWeekName(DateTime date){
+  String weekName(DateTime date){
     var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(date);
     return weekName;   
   }

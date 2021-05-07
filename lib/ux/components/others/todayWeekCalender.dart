@@ -20,7 +20,7 @@ class TodayWeekCalender extends StatelessWidget {
               height: 1,
             ),
             Text(
-              "${DateUtil().getTodayWeekName().toUpperCase()}",
+              "${DateUtil().todayWeekName().toUpperCase()}",
               style: TextStyle(
                 fontSize: 11,
                 color: Colors.white,
