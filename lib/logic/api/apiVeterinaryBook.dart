@@ -60,7 +60,7 @@ class ApiVeterinaryBook{
       url,
       needAuth: true,
       onSuccess: (map) async{
-        VeterinaryBookHelper().fetchAllBookings(map);
+        VeterinaryBookHelper().fetchAll(map);
         return true;
       }
     );

@@ -3,7 +3,7 @@ import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:hive/hive.dart';
 
 class VeterinaryBookHelper{
-  Future<void> fetchAllBookings(Map body) async{
+  Future<void> fetchAll(Map body) async{
     Box<ModelVetBook> box = await Hive.openBox<ModelVetBook>("vetBook");
 
     if((body['vetBook'] as List).isEmpty) return await box.clear();
@@ -20,19 +20,19 @@ class VeterinaryBookHelper{
     }
   }
 
-  Future<void> updateBooking(ModelVetBook vetBook) async{
+  Future<void> update(ModelVetBook vetBook) async{
     Box<ModelVetBook> box = await Hive.openBox<ModelVetBook>("vetBook");
     await box.put(vetBook.id, vetBook);
   }
 
-  List<ModelVetBook> getPendingBookingsSync(){
+  List<ModelVetBook> pendingsSync(){
     return Hive.box<ModelVetBook>("vetBook").values.where(
       (element) => element.status==BookStatusEnum.booked||
       element.status==BookStatusEnum.accepted
     ).toList();
   }
 
-  List<ModelVetBook> getCompetedBookingsSync(){
+  List<ModelVetBook> completedSync(){
     return Hive.box<ModelVetBook>("vetBook").values.where(
       (element) => element.status==BookStatusEnum.completed
     ).toList();

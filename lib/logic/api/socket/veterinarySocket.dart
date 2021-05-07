@@ -28,7 +28,7 @@ class VeterinarySocket{
         print(event);
         
         ModelVetBook vetBook = ModelVetBook.fromJson(event['vetBook']);
-        VeterinaryBookHelper().updateBooking(vetBook);
+        VeterinaryBookHelper().update(vetBook);
       });
     }else if(role=="user"){
 
