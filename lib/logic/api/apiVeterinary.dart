@@ -17,7 +17,7 @@ class ApiVeterinary{
       url,
       needAuth: true,
       onSuccess: (map) async{
-        await VeterinaryHelper().fetchAllVeterinary(map);
+        await VeterinaryHelper().fetchAll(map);
         return true;
       }
     );
@@ -31,7 +31,7 @@ class ApiVeterinary{
       needAuth: true,
       needBool: false,
       onSuccess: (map) async{
-        return await VeterinaryHelper().fetchSpecificVeterinary(map);
+        return await VeterinaryHelper().fetchSpecific(map);
       }
     );
   }
@@ -43,7 +43,7 @@ class ApiVeterinary{
       url,
       needAuth: true,
       onSuccess: (map) async{
-        await VeterinaryHelper().fetchAuthenticatedVeterinary(map);
+        await VeterinaryHelper().fetchAuthenticated(map);
         return true;
       }
     );

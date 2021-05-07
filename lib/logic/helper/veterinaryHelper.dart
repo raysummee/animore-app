@@ -3,7 +3,7 @@ import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:hive/hive.dart';
 
 class VeterinaryHelper{
-  Future<void> fetchAllVeterinary(Map body) async{
+  Future<void> fetchAll(Map body) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
     if((body['veterinary'] as List).isEmpty) return await box.clear();
 
@@ -15,22 +15,22 @@ class VeterinaryHelper{
     }
   }
 
-  Future<ModelDoctor> fetchSpecificVeterinary(Map body) async{
+  Future<ModelDoctor> fetchSpecific(Map body) async{
     return ModelDoctor.fromJson(body['veterinary']);
   }
 
-  Future<void> fetchAuthenticatedVeterinary(Map body) async{
+  Future<void> fetchAuthenticated(Map body) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinaryAuth");
     ModelDoctor vet = ModelDoctor.fromJson(body['veterinary']);
     await box.put("veterinaryAuth", vet);
   }
 
-  Future<void> updateVeterinary(ModelDoctor modelDoctor) async{
+  Future<void> update(ModelDoctor modelDoctor) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinary");
     await box.put(modelDoctor.id, modelDoctor);
   }
 
-  Future<void> updateAuthenticatedVeterinary(ModelDoctor modelDoctor) async{
+  Future<void> updateAuthenticated(ModelDoctor modelDoctor) async{
     Box<ModelDoctor> box = await Hive.openBox<ModelDoctor>("veterinaryAuth");
     await box.put("veterinaryAuth", modelDoctor);
   }

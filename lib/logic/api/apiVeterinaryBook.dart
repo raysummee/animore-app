@@ -26,7 +26,7 @@ class ApiVeterinaryBook{
       needAuth: true,
       onSuccess: (map) async{
         doctor.status = BookStatusEnum.booked;
-        VeterinaryHelper().updateVeterinary(doctor);
+        VeterinaryHelper().update(doctor);
         return true;
       },
       onServerError: (map) async{

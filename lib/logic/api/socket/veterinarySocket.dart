@@ -41,7 +41,7 @@ class VeterinarySocket{
         ModelDoctor modelDoctor = ModelDoctor.fromJson(event['vetBook']["veterinary"]);
  
         modelDoctor.status = statusEnumFromString(event['vetBook']['status']);
-        VeterinaryHelper().updateVeterinary(modelDoctor);
+        VeterinaryHelper().update(modelDoctor);
       });
     }
   }
