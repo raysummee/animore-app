@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
@@ -5,9 +7,13 @@ import 'package:animore/ux/components/button/MediumRoundedButton.dart';
 import 'package:animore/ux/components/button/editTodoButton.dart';
 import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/card/todoCard.dart';
+import 'package:animore/ux/pages/main/pets/editPetEventPage.dart';
+import 'package:animore/ux/pages/main/pets/editPetTodosPage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class TodosPage extends StatelessWidget {
   final ScrollController controller;
@@ -58,7 +64,19 @@ class TodosPage extends StatelessWidget {
                           ),
                           minimumSize: Size(50, 50),
                         ),
-                        onPressed: (){}, 
+                        onPressed: (){
+                          if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
+                            showCupertinoModalBottomSheet(
+                              context: context, 
+                              builder: (context) => EditPetTodosPage(),
+                            );
+                          }else{
+                            showMaterialModalBottomSheet(
+                              context: context, 
+                              builder: (context) => EditPetTodosPage(),
+                            );
+                          }
+                        }, 
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
