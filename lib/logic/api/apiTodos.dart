@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'apiConfig.dart';
 class ApiTodos{
-  Future<void> getTodosAllRequest() async{
+  Future<void> all() async{
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/todos/$petId");
