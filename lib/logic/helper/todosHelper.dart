@@ -20,6 +20,40 @@ class TodosHelper{
     return Hive.box<ModelTodos>("Todos_$weekName");
   }
 
+  Future<Box<ModelTodos>> openWeekTodosBox(DateTime date) async{
+    var weekName = DateUtil().getWeekName(date);
+    return await Hive.openBox<ModelTodos>("Todos_$weekName");
+  }
+
+  Future<void> closeForceWeekTodosBox(DateTime date) async{
+    var weekName = DateUtil().getWeekName(date);
+    bool isOpen = Hive.isBoxOpen("Todos_$weekName");
+    if(!isOpen) return;
+    await Hive.box<ModelTodos>("Todos_$weekName").close();
+  }
+
+
+  Future<void> safeCloseWeekTodosBox(DateTime date) async{
+    var weekName = DateUtil().getWeekName(date);
+    if(weekName==DateUtil().getTodayWeekName()) return;
+    if(weekName==DateUtil().getTomorrowWeekName()) return;
+    await closeForceWeekTodosBox(date);
+  }
+
+  Future<void> retainDefaultWeekTodosBox() async{
+    var weekNames = ["mon", "tue", "wed", "thu", "fri", "sat"];
+    weekNames.forEach((weekName) async{
+      if(weekName==DateUtil().getTodayWeekName()) return;
+      if(weekName==DateUtil().getTomorrowWeekName()) return;
+      bool isOpen = Hive.isBoxOpen("Todos_$weekName");
+      if(!isOpen) return;
+      print("closing $weekName");
+      await Hive.box<ModelTodos>("Todos_$weekName").close();
+    });
+  }
+
+
+
 
   Future<void> openTomorrowWeekTodosBox() async{
     var weekName = DateUtil().getTomorrowWeekName();
