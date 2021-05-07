@@ -5,27 +5,22 @@ import 'package:intl/intl.dart';
 
 class TodosHelper{
 
-  Box<ModelTodos> getTodayWeekTodosBox(){
+  Box<ModelTodos> todayBox(){
     var weekName = DateUtil().getTodayWeekName();
     return Hive.box<ModelTodos>("Todos_$weekName");
   }
 
-  Future<void> openTodayWeekTodosBox() async{
+  Future<Box<ModelTodos>> openTodayBox() async{
     var weekName = DateUtil().getTodayWeekName();
-    await Hive.openBox<ModelTodos>("Todos_$weekName");
+    return await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
 
-  Box<ModelTodos> getTodayWeekTodosBoxSync(){
-    var weekName = DateUtil().getTodayWeekName();
-    return Hive.box<ModelTodos>("Todos_$weekName");
-  }
-
-  Future<Box<ModelTodos>> openWeekTodosBox(DateTime date) async{
+  Future<Box<ModelTodos>> openBox(DateTime date) async{
     var weekName = DateUtil().getWeekName(date);
     return await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
 
-  Future<void> closeForceWeekTodosBox(DateTime date) async{
+  Future<void> closeForceBox(DateTime date) async{
     var weekName = DateUtil().getWeekName(date);
     bool isOpen = Hive.isBoxOpen("Todos_$weekName");
     if(!isOpen) return;
@@ -33,14 +28,14 @@ class TodosHelper{
   }
 
 
-  Future<void> safeCloseWeekTodosBox(DateTime date) async{
+  Future<void> safeCloseBox(DateTime date) async{
     var weekName = DateUtil().getWeekName(date);
     if(weekName==DateUtil().getTodayWeekName()) return;
     if(weekName==DateUtil().getTomorrowWeekName()) return;
-    await closeForceWeekTodosBox(date);
+    await closeForceBox(date);
   }
 
-  Future<void> retainDefaultWeekTodosBox() async{
+  Future<void> retainDefaultBox() async{
     var weekNames = ["mon", "tue", "wed", "thu", "fri", "sat"];
     weekNames.forEach((weekName) async{
       if(weekName==DateUtil().getTodayWeekName()) return;
@@ -52,21 +47,18 @@ class TodosHelper{
     });
   }
 
-
-
-
-  Future<void> openTomorrowWeekTodosBox() async{
+  Future<void> openTomorrowBox() async{
     var weekName = DateUtil().getTomorrowWeekName();
     await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
  
-  Future<void> editTodoByWeekName(ModelTodos todos, String weekName) async{
+  Future<void> editTodo(ModelTodos todos, String weekName) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
     await box.put(todos.id, todos);
   }
 
 
-  Future<void> fetchTodosWeekwise(Map<String, dynamic> body, String weekName) async{
+  Future<void> _fetchTodo(Map<String, dynamic> body, String weekName) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
 
     if(body['todos'][weekName.toLowerCase()]==null||(body['todos'][weekName.toLowerCase()] as List).isEmpty) return;
@@ -89,12 +81,12 @@ class TodosHelper{
   }
 
   Future<void> fetchTodos(Map<String, dynamic> body) async{
-    await fetchTodosWeekwise(body, "Mon");
-    await fetchTodosWeekwise(body, "Tue");
-    await fetchTodosWeekwise(body, "Wed");
-    await fetchTodosWeekwise(body, "Thu");
-    await fetchTodosWeekwise(body, "Fri");
-    await fetchTodosWeekwise(body, "Sat");
-    await fetchTodosWeekwise(body, "Sun");
+    await _fetchTodo(body, "Mon");
+    await _fetchTodo(body, "Tue");
+    await _fetchTodo(body, "Wed");
+    await _fetchTodo(body, "Thu");
+    await _fetchTodo(body, "Fri");
+    await _fetchTodo(body, "Sat");
+    await _fetchTodo(body, "Sun");
   }
 }

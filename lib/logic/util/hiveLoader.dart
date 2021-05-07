@@ -27,8 +27,8 @@ class HiveLoader{
     Hive.registerAdapter(ModelMessageAdapter());
 
     await Hive.openBox<ModelPet>("pet");
-    await TodosHelper().openTodayWeekTodosBox();
-    await TodosHelper().openTomorrowWeekTodosBox();
+    await TodosHelper().openTodayBox();
+    await TodosHelper().openTomorrowBox();
     await Hive.openBox<ModelUser>("user");
     await Hive.openBox("tokenTemp");//TODO need to delete when found alt for storing jwt in web
     await Hive.openBox<ModelImportantEvent>("importantEvent");

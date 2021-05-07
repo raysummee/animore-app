@@ -37,7 +37,7 @@ class EditPetTodosPage extends StatelessWidget {
           
           Expanded(
             child: ValueListenableBuilder(
-              valueListenable: TodosHelper().getTodayWeekTodosBoxSync().listenable(),
+              valueListenable: TodosHelper().todayBox().listenable(),
               builder: (context, Box<ModelTodos> box, child) {
                 return ListView.builder(
                   itemBuilder: (context, index) => Container(
