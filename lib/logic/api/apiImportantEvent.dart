@@ -19,7 +19,7 @@ class ApiImportantEvent {
       url,
       onSuccess: (map) async {
         print("success");
-        await ImportantEventHelper().fetchImportantEvent(map);
+        await ImportantEventHelper().fetch(map);
         return true;
       },
 
@@ -42,7 +42,7 @@ class ApiImportantEvent {
       url,
       body: inputBody,
       onSuccess: (map) async{
-        await ImportantEventHelper().updateLocalImportantEvent(event, index);
+        await ImportantEventHelper().updateLocal(event, index);
         return true;
       }
     );
@@ -64,7 +64,7 @@ class ApiImportantEvent {
       url,
       body: inputBody,
       onSuccess: (map) async{
-        await ImportantEventHelper().addIntoLocalImportantEvent(event);
+        await ImportantEventHelper().addIntoLocal(event);
         return true;
       }
     );
@@ -79,7 +79,7 @@ class ApiImportantEvent {
     return await http.delete(
       url,
       onSuccess: (map) async{
-        await ImportantEventHelper().deleteLocalImportantEvent(index);
+        await ImportantEventHelper().deleteLocal(index);
         return true;
       }
     );
