@@ -23,7 +23,7 @@ GlobalKey<NavigatorState> navigatorKey;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await HiveLoader().init();
-  VeterinarySocket().onBookVeterinary();
+  VeterinarySocket().onBook();
   navigatorKey = new GlobalKey<NavigatorState>();
   runApp(Animore());
 }

@@ -12,7 +12,7 @@ import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:flutter_pusher_client/flutter_pusher.dart';
 
 class VeterinarySocket{
-  void onBookVeterinary(){
+  void onBook(){
     if(Auth().user()==null)return;
 
     String role = roleEnumToString(Auth().user().role);
