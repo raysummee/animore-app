@@ -9,7 +9,7 @@ class DoctorMessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ApiVeterinaryBook().getAllBookingsOfCurrentVeterinary(),
+      future: ApiVeterinaryBook().allAppointmentAuthenticated(),
       builder: (context, snapshot) {
         return ValueListenableBuilder(
           valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 

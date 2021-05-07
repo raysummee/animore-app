@@ -10,7 +10,7 @@ import 'base/baseHttp.dart' as http;
 import 'apiConfig.dart';
 
 class ApiVeterinaryBook{
-   Future<bool> bookNewVeterinary(ModelDoctor doctor) async{
+   Future<bool> makeAppointment(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;    
@@ -53,7 +53,7 @@ class ApiVeterinaryBook{
     );
   }
 
-  Future<void> getAllBookingsOfCurrentVeterinary() async{
+  Future<void> allAppointmentAuthenticated() async{
     var url = Uri.parse("$host/veterinary/book");
 
     await http.get(
