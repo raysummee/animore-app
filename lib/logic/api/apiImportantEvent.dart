@@ -11,7 +11,7 @@ import 'package:path/path.dart';
 class ApiImportantEvent {
   Future<void> getImportantEventAll() async {
     //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;
+    final petId = (await PetHelper().at(0)).id;
 
     var url = Uri.parse("$host/important_date/$petId");
 
@@ -28,7 +28,7 @@ class ApiImportantEvent {
 
   Future<bool> updateImportantEvent(ModelImportantEvent event, int index) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;
+    final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
 
     var inputBody = json.encode({
@@ -50,7 +50,7 @@ class ApiImportantEvent {
 
   Future<bool> addNewImportantEvent(ModelImportantEvent event) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;
+    final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId");
 
     var inputBody = json.encode({
@@ -72,7 +72,7 @@ class ApiImportantEvent {
 
   Future<bool> deleteImportantEvent(ModelImportantEvent event, int index) async {
     //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;
+    final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
     print(url);
 

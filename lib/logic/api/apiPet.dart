@@ -15,7 +15,7 @@ class ApiPet{
     await http.get(
       url,
       onSuccess: (map) async{
-        return await PetHelper().fetchPet(map);
+        return await PetHelper().fetch(map);
       }
     );
   } 
@@ -33,7 +33,7 @@ class ApiPet{
       url,
       body: inputBody,
       onSuccess: (map) async{
-        return await PetHelper().updatePet(index, petId, name, bread, type, dob);
+        return await PetHelper().update(index, petId, name, bread, type, dob);
       }
     );
   }

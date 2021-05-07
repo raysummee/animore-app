@@ -13,7 +13,7 @@ class ApiVeterinaryBook{
    Future<bool> bookNewVeterinary(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
     //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().getPetAt(0)).id;    
+    final petId = (await PetHelper().at(0)).id;    
     var inputBody = json.encode({
       "pet_id": petId,
       "veterinary_id": doctor.id,
