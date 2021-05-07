@@ -8,11 +8,11 @@ class Pusher{
   static FlutterPusher _pusher;
 
   Pusher._(){
-    _initPusher();
+    _init();
   }
   //
   
-  static void _initPusher(){
+  static void _init(){
     print("init pusher");
     PusherOptions options = PusherOptions(
       cluster: "ap2",
