@@ -4,11 +4,14 @@ import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
+import 'package:animore/ux/pages/main/pets/editPetTodosPage.dart';
 import 'package:animore/ux/pages/main/shop/cartPage.dart';
 import 'package:animore/ux/pages/main/profile/contactPage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ProfilePage extends StatelessWidget {
   @override

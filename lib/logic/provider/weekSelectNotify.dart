@@ -7,7 +7,7 @@ class WeekSelectNotify extends ChangeNotifier{
 
   WeekSelectNotify(){
     const List<String> weeks = ["mon", "tue", "wed", "thus", "fri", "sat", "sun"];
-    _weekName = DateUtil().todayWeekName();
+    _weekName = DateUtil().todayWeekName().toLowerCase();
     _index = weeks.indexWhere((element) => element==_weekName);
   }
 
