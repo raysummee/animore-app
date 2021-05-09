@@ -42,7 +42,7 @@ class EditPetTodosPage extends StatelessWidget {
             child: ValueListenableBuilder(
               valueListenable: TodosHelper().boxSyncWeek(provider.weekName).listenable(),
               builder: (context, Box<ModelTodos> box, child) {
-                return ListView.builder(
+                return box.isNotEmpty? ListView.builder(
                   itemBuilder: (context, index) => Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade100)
@@ -57,6 +57,11 @@ class EditPetTodosPage extends StatelessWidget {
                     )
                   ),
                   itemCount: box.length
+                ):Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "No todo is avaiable"
+                  ),
                 );
               }
             ),
