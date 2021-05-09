@@ -20,6 +20,11 @@ class TodosHelper{
     return await Hive.openBox<ModelTodos>("Todos_$weekName");
   }
 
+   Box<ModelTodos> boxSyncWeek(String week){
+    week = toBeginningOfSentenceCase(week);
+    return Hive.box<ModelTodos>("Todos_$week");
+  }
+
   Future<void> closeForceBox(DateTime date) async{
     var weekName = DateUtil().weekName(date);
     bool isOpen = Hive.isBoxOpen("Todos_$weekName");

@@ -1,6 +1,7 @@
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/customDropdown/customDropdown.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,12 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EditPetTodosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<WeekSelectNotify>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -37,7 +40,7 @@ class EditPetTodosPage extends StatelessWidget {
           
           Expanded(
             child: ValueListenableBuilder(
-              valueListenable: TodosHelper().todayBox().listenable(),
+              valueListenable: TodosHelper().boxSyncWeek(provider.weekName).listenable(),
               builder: (context, Box<ModelTodos> box, child) {
                 return ListView.builder(
                   itemBuilder: (context, index) => Container(
