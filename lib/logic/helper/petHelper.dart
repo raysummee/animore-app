@@ -5,7 +5,9 @@ class PetHelper {
   Future<bool> fetch(Map<String, dynamic> map) async{
     print("api pet");
     List<ModelPet> pets = (map['pet'] as List).map((e) => ModelPet.fromJson(e)).toList();
-    await(await Hive.openBox<ModelPet>("pet")).addAll(pets);
+    Box<ModelPet> box = await Hive.openBox<ModelPet>("pet");
+    await box.clear();
+    await box.addAll(pets);
     return true;
   }
 
