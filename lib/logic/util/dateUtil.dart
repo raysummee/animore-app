@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateUtil{
@@ -17,5 +18,10 @@ class DateUtil{
   String weekName(DateTime date){
     var weekName = DateFormat(DateFormat.ABBR_WEEKDAY).format(date);
     return weekName;   
+  }
+
+  DateTime toDateTime(TimeOfDay timeOfDay){
+    DateTime now = DateTime.now();
+    return DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
   }
 }
