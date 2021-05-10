@@ -2,6 +2,7 @@ import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/logic/util/dateUtil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -111,13 +112,20 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                       splashColor: Colors.deepOrange,
                       icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
                       onPressed: () async{
-                        DateTime temp = await showDatePicker(context: context, initialDate: todo.time??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
-                        if(temp!=null){
-                          setState(() {
-                            todo.time = temp;
-                            change = true;
-                          });
-                        }
+                        TimeOfDay timeInitial;
+
+                        if(todo.time!=null)
+                          timeInitial = TimeOfDay.fromDateTime(todo.time);
+                        else
+                          timeInitial = TimeOfDay.now();
+
+                        TimeOfDay t = await showTimePicker(context: context, initialTime: timeInitial);
+                        if(t==null) return;
+                        DateTime dateTime = DateUtil().toDateTime(t);
+                        setState(() {
+                          todo.time = dateTime;
+                          change = true;
+                        });
                       }
                     )
                   ),
@@ -153,7 +161,7 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                           flex: 1,
                           child: ElevatedButton(
                             onPressed: widget.todo==null?null:(){
-                              ApiTodos().update(todo, widget.weekName);
+                              ApiTodos().delete(todo, widget.weekName);
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
