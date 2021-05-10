@@ -1,5 +1,7 @@
 import 'package:animore/logic/api/apiImportantEvent.dart';
+import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
+import 'package:animore/logic/model/modelTodos.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -7,38 +9,38 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
-class EventEditDialog extends StatefulWidget{
-  final ModelImportantEvent event;
+class EditTodosDialog extends StatefulWidget{
+  final ModelTodos todo;
   final int index;
+  final String weekName;
+  EditTodosDialog(this.todo, this.index, this.weekName);
 
-  EventEditDialog(this.event, this.index);
-
-  static show(BuildContext context, {ModelImportantEvent event, int index}){
+  static show(BuildContext context, {ModelTodos todo, int index, String weekName}){
     showDialog(
       context: context, 
       builder: (context) => Dialog(
-        child: EventEditDialog(event, index)
+        child: EditTodosDialog(todo, index, weekName)
       )
     );
   }
    @override
-  _EventEditDialogState createState() => _EventEditDialogState();
+  _EditTodosDialogState createState() => _EditTodosDialogState();
 }
 
-class _EventEditDialogState extends State<EventEditDialog> {
+class _EditTodosDialogState extends State<EditTodosDialog> {
   TextEditingController controller;
-  ModelImportantEvent event;
+  ModelTodos todo;
 
   bool change = false;
   @override
   void initState() {
     
-    if(widget.event==null){
-      event = ModelImportantEvent(dateTime: null, id: null, name: "");
+    if(widget.todo==null){
+      todo = ModelTodos(id: null, name: "", time: null, done: -1);
     }else{
-      event = widget.event;
+      todo = widget.todo;
     }
-    controller  = TextEditingController(text: event.name);
+    controller  = TextEditingController(text: todo.name);
 
     super.initState();
   }
@@ -52,7 +54,7 @@ class _EventEditDialogState extends State<EventEditDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Add Events",
+              "Add Todo",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18
@@ -62,9 +64,9 @@ class _EventEditDialogState extends State<EventEditDialog> {
               height: 16,
             ),
             Text(
-              event.dateTime==null? 
-                "Select Date": 
-                DateFormat(DateFormat.YEAR_ABBR_MONTH_DAY).format(event.dateTime),
+              todo.time==null? 
+                "Select Time": 
+                DateFormat(DateFormat.HOUR_MINUTE).format(todo.time),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold
@@ -79,11 +81,11 @@ class _EventEditDialogState extends State<EventEditDialog> {
                   child: TextField(
                     controller: controller,
                     onChanged: (val){
-                      if(val==event.name&&change){
+                      if(val==todo.name&&change){
                         setState(() {
                           change = false;
                         });
-                      }else if(val!=event.name&&!change){
+                      }else if(val!=todo.name&&!change){
                         setState(() {
                           change = true;
                         });
@@ -92,7 +94,7 @@ class _EventEditDialogState extends State<EventEditDialog> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       isDense: true,
-                      hintText: "Event",
+                      hintText: "Todos",
                     ),
                   )
                 ),
@@ -109,10 +111,10 @@ class _EventEditDialogState extends State<EventEditDialog> {
                       splashColor: Colors.deepOrange,
                       icon: Icon(FlutterIcons.date_range_mdi, color: Colors.white), 
                       onPressed: () async{
-                        DateTime temp = await showDatePicker(context: context, initialDate: event.dateTime??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
+                        DateTime temp = await showDatePicker(context: context, initialDate: todo.time??DateTime.now(), firstDate: DateTime(1990), lastDate: DateTime.now().add(Duration(days: 2000)));
                         if(temp!=null){
                           setState(() {
-                            event.dateTime = temp;
+                            todo.time = temp;
                             change = true;
                           });
                         }
@@ -150,8 +152,8 @@ class _EventEditDialogState extends State<EventEditDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: widget.event==null?null:(){
-                              ApiImportantEvent().delete(event, widget.index);
+                            onPressed: widget.todo==null?null:(){
+                              ApiTodos().update(todo, widget.weekName);
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
@@ -170,12 +172,12 @@ class _EventEditDialogState extends State<EventEditDialog> {
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
-                    onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
-                      event.name = controller.text;
-                      if(event.id!=null){
-                        ApiImportantEvent().update(event, widget.index);
+                    onPressed: change&&todo.time!=null&&controller.text.isNotEmpty?() async{
+                      todo.name = controller.text;
+                      if(todo.id!=null){
+                        ApiTodos().update(todo, widget.weekName);
                       }else{
-                        ApiImportantEvent().addNew(event);
+                        ApiTodos().addNew(todo, widget.weekName);
                       }
                       Navigator.of(context).pop();
                     }:null,

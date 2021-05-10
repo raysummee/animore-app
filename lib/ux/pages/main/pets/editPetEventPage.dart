@@ -1,6 +1,6 @@
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
-import 'package:animore/ux/components/dialog/eventEditDialog.dart';
+import 'package:animore/ux/components/dialog/editEventDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
@@ -37,7 +37,7 @@ class EditPetEventPage extends StatelessWidget {
                 FlutterIcons.event_sli,
                 Colors.white, 
                 (){
-                  EventEditDialog.show(context, event: box.getAt(index), index: index);
+                  EditEventDialog.show(context, event: box.getAt(index), index: index);
                 },
                 subtitle: DateFormat("dd MMM yy").format(box.getAt(index).dateTime),
               )
@@ -56,7 +56,7 @@ class EditPetEventPage extends StatelessWidget {
         ),
         TextButton(
           onPressed: (){
-            EventEditDialog.show(context);
+            EditEventDialog.show(context);
           }, 
           child: Text("Add New Event")
         ),
