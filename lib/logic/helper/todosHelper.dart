@@ -67,6 +67,11 @@ class TodosHelper{
     await box.put(todos.id, todos);
   }
 
+  Future<void> delete(ModelTodos todos, String weekName) async{
+    Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
+    await box.delete(todos.id);
+  }
+
 
   Future<void> _fetchTodo(Map<String, dynamic> body, String weekName) async{
     Box<ModelTodos> box = await Hive.openBox<ModelTodos>("Todos_$weekName");
