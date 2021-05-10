@@ -8,12 +8,14 @@ import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
+import 'package:animore/logic/provider/petSelectNotify.dart';
 import 'package:animore/logic/provider/vetBookSliderNotify.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/logic/util/hiveLoader.dart';
 import 'package:animore/ux/pages/commons/startup.dart';
 import 'package:animore/ux/pages/main/home/homePage.dart';
 import 'package:animore/ux/pages/main/navPages.dart';
+import 'package:animore/ux/pages/main/pets/selectPetPage.dart';
 import 'package:animore/ux/pages/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +49,8 @@ class Animore extends StatelessWidget {
         ChangeNotifierProvider<LandingPageCarouselNotify>(create: (_)=>LandingPageCarouselNotify()),
         ChangeNotifierProvider<PetCardEditNotify>(create: (_)=>PetCardEditNotify()),
         ChangeNotifierProvider<VetBookSliderNotify>(create: (_)=>VetBookSliderNotify()),
-        ChangeNotifierProvider<WeekSelectNotify>(create: (_)=>WeekSelectNotify())
+        ChangeNotifierProvider<WeekSelectNotify>(create: (_)=>WeekSelectNotify()),
+        ChangeNotifierProvider<PetSelectNotify>(create: (_)=>PetSelectNotify())
       ],
       child: MaterialApp(
         title: 'Animore',
