@@ -72,12 +72,11 @@ class ApiTodos{
   Future<void> delete(ModelTodos todo, String weekName) async{
     //TODO replace index 0 with the index of pet which is currenty choosed
     final petId = (await PetHelper().at(0)).id;
-    var url = Uri.parse("$host/todos/$petId");
+    var url = Uri.parse("$host/todos/${todo.id}");
     await http.delete(
       url,
       onSuccess: (map) async{
         print("added todos");
-        ModelTodos todo = ModelTodos.fromMap(map['todos']);
         String upperCaseWeek = toBeginningOfSentenceCase(weekName);
         TodosHelper().delete(todo, upperCaseWeek);
         return true;
