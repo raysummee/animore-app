@@ -32,7 +32,7 @@ class ApiTodos{
     var bodyToSend = json.encode({
       "task_name": todo.name,
       "week": weekName,
-      "time": todo.time,
+      "time": DateFormat("HH:mm:ss").format(todo.time),
     });
     await http.post(
       url,
