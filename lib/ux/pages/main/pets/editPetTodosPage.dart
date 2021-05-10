@@ -4,6 +4,7 @@ import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/customDropdown/customDropdown.dart';
+import 'package:animore/ux/components/dialog/editTodosDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
@@ -37,7 +38,6 @@ class EditPetTodosPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          
           Expanded(
             child: ValueListenableBuilder(
               valueListenable: TodosHelper().boxSyncWeek(provider.weekName).listenable(),
@@ -52,6 +52,12 @@ class EditPetTodosPage extends StatelessWidget {
                       FlutterIcons.event_sli,
                       Colors.white, 
                       (){
+                        EditTodosDialog.show(
+                          context,
+                          index: index,
+                          todo: box.getAt(index),
+                          weekName: provider.weekName
+                        );
                       },
                       subtitle: DateFormat("HH:mm aa").format(box.getAt(index).time),
                     )
@@ -78,6 +84,7 @@ class EditPetTodosPage extends StatelessWidget {
         ),
         TextButton(
           onPressed: (){
+            EditTodosDialog.show(context, weekName: provider.weekName);
           }, 
           child: Text("Add New Todos")
         ),
