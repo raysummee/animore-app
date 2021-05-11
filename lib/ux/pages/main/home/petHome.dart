@@ -25,19 +25,19 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container(
       child: ValueListenableBuilder(
-        valueListenable: Hive.box<ModelPet>("pet").listenable(),
+        valueListenable: PetHelper().box().listenable(),
         builder: (context, Box<ModelPet> box, child) {
           if (box.isNotEmpty) {
             return AnimatedSizeAndFade(
               vsync: this,
               child: provider.isEditing?
                 PetEditCard(
-                  PetHelper().selectedPet(navigatorKey.currentContext),
+                  box.get(PetHelper().selectedPetId(navigatorKey.currentContext)),
                   ImportantEventHelper().all(), 
                   0
                 ):
                 PetCard(
-                  PetHelper().selectedPet(navigatorKey.currentContext).name,
+                  box.get(PetHelper().selectedPetId(navigatorKey.currentContext)).name,
                   ImportantEventHelper().recent()
                 ),
               fadeDuration: Duration(milliseconds: 300),
