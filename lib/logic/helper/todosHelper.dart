@@ -81,7 +81,9 @@ class TodosHelper{
   Future<void> _fetchTodo(Map<String, dynamic> body, String weekName) async{
     Box<ModelTodos> box = await openBox(weekName);
 
-    if(body['todos'][weekName.toLowerCase()]==null||(body['todos'][weekName.toLowerCase()] as List).isEmpty) return;
+    if(body['todos'][weekName.toLowerCase()]==null||(body['todos'][weekName.toLowerCase()] as List).isEmpty){
+      await box.clear();
+    }
 
     List<ModelTodos> todos = (body['todos'][weekName.toLowerCase()] as List).map((e) => ModelTodos.fromMap(e)).toList();
     todos.sort((a,b)=>a.time.compareTo(b.time));
@@ -111,17 +113,17 @@ class TodosHelper{
   }
 
   Future<Box<ModelTodos>> openBox(String weekName) async{
-    final petId = PetHelper().selectedPetAsync(navigatorKey.currentContext);
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     return await Hive.openBox<ModelTodos>("Todos_${weekName}_$petId");
   }
 
   Box<ModelTodos> box(String weekName) {
-    final petId = PetHelper().selectedPetAsync(navigatorKey.currentContext);
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     return Hive.box<ModelTodos>("Todos_${weekName}_$petId");
   }
  
   bool isBoxOpen(String weekName) {
-    final petId = PetHelper().selectedPetAsync(navigatorKey.currentContext);
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     return Hive.isBoxOpen("Todos_${weekName}_$petId");
   }
 
