@@ -1,5 +1,8 @@
 import 'package:animore/logic/model/modelPet.dart';
+import 'package:animore/logic/provider/petSelectNotify.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 class PetHelper {
   Future<bool> fetch(Map<String, dynamic> map) async{
@@ -31,5 +34,19 @@ class PetHelper {
   Future<ModelPet> at(int index) async{
     Box<ModelPet> box = await Hive.openBox<ModelPet>("pet");
     return box.getAt(index);
+  }
+
+  Box<ModelPet> box(){
+    return Hive.box<ModelPet>("pet");
+  }
+
+  ModelPet selectedPet(BuildContext context){
+    var provider = Provider.of<PetSelectNotify>(context);
+    return Hive.box<ModelPet>("pet").getAt(provider.index);
+  }
+
+  Future<ModelPet> selectedPetAsync(BuildContext context) async{
+    var provider = Provider.of<PetSelectNotify>(context);
+    return (await Hive.openBox<ModelPet>("pet")).getAt(provider.index);
   }
 }
