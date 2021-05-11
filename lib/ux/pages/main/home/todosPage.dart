@@ -26,7 +26,7 @@ class TodosPage extends StatelessWidget {
         future: ApiTodos().all(),
         builder: (context, snapshot) {
           return ValueListenableBuilder(
-            valueListenable: TodosHelper().todayBox().listenable(), 
+            valueListenable: TodosHelper().today().listenable(), 
             builder: (context, Box<ModelTodos> box, child) {
               if(box.isNotEmpty){
                 return ListView.separated(

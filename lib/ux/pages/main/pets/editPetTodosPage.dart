@@ -40,7 +40,7 @@ class EditPetTodosPage extends StatelessWidget {
         children: [
           Expanded(
             child: ValueListenableBuilder(
-              valueListenable: TodosHelper().boxSyncWeek(provider.weekName).listenable(),
+              valueListenable: TodosHelper().fromWeek(provider.weekName).listenable(),
               builder: (context, Box<ModelTodos> box, child) {
                 return box.isNotEmpty? ListView.builder(
                   itemBuilder: (context, index) => Container(

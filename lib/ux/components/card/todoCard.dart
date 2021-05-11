@@ -50,7 +50,7 @@ class _TodoCardState extends State<TodoCard> {
           setState(() {
             selected = !selected;
           });
-          TodosHelper().editTodo(
+          TodosHelper().edit(
             ModelTodos(
               id: widget.modelTodos.id, 
               time: widget.modelTodos.time, 
@@ -109,7 +109,7 @@ class _TodoCardState extends State<TodoCard> {
                 setState(() {
                   selected = !selected;
                 });
-                TodosHelper().editTodo(
+                TodosHelper().edit(
                   ModelTodos(
                     id: widget.modelTodos.id, 
                     time: widget.modelTodos.time, 
