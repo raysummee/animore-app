@@ -3,15 +3,15 @@ import 'package:animore/logic/Helper/importantEventHelper.dart';
 import 'package:animore/logic/api/base/baseHttp.dart' as http;
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
+import 'package:animore/main.dart';
 import 'package:flutter/material.dart';
 import 'package:animore/logic/api/apiConfig.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 class ApiImportantEvent {
-  Future<void> all() async {
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+  Future<void> all({int id}) async {
+    final petId = id??PetHelper().selectedPetId(navigatorKey.currentContext);
 
     var url = Uri.parse("$host/important_date/$petId");
 
@@ -27,8 +27,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> update(ModelImportantEvent event, int index) async {
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
 
     var inputBody = json.encode({
@@ -49,8 +48,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> addNew(ModelImportantEvent event) async {
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId");
 
     var inputBody = json.encode({
@@ -71,8 +69,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> delete(ModelImportantEvent event, int index) async {
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
     print(url);
 

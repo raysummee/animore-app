@@ -8,12 +8,11 @@ import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:animore/main.dart';
 import 'apiConfig.dart';
 class ApiTodos{
-  Future<void> all() async{
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+  Future<void> all({int id}) async{
+    final petId = id??PetHelper().selectedPetId(navigatorKey.currentContext);  
     var url = Uri.parse("$host/todos/$petId");
     await http.get(
       url,
@@ -26,8 +25,7 @@ class ApiTodos{
   } 
 
   Future<void> addNew(ModelTodos todo, String weekName) async{
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     var url = Uri.parse("$host/todos/$petId");
     var bodyToSend = json.encode({
       "task_name": todo.name,
@@ -48,8 +46,7 @@ class ApiTodos{
   } 
 
   Future<void> update(ModelTodos todo, String weekName) async{
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
     var url = Uri.parse("$host/todos/$petId");
     var bodyToSend = json.encode({
       "task_name": todo.name,
@@ -70,8 +67,6 @@ class ApiTodos{
   } 
 
   Future<void> delete(ModelTodos todo, String weekName) async{
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;
     var url = Uri.parse("$host/todos/${todo.id}");
     await http.delete(
       url,

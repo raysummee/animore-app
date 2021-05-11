@@ -6,14 +6,14 @@ import 'package:animore/logic/helper/veterinaryBookHelper.dart';
 import 'package:animore/logic/helper/veterinaryHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:intl/intl.dart';
+import '../../main.dart';
 import 'base/baseHttp.dart' as http;
 import 'apiConfig.dart';
 
 class ApiVeterinaryBook{
    Future<bool> makeAppointment(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
-    //TODO replace index 0 with the index of pet which is currenty choosed
-    final petId = (await PetHelper().at(0)).id;    
+    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);    
     var inputBody = json.encode({
       "pet_id": petId,
       "veterinary_id": doctor.id,

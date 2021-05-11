@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PetSelectNotify extends ChangeNotifier{
-  int _index = 0;
+  int _id = 1;
 
-  int get index=>_index;
+  int get id=>_id;
 
-  set index(int index){
-    _index = index;
+  set id(int index){
+    _id = index;
     notifyListeners();
   }
 }
