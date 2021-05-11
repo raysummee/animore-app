@@ -65,6 +65,7 @@ class CardSelectButton extends StatelessWidget {
               provider.id = pet.id;
               await ApiTodos().all(id: pet.id);
               await ApiImportantEvent().all(id: pet.id);
+              Navigator.of(context).pop();
             },
             onLongPress: onLongPress,
             child: Container(
