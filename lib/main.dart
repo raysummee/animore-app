@@ -21,12 +21,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+
 GlobalKey<NavigatorState> navigatorKey;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await HiveLoader().init();
-  VeterinarySocket().onBook();
   navigatorKey = new GlobalKey<NavigatorState>();
   runApp(Animore());
 }
