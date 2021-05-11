@@ -27,6 +27,7 @@ class HiveLoader{
     Hive.registerAdapter(ModelMessageAdapter());
 
     await Hive.openBox<ModelPet>("pet");
+    await Hive.openBox<int>("SelectedPet");
     await TodosHelper().todayFuture();
     await TodosHelper().tomorrowFuture();
     await Hive.openBox<ModelUser>("user");
