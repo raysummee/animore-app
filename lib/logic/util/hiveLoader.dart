@@ -1,5 +1,6 @@
 import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
+import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
@@ -26,8 +27,14 @@ class HiveLoader{
     Hive.registerAdapter(ModelVetBookAdapter());
     Hive.registerAdapter(ModelMessageAdapter());
 
-    await Hive.openBox<ModelPet>("pet");
+
+
     await Hive.openBox<int>("SelectedPet");
+
+    PetHelper().setSelectedPetIdToDefault();
+    
+
+    await Hive.openBox<ModelPet>("pet");
     await TodosHelper().todayFuture();
     await TodosHelper().tomorrowFuture();
     await Hive.openBox<ModelUser>("user");
@@ -38,7 +45,7 @@ class HiveLoader{
     await Hive.openBox<ModelVetBook>("vetBook");
 
     await Hive.openBox<ModelMessage>("messages");
- 
+
   }
 
   Future<void> dispose() async{
