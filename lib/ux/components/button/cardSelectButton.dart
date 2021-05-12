@@ -63,6 +63,10 @@ class CardSelectButton extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () async{
+              if(provider.id==pet.id){
+                Navigator.of(context).pop();
+                return;
+              }
               provider.id = pet.id;
               IndeterminateLoader.show(context);
               await ApiTodos().all(id: pet.id);
