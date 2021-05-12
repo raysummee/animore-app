@@ -1,5 +1,6 @@
 import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
+import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -149,8 +150,10 @@ class _EditEventDialogState extends State<EditEventDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: widget.event==null?null:(){
-                              ApiImportantEvent().delete(event, widget.index);
+                            onPressed: widget.event==null?null:() async{
+                              IndeterminateLoader.show(context);
+                              await ApiImportantEvent().delete(event, widget.index);
+                              IndeterminateLoader.hide();
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
@@ -172,9 +175,13 @@ class _EditEventDialogState extends State<EditEventDialog> {
                     onPressed: change&&event.dateTime!=null&&controller.text.isNotEmpty?() async{
                       event.name = controller.text;
                       if(event.id!=null){
-                        ApiImportantEvent().update(event, widget.index);
+                        IndeterminateLoader.show(context);
+                        await ApiImportantEvent().update(event, widget.index);
+                        IndeterminateLoader.hide();
                       }else{
-                        ApiImportantEvent().addNew(event);
+                        IndeterminateLoader.show(context);
+                        await ApiImportantEvent().addNew(event);
+                        IndeterminateLoader.hide();
                       }
                       Navigator.of(context).pop();
                     }:null,
