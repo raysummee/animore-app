@@ -28,24 +28,29 @@ class HiveLoader{
     Hive.registerAdapter(ModelMessageAdapter());
 
 
+    await openBoxes();
+
+  }
+
+  Future<void> openBoxes() async{
 
     await Hive.openBox<int>("SelectedPet");
 
-    PetHelper().setIdToDefault();
-    
-
     await Hive.openBox<ModelPet>("pet");
-    await TodosHelper().todayFuture();
-    await TodosHelper().tomorrowFuture();
+
     await Hive.openBox<ModelUser>("user");
     await Hive.openBox("tokenTemp");//TODO need to delete when found alt for storing jwt in web
+
+    await PetHelper().setIdToDefault();
+    
+    await TodosHelper().todayFuture();
+    await TodosHelper().tomorrowFuture();
     await Hive.openBox<ModelImportantEvent>("importantEvent");
 
     await Hive.openBox<ModelDoctor>("veterinary");
     await Hive.openBox<ModelVetBook>("vetBook");
 
     await Hive.openBox<ModelMessage>("messages");
-
   }
 
   Future<void> dispose() async{
