@@ -3,6 +3,7 @@ import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/util/dateUtil.dart';
+import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -160,8 +161,10 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
-                            onPressed: widget.todo==null?null:(){
-                              ApiTodos().delete(todo, widget.weekName);
+                            onPressed: widget.todo==null?null:() async{
+                              IndeterminateLoader.show(context);
+                              await ApiTodos().delete(todo, widget.weekName);
+                              IndeterminateLoader.hide();
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
@@ -183,9 +186,13 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                     onPressed: change&&todo.time!=null&&controller.text.isNotEmpty?() async{
                       todo.name = controller.text;
                       if(todo.id!=null){
-                        ApiTodos().update(todo, widget.weekName);
+                        IndeterminateLoader.show(context);
+                        await ApiTodos().update(todo, widget.weekName);
+                        IndeterminateLoader.hide();
                       }else{
-                        ApiTodos().addNew(todo, widget.weekName);
+                        IndeterminateLoader.show(context);
+                        await ApiTodos().addNew(todo, widget.weekName);
+                        IndeterminateLoader.hide();
                       }
                       Navigator.of(context).pop();
                     }:null,
