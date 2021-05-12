@@ -45,22 +45,20 @@ class ApiTodos{
     );
   } 
 
-  Future<void> update(ModelTodos todo, String weekName) async{
-    final petId = PetHelper().selectedId(navigatorKey.currentContext);
-    var url = Uri.parse("$host/todos/$petId");
+  Future<void> update(ModelTodos todo, String weekName, int todoId) async{
+    var url = Uri.parse("$host/todos/$todoId");
     var bodyToSend = json.encode({
       "task_name": todo.name,
       "week": weekName,
       "time": DateFormat("HH:mm:ss").format(todo.time),
     });
-    await http.post(
+    await http.put(
       url,
       body: bodyToSend,
       onSuccess: (map) async{
         print("added todos");
-        ModelTodos todo = ModelTodos.fromMap(map['todos']);
         String upperCaseWeek = toBeginningOfSentenceCase(weekName);
-        TodosHelper().add(todo, upperCaseWeek);
+        TodosHelper().edit(todo, upperCaseWeek);
         return true;
       }
     );

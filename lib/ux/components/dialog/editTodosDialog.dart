@@ -187,7 +187,7 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                       todo.name = controller.text;
                       if(todo.id!=null){
                         IndeterminateLoader.show(context);
-                        await ApiTodos().update(todo, widget.weekName);
+                        await ApiTodos().update(todo, widget.weekName, todo.id);
                         IndeterminateLoader.hide();
                       }else{
                         IndeterminateLoader.show(context);
