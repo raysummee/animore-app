@@ -39,10 +39,6 @@ class PetHelper {
     return (await Hive.openBox<ModelPet>("pet")).values.toList();
   }
 
-  Future<ModelPet> at(int index) async{
-    Box<ModelPet> box = await Hive.openBox<ModelPet>("pet");
-    return box.getAt(index);
-  }
 
   Box<ModelPet> box(){
     return Hive.box<ModelPet>("pet");
@@ -51,5 +47,18 @@ class PetHelper {
   int selectedPetId(BuildContext context){
     var provider = Provider.of<PetSelectNotify>(context, listen: false);
     return provider.id;
+  }
+
+  int defaultPetId(){
+    Box<int> box = Hive.box<int>("SelectedPet");
+    if(box.isEmpty)return null;
+    return box.getAt(0);
+  }
+
+  void setSelectedPetIdToDefault(){
+    if(PetHelper().defaultPetId()!=null){
+      var provider = Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false);
+      provider.id = PetHelper().defaultPetId();
+    }
   }
 }
