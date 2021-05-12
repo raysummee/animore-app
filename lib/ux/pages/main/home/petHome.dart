@@ -28,13 +28,13 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
         valueListenable: PetHelper().box().listenable(),
         builder: (context, Box<ModelPet> box, child) {
           if (box.isNotEmpty) {
+            print(PetHelper().selectedId(navigatorKey.currentContext));
             return AnimatedSizeAndFade(
               vsync: this,
               child: provider.isEditing?
                 PetEditCard(
                   box.get(PetHelper().selectedId(navigatorKey.currentContext)),
                   ImportantEventHelper().all(), 
-                  0
                 ):
                 PetCard(
                   box.get(PetHelper().selectedId(navigatorKey.currentContext)).name,

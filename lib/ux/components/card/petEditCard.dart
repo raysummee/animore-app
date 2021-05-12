@@ -16,9 +16,8 @@ import 'package:provider/provider.dart';
 
 class PetEditCard extends StatefulWidget {
   final ModelPet pet;
-  final int index;
   final List<ModelImportantEvent> importantEvent;
-  PetEditCard(this.pet, this.importantEvent, this.index);
+  PetEditCard(this.pet, this.importantEvent);
 
   @override
   _PetEditCardState createState() => _PetEditCardState();
@@ -233,7 +232,6 @@ class _PetEditCardState extends State<PetEditCard> {
                     ),
                     onPressed: (){
                       ApiPet().edit(
-                        widget.index, 
                         widget.pet.id,
                         bread: breadController.text,
                         dob: dob,

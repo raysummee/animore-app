@@ -20,7 +20,7 @@ class ApiPet{
     );
   } 
 
-  Future<bool> edit(int index,int petId, {String name, String bread, String type, DateTime dob}) async{
+  Future<bool> edit(int petId, {String name, String bread, String type, DateTime dob}) async{
 
     var url = Uri.parse("$host/pet/$petId");
     var inputBody = json.encode({
@@ -33,7 +33,7 @@ class ApiPet{
       url,
       body: inputBody,
       onSuccess: (map) async{
-        return await PetHelper().update(index, petId, name, bread, type, dob);
+        return await PetHelper().update(petId, name, bread, type, dob);
       }
     );
   }
