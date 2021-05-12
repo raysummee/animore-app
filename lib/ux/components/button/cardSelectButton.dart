@@ -3,6 +3,7 @@ import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petSelectNotify.dart';
+import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -63,8 +64,10 @@ class CardSelectButton extends StatelessWidget {
           child: InkWell(
             onTap: () async{
               provider.id = pet.id;
+              IndeterminateLoader.show(context);
               await ApiTodos().all(id: pet.id);
               await ApiImportantEvent().all(id: pet.id);
+              IndeterminateLoader.hide();
               Navigator.of(context).pop();
             },
             onLongPress: onLongPress,
