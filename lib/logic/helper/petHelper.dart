@@ -44,21 +44,21 @@ class PetHelper {
     return Hive.box<ModelPet>("pet");
   }
 
-  int selectedPetId(BuildContext context){
+  int selectedId(BuildContext context){
     var provider = Provider.of<PetSelectNotify>(context, listen: false);
     return provider.id;
   }
 
-  int defaultPetId(){
+  int defaultId(){
     Box<int> box = Hive.box<int>("SelectedPet");
     if(box.isEmpty)return null;
     return box.getAt(0);
   }
 
-  void setSelectedPetIdToDefault(){
-    if(PetHelper().defaultPetId()!=null){
+  void setIdToDefault(){
+    if(PetHelper().defaultId()!=null){
       var provider = Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false);
-      provider.id = PetHelper().defaultPetId();
+      provider.id = PetHelper().defaultId();
     }
   }
 }

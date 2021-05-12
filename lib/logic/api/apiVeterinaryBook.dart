@@ -13,7 +13,7 @@ import 'apiConfig.dart';
 class ApiVeterinaryBook{
    Future<bool> makeAppointment(ModelDoctor doctor) async{
     var url = Uri.parse("$host/veterinary/book");
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);    
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);    
     var inputBody = json.encode({
       "pet_id": petId,
       "veterinary_id": doctor.id,

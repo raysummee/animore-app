@@ -11,7 +11,7 @@ import 'package:path/path.dart';
 
 class ApiImportantEvent {
   Future<void> all({int id}) async {
-    final petId = id??PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = id??PetHelper().selectedId(navigatorKey.currentContext);
 
     var url = Uri.parse("$host/important_date/$petId");
 
@@ -27,7 +27,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> update(ModelImportantEvent event, int index) async {
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
 
     var inputBody = json.encode({
@@ -48,7 +48,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> addNew(ModelImportantEvent event) async {
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId");
 
     var inputBody = json.encode({
@@ -69,7 +69,7 @@ class ApiImportantEvent {
   }
 
   Future<bool> delete(ModelImportantEvent event, int index) async {
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     var url = Uri.parse("$host/important_date/$petId/${event.id}");
     print(url);
 

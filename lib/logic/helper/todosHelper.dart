@@ -113,17 +113,17 @@ class TodosHelper{
   }
 
   Future<Box<ModelTodos>> openBox(String weekName) async{
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     return await Hive.openBox<ModelTodos>("Todos_${weekName}_$petId");
   }
 
   Box<ModelTodos> box(String weekName) {
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     return Hive.box<ModelTodos>("Todos_${weekName}_$petId");
   }
  
   bool isBoxOpen(String weekName) {
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     return Hive.isBoxOpen("Todos_${weekName}_$petId");
   }
 

@@ -31,7 +31,7 @@ class HiveLoader{
 
     await Hive.openBox<int>("SelectedPet");
 
-    PetHelper().setSelectedPetIdToDefault();
+    PetHelper().setIdToDefault();
     
 
     await Hive.openBox<ModelPet>("pet");

@@ -32,12 +32,12 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
               vsync: this,
               child: provider.isEditing?
                 PetEditCard(
-                  box.get(PetHelper().selectedPetId(navigatorKey.currentContext)),
+                  box.get(PetHelper().selectedId(navigatorKey.currentContext)),
                   ImportantEventHelper().all(), 
                   0
                 ):
                 PetCard(
-                  box.get(PetHelper().selectedPetId(navigatorKey.currentContext)).name,
+                  box.get(PetHelper().selectedId(navigatorKey.currentContext)).name,
                   ImportantEventHelper().recent()
                 ),
               fadeDuration: Duration(milliseconds: 300),

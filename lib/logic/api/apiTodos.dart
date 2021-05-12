@@ -12,7 +12,7 @@ import 'package:animore/main.dart';
 import 'apiConfig.dart';
 class ApiTodos{
   Future<void> all({int id}) async{
-    final petId = id??PetHelper().selectedPetId(navigatorKey.currentContext);  
+    final petId = id??PetHelper().selectedId(navigatorKey.currentContext);  
     var url = Uri.parse("$host/todos/$petId");
     await http.get(
       url,
@@ -25,7 +25,7 @@ class ApiTodos{
   } 
 
   Future<void> addNew(ModelTodos todo, String weekName) async{
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     var url = Uri.parse("$host/todos/$petId");
     var bodyToSend = json.encode({
       "task_name": todo.name,
@@ -46,7 +46,7 @@ class ApiTodos{
   } 
 
   Future<void> update(ModelTodos todo, String weekName) async{
-    final petId = PetHelper().selectedPetId(navigatorKey.currentContext);
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
     var url = Uri.parse("$host/todos/$petId");
     var bodyToSend = json.encode({
       "task_name": todo.name,
