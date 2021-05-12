@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PetSelectNotify extends ChangeNotifier{
-  int _id = 1;
+  int _id;
 
   int get id=>_id;
 
