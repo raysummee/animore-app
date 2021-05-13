@@ -1,3 +1,4 @@
+import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/socket/veterinarySocket.dart';
 import 'package:animore/logic/util/hiveLoader.dart';
@@ -19,6 +20,7 @@ class _StartupState extends State<Startup> {
     SchedulerBinding.instance.addPostFrameCallback((_) async{
       await HiveLoader().init();
       VeterinarySocket().onBook();
+      ApiTodos().all();
       switch (Auth().user()!=null) {
         case true:
           Navigator.of(navigatorKey.currentContext).pushReplacement(
