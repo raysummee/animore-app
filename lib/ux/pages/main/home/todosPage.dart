@@ -15,15 +15,27 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class TodosPage extends StatelessWidget {
+class TodosPage extends StatefulWidget {
   final ScrollController controller;
   TodosPage(this.controller);
+
+  @override
+  _TodosPageState createState() => _TodosPageState();
+}
+
+class _TodosPageState extends State<TodosPage> {
+  Future fetchFromApi;
+  @override
+  void initState() {
+    fetchFromApi = ApiTodos().all();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.cyan.withOpacity(0.03),
       child: FutureBuilder<void>(
-        // future: ApiTodos().all(),
+        future: fetchFromApi,
         builder: (context, snapshot) {
           return ValueListenableBuilder(
             valueListenable: TodosHelper().today().listenable(), 
@@ -31,7 +43,7 @@ class TodosPage extends StatelessWidget {
               if(box.isNotEmpty){
                 return ListView.separated(
                   padding: EdgeInsets.fromLTRB(0, 110, 0, 150),
-                  controller: controller,
+                  controller: widget.controller,
                   itemBuilder: (context, index) => TodoCard(box.getAt(index), index), 
                   separatorBuilder: (context, index) {
                     return Divider(

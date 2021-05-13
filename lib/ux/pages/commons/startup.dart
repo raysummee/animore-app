@@ -20,7 +20,6 @@ class _StartupState extends State<Startup> {
     SchedulerBinding.instance.addPostFrameCallback((_) async{
       await HiveLoader().init();
       VeterinarySocket().onBook();
-      ApiTodos().all();
       switch (Auth().user()!=null) {
         case true:
           Navigator.of(navigatorKey.currentContext).pushReplacement(
