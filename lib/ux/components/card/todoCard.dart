@@ -27,8 +27,10 @@ class _TodoCardState extends State<TodoCard> {
     super.initState();
     selected = widget.modelTodos.done==DateTime.now().day;
   }
+
   @override
   Widget build(BuildContext context) {
+    selected = widget.modelTodos.done==DateTime.now().day;
     return Material(
       color: Colors.transparent,
       child: InkWell(
