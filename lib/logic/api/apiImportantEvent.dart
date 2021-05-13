@@ -10,8 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 
 class ApiImportantEvent {
-  Future<void> all({int id}) async {
-    final petId = id??PetHelper().selectedId(navigatorKey.currentContext);
+  Future<void> all() async {
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);
 
     var url = Uri.parse("$host/important_date/$petId");
 

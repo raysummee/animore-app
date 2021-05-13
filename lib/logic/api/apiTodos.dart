@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 import 'package:animore/main.dart';
 import 'apiConfig.dart';
 class ApiTodos{
-  Future<void> all({int id}) async{
-    final petId = id??PetHelper().selectedId(navigatorKey.currentContext);  
+  Future<void> all() async{
+    final petId = PetHelper().selectedId(navigatorKey.currentContext);  
     var url = Uri.parse("$host/todos/$petId");
     await http.get(
       url,

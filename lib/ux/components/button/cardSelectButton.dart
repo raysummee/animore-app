@@ -64,8 +64,8 @@ class CardSelectButton extends StatelessWidget {
               }
               provider.id = pet.id;
               IndeterminateLoader.show(context);
-              await ApiTodos().all(id: pet.id);
-              await ApiImportantEvent().all(id: pet.id);
+              await ApiTodos().all();
+              await ApiImportantEvent().all();
               IndeterminateLoader.hide();
               Navigator.of(context).pop();
             },
