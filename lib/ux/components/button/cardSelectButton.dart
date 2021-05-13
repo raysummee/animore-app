@@ -30,32 +30,27 @@ class CardSelectButton extends StatelessWidget {
             subtitle: Text("${pet.type}: ${pet.bread}"),
             trailing: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ValueListenableBuilder(
-                  valueListenable: PetHelper().box().listenable(),
-                  builder: (context, Box<ModelPet> box, child) {
-                    return AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle, 
-                        border: Border.all(color: Colors.cyan),
-                        color: provider.id==pet.id? Colors.cyan : Colors.white
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: provider.id==pet.id
-                          ?Icon(
-                            Icons.check,
-                            size: 10.0,
-                            color: Colors.white,
-                          )
-                          :Container(
-                            width: 10,
-                            height: 10,
-                          )
-                        ),
-                      );
-                  }
+                child:  AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle, 
+                  border: Border.all(color: Colors.cyan),
+                  color: provider.id==pet.id? Colors.cyan : Colors.white
                 ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: provider.id==pet.id
+                    ?Icon(
+                      Icons.check,
+                      size: 10.0,
+                      color: Colors.white,
+                    )
+                    :Container(
+                      width: 10,
+                      height: 10,
+                    )
+                  ),
+                )
               )
           ),
         ),
