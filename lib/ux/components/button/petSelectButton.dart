@@ -10,12 +10,12 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class CardSelectButton extends StatelessWidget {
+class PetSelectButton extends StatelessWidget {
   final ModelPet pet;
   final IconData leading;
   final int index;
   final VoidCallback onLongPress;
-  CardSelectButton(this.pet, this.index, this.leading ,this.onLongPress,);
+  PetSelectButton(this.pet, this.index, this.leading ,this.onLongPress,);
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<PetSelectNotify>(context);

@@ -5,7 +5,7 @@ import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
-import 'package:animore/ux/components/button/cardSelectButton.dart';
+import 'package:animore/ux/components/button/petSelectButton.dart';
 import 'package:animore/ux/components/complex/customDropdown/customDropdown.dart';
 import 'package:animore/ux/components/dialog/editTodosDialog.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class SelectPetPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade100)
                     ),
-                    child: CardSelectButton(
+                    child: PetSelectButton(
                       box.getAt(index), 
                       index,
                       FlutterIcons.pets_mdi, 
