@@ -20,7 +20,9 @@ class ImportantEventHelper{
     Box<ModelImportantEvent> box = Hive.box<ModelImportantEvent>("importantEvent");
     if(box.isEmpty) return null;
     DateTime compareTime = DateTime.now().subtract(Duration(days: 1));
-    return box.values.where((element) => element.dateTime.isAfter(compareTime)).first;
+    var recentEvents = box.values.where((element) => element.dateTime.isAfter(compareTime));
+    if(recentEvents.isEmpty) return null;
+    return recentEvents.first;
   }
 
   Future<void> addIntoLocal(ModelImportantEvent event) async{
