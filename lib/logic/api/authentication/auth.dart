@@ -2,7 +2,7 @@ import 'package:animore/logic/api/authentication/apiAuthentication.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:animore/main.dart';
-import 'package:animore/ux/components/dialog/remoteLogoutDialog.dart';
+import 'package:animore/ux/components/dialog/infoDialog.dart';
 import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:animore/ux/pages/main/navPages.dart';
 import 'package:animore/ux/pages/welcome/welcomePage.dart';
@@ -14,22 +14,37 @@ class Auth {
     IndeterminateLoader.show(context);
     if (await ApiAuthentication().loginEmail(email, password, context)) {
       print("succeed");
+      IndeterminateLoader.hide();
       Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
+      IndeterminateLoader.hide();
+      InfoDialog.show(
+        context,
+        title: "Authentication mismatch",
+        content: "You might have entered wrong email/password",
+        buttonLabel: "Try Again"
+      );
+
     }
-    IndeterminateLoader.hide();
   }
 
   Future<void> signup(String name, String email, String password,String passwordConfrim, BuildContext context) async {
     IndeterminateLoader.show(context);
     if (await ApiAuthentication().registerEmail(name, email, password, passwordConfrim, context)) {
       print("succeed");
+      IndeterminateLoader.hide();
       Navigator.of(context).pushAndRemoveUntil(MaterialWithModalsPageRoute(builder: (_) => NavPages()), (route) => false);
     } else {
       print("failed");
+      IndeterminateLoader.hide();
+      InfoDialog.show(
+        context,
+        title: "Duplicate User",
+        content: "A user is already registerd with this email!",
+        buttonLabel: "I Understand"
+      );
     }
-    IndeterminateLoader.hide();
   }
 
   Future<bool> logout(BuildContext context) async {
@@ -46,7 +61,12 @@ class Auth {
     print("remote logout");
     logout(context);
     Future.delayed(Duration(milliseconds: 400), (){
-      RemoteLogoutDialog.show(context);
+      InfoDialog.show(
+        context,
+        title: "You've been logout!",
+        content: "You're logged out! Please login again to continue the app",
+        buttonLabel: "I Understand"
+      );
     });
   }
 

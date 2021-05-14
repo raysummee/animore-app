@@ -4,7 +4,6 @@ import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/ux/components/button/navButton.dart';
-import 'package:animore/ux/components/dialog/remoteLogoutDialog.dart';
 import 'package:animore/ux/pages/main/doctor/doctorPage.dart';
 import 'package:animore/ux/pages/main/shop/merchantPage.dart';
 import 'package:animore/ux/pages/main/shop/shopPage.dart';

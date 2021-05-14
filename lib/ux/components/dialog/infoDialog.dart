@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-class RemoteLogoutDialog extends StatelessWidget {
-  static void show(BuildContext context){
+class InfoDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final String buttonLabel;
+  InfoDialog(this.title, this.content, this.buttonLabel);
+  static void show(BuildContext context,{String title, String content, String buttonLabel}){
     showGeneralDialog(
       context: context, 
       transitionDuration: Duration(milliseconds: 300),
       pageBuilder: (context, animation, secondaryAnimation) {
-        return RemoteLogoutDialog();
+        return InfoDialog(title, content, buttonLabel);
       },
     );
   }
@@ -18,7 +22,7 @@ class RemoteLogoutDialog extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
         ),
-        title: Text("You've been logout!"),
+        title: Text(title),
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(22, 0, 22, 0),
@@ -26,7 +30,7 @@ class RemoteLogoutDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "You're logged out! Please login again to continue the app",
+                  content,
                   style: TextStyle(
                     fontSize: 16
                   ),
@@ -45,7 +49,7 @@ class RemoteLogoutDialog extends StatelessWidget {
                     onPressed: (){
                       Navigator.of(context).pop();
                     }, 
-                    child: Text("I Understand")
+                    child: Text(buttonLabel)
                   )
                 )
               ],
