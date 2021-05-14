@@ -1,3 +1,4 @@
+import 'package:animore/logic/errors/infoError.dart';
 import 'package:flutter/material.dart';
 
 class InfoDialog extends StatelessWidget {
@@ -5,6 +6,7 @@ class InfoDialog extends StatelessWidget {
   final String content;
   final String buttonLabel;
   InfoDialog(this.title, this.content, this.buttonLabel);
+
   static void show(BuildContext context,{String title, String content, String buttonLabel}){
     showGeneralDialog(
       context: context, 
@@ -14,6 +16,23 @@ class InfoDialog extends StatelessWidget {
       },
     );
   }
+
+  static void showError(BuildContext context){
+    if(InfoError.isEmpty()) return;
+    showGeneralDialog(
+      context: context, 
+      transitionDuration: Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return InfoDialog(
+          InfoError.title,
+          InfoError.content,
+          InfoError.responseText
+        );
+      },
+    );
+    InfoError.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
