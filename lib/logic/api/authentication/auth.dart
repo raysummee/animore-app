@@ -1,4 +1,5 @@
 import 'package:animore/logic/api/authentication/apiAuthentication.dart';
+import 'package:animore/logic/errors/infoError.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:animore/main.dart';
@@ -19,12 +20,7 @@ class Auth {
     } else {
       print("failed");
       IndeterminateLoader.hide();
-      InfoDialog.show(
-        context,
-        title: "Authentication mismatch",
-        content: "You might have entered wrong email/password",
-        buttonLabel: "Try Again"
-      );
+      InfoDialog.showError(context);
 
     }
   }
@@ -38,12 +34,7 @@ class Auth {
     } else {
       print("failed");
       IndeterminateLoader.hide();
-      InfoDialog.show(
-        context,
-        title: "Duplicate User",
-        content: "A user is already registerd with this email!",
-        buttonLabel: "I Understand"
-      );
+      InfoDialog.showError(context);
     }
   }
 
