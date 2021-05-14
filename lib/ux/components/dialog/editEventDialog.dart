@@ -34,9 +34,17 @@ class _EditEventDialogState extends State<EditEventDialog> {
   void initState() {
     
     if(widget.event==null){
-      event = ModelImportantEvent(dateTime: null, id: null, name: "");
+      event = ModelImportantEvent(
+        dateTime: null, 
+        id: null, 
+        name: ""
+      );
     }else{
-      event = widget.event;
+      event = ModelImportantEvent(
+        dateTime: widget.event.dateTime, 
+        id: widget.event.id, 
+        name: widget.event.name
+      );
     }
     controller  = TextEditingController(text: event.name);
 

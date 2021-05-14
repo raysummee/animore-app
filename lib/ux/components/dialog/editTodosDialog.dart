@@ -38,9 +38,19 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
   void initState() {
     
     if(widget.todo==null){
-      todo = ModelTodos(id: null, name: "", time: null, done: -1);
+      todo = ModelTodos(
+        id: null, 
+        name: "", 
+        time: null, 
+        done: 0
+      );
     }else{
-      todo = widget.todo;
+      todo = ModelTodos(
+        id: widget.todo.id, 
+        name: widget.todo.name, 
+        time: widget.todo.time, 
+        done: widget.todo.done
+      );
     }
     controller  = TextEditingController(text: todo.name);
 
@@ -163,8 +173,9 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
                           child: ElevatedButton(
                             onPressed: widget.todo==null?null:() async{
                               IndeterminateLoader.show(context);
-                              await ApiTodos().delete(todo, widget.weekName);
+                              bool status = await ApiTodos().delete(todo, widget.weekName);
                               IndeterminateLoader.hide();
+                              if(status)
                               Navigator.of(context).pop();
                             },
                             child: Icon(FlutterIcons.trash_fea),
