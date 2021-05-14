@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Validator{
+
+  // BACKS //
+
   static FormFieldValidator<String> _validateRegex(String regex, String errorMsg, bool not) {
     return (value) {
       if (RegExp(regex).hasMatch(value))
@@ -17,15 +20,6 @@ class Validator{
     return _validateRegex(regex, errorMsg, true);
   }
 
-  static FormFieldValidator<String> validateEquality(String string, String errorMsg) {
-    return (value){
-      if(value==string){
-        return null;
-      }else{
-        return errorMsg;
-      }
-    };
-  }
 
   static FormFieldValidator<String> validate(List<FormFieldValidator<String>> validators) {
     return (value) {
@@ -39,7 +33,19 @@ class Validator{
     };
   }
 
+  //BACKS ENDS//
 
+  // VALIDATORS //
+
+  static FormFieldValidator<String> validateEquality(String string, String errorMsg) {
+    return (value){
+      if(value==string){
+        return null;
+      }else{
+        return errorMsg;
+      }
+    };
+  }
   
   static FormFieldValidator<String> validateEmail() {
     return validate([
@@ -55,7 +61,11 @@ class Validator{
     ]);
   }
 
-  static FormFieldValidator<String> validatePassword() {
+  static FormFieldValidator<String> validatePassword(bool isLogin) {
+    if(isLogin){
+      return validateRegex(r".+", "Password should not be empty");
+    }
+
     return validate([
       validateRegex(r".+", "Password should not be empty"),
       validateRegex(r".{6}", "Password should be minimum 6 characters"),
@@ -81,4 +91,6 @@ class Validator{
       validateRegex(r"^username$", "Username should be a username")
     ]);
   }
+
+  // VALIDATOR ENDS //
 }

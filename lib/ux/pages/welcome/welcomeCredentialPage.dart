@@ -133,7 +133,7 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               onChanged: (val){
                               },
-                              validator: isLogin? null:Validator.validatePassword(),
+                              validator: Validator.validatePassword(isLogin),
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 contentPadding: EdgeInsets.fromLTRB(22, 22, 22, 22),
