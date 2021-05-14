@@ -62,9 +62,14 @@ class PetSelectButton extends StatelessWidget {
                 Navigator.of(context).pop();
                 return;
               }
+              int tempId = provider.id;
               provider.id = pet.id;
               IndeterminateLoader.show(context);
-              await ApiTodos().all();
+              if(!await ApiTodos().all()){
+                provider.id = tempId;
+                IndeterminateLoader.hide();
+                return;
+              }
               await ApiImportantEvent().all();
               IndeterminateLoader.hide();
               Navigator.of(context).pop();
