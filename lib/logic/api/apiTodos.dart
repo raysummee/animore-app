@@ -11,10 +11,10 @@ import 'package:intl/intl.dart';
 import 'package:animore/main.dart';
 import 'apiConfig.dart';
 class ApiTodos{
-  Future<void> all() async{
+  Future<bool> all() async{
     final petId = PetHelper().selectedId(navigatorKey.currentContext);  
     var url = Uri.parse("$host/todos/$petId");
-    await http.get(
+    return await http.get(
       url,
       onSuccess: (map) async{
         print("api todos");
@@ -64,9 +64,9 @@ class ApiTodos{
     );
   } 
 
-  Future<void> delete(ModelTodos todo, String weekName) async{
+  Future<bool> delete(ModelTodos todo, String weekName) async{
     var url = Uri.parse("$host/todos/${todo.id}");
-    await http.delete(
+    return await http.delete(
       url,
       onSuccess: (map) async{
         print("added todos");
