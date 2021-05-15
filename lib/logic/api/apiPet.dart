@@ -7,6 +7,7 @@ import 'package:animore/logic/helper/authenticationHelper.dart';
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 class ApiPet{
 
@@ -20,13 +21,34 @@ class ApiPet{
     );
   } 
 
+  Future<bool> add({String name, String bread, String type, DateTime dob}) async{
+
+    var url = Uri.parse("$host/pet");
+    var inputBody = json.encode({
+      "name": name,
+      "bread": bread,
+      "type": type,
+      "dob": DateFormat("mm/dd/yy").format(dob)
+    });
+    
+    return await http.post(
+      url,
+      body: inputBody,
+      onSuccess: (map) async{
+        ModelPet pet = ModelPet.fromJson(map["pet"]);
+        return await PetHelper().add(pet);
+      }
+    );
+  }
+
   Future<bool> edit(int petId, {String name, String bread, String type, DateTime dob}) async{
 
     var url = Uri.parse("$host/pet/$petId");
     var inputBody = json.encode({
       "name": name,
       "bread": bread,
-      "type": type
+      "type": type,
+      "dob": DateFormat("mm/dd/yy").format(dob)
     });
     
     return await http.post(

@@ -13,14 +13,23 @@ class PetHelper {
   Future<bool> fetch(Map<String, dynamic> map) async{
     print("api pet");
     List<ModelPet> pets = (map['pet'] as List).map((e) => ModelPet.fromJson(e)).toList();
-    if(pets.isEmpty) return false;
-    await saveDefaultId(pets[0].id);
     Box<ModelPet> box = await Hive.openBox<ModelPet>("pet");
+    if(pets.isEmpty){ 
+      await box.clear();
+      return false;
+    }
+    await saveDefaultId(pets[0].id);
     await box.clear();
 
     Map<dynamic, ModelPet> petsK = Map.fromIterable(pets, key: (pet)=> pet.id);
     print(petsK.keys);
     await box.putAll(petsK);
+    return true;
+  }
+
+  Future<bool> add(ModelPet modelPet) async{
+    Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false).id = modelPet.id;
+    (await Hive.openBox<ModelPet>("pet")).put(modelPet.id, modelPet);
     return true;
   }
 
