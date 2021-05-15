@@ -55,6 +55,10 @@ class Validator{
     ]);
   }
 
+  static FormFieldValidator<String> validateNonull(String inputName) {
+    return validateRegex(r".+", "$inputName should not be empty");
+  }
+
   static FormFieldValidator<String> validateFullname() {
     return validate([
       validateRegex(r".+", "Name should not be empty"),
@@ -89,6 +93,13 @@ class Validator{
     return validate([
       validateRegex(r".+", "Username should not be empty"),
       validateRegex(r"^username$", "Username should be a username")
+    ]);
+  }
+
+  static FormFieldValidator<String> validateDate() {
+    return validate([
+      validateRegex(r".+", "Date should not be empty"),
+      validateRegex(r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", "Date should be a date")
     ]);
   }
 
