@@ -32,25 +32,22 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
           return ValueListenableBuilder(
             valueListenable: PetHelper().box().listenable(),
             builder: (context, Box<ModelPet> box, child) {
-              if (box.isNotEmpty) {
-                print(PetHelper().selectedId(navigatorKey.currentContext));
-                return AnimatedSizeAndFade(
-                  vsync: this,
-                  child: provider.isEditing?
-                    PetEditCard(
-                      box.get(PetHelper().selectedId(navigatorKey.currentContext)),
-                      ImportantEventHelper().all(), 
-                    ):
-                    PetCard(
-                      box.get(PetHelper().selectedId(navigatorKey.currentContext)).name,
-                      ImportantEventHelper().recent()
-                    ),
-                  fadeDuration: Duration(milliseconds: 300),
-                  sizeDuration: Duration(milliseconds: 300),
-                );
-              } else {
-                return PetAddCard();
-              }
+              print(PetHelper().selectedId(navigatorKey.currentContext));
+              return AnimatedSizeAndFade(
+                vsync: this,
+                child: box.isNotEmpty?provider.isEditing?
+                  PetEditCard(
+                    box.get(PetHelper().selectedId(navigatorKey.currentContext)),
+                    ImportantEventHelper().all(), 
+                  ):
+                  PetCard(
+                    box.get(PetHelper().selectedId(navigatorKey.currentContext)).name,
+                    ImportantEventHelper().recent()
+                  ):
+                  PetAddCard(),
+                fadeDuration: Duration(milliseconds: 300),
+                sizeDuration: Duration(milliseconds: 300),
+              );
             }
           );
         }
