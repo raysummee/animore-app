@@ -4,6 +4,7 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
+import 'package:animore/logic/util/dateUtil.dart';
 import 'package:animore/logic/util/validator.dart';
 import 'package:animore/ux/components/complex/avatar/avatarEditBig.dart';
 import 'package:animore/ux/components/dialog/editEventDialog.dart';
@@ -29,6 +30,7 @@ class _PetAddCardState extends State<PetAddCard> {
   TextEditingController typeController;
   TextEditingController dobController;
   DateTime dob;
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -67,6 +69,7 @@ class _PetAddCardState extends State<PetAddCard> {
           child: Container(
             padding: EdgeInsets.fromLTRB(26, 30, 26, 30),
             child: Form(
+              key: _formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -158,6 +161,16 @@ class _PetAddCardState extends State<PetAddCard> {
                         "Create"
                       ),
                       onPressed: () async{
+                        if(!_formKey.currentState.validate()) return;
+                        IndeterminateLoader.show(context);
+                        DateTime dob = DateUtil().toDateTimeString(dobController.text);
+                        await ApiPet().add(
+                          bread: breadController.text,
+                          dob: dob,
+                          name: nameController.text,
+                          type: typeController.text
+                        );
+                        IndeterminateLoader.hide();
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(100, 48),
