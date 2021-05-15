@@ -77,17 +77,7 @@ class _TodosPageState extends State<TodosPage> {
                           minimumSize: Size(50, 50),
                         ),
                         onPressed: (){
-                          if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
-                            showCupertinoModalBottomSheet(
-                              context: context, 
-                              builder: (context) => EditPetTodosPage(),
-                            );
-                          }else{
-                            showMaterialModalBottomSheet(
-                              context: context, 
-                              builder: (context) => EditPetTodosPage(),
-                            );
-                          }
+                          EditPetTodosPage.showBottomSheet(context);
                         }, 
                         child: Row(
                           mainAxisSize: MainAxisSize.min,

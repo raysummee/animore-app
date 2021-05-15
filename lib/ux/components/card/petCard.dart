@@ -108,17 +108,7 @@ class PetCard extends StatelessWidget {
                               color: Colors.cyan,
                               child: InkWell(
                                 onTap: (){
-                                  if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
-                                    showCupertinoModalBottomSheet(
-                                      context: context, 
-                                      builder: (context) => SelectPetPage(),
-                                    );
-                                  }else{
-                                    showMaterialModalBottomSheet(
-                                      context: context, 
-                                      builder: (context) => SelectPetPage(),
-                                    );
-                                  }
+                                  SelectPetPage.showBottomSheet(context);
                                 },
                                 splashColor: Colors.deepOrange,
                                 child: Container(

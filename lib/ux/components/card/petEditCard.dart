@@ -147,17 +147,7 @@ class _PetEditCardState extends State<PetEditCard> {
                                   splashColor: Colors.deepOrange,
                                   icon: Icon(FlutterIcons.event_available_mdi, color: Colors.white), 
                                   onPressed: (){
-                                    if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
-                                      showCupertinoModalBottomSheet(
-                                        context: context, 
-                                        builder: (context) => EditPetEventPage(),
-                                      );
-                                    }else{
-                                      showMaterialModalBottomSheet(
-                                        context: context, 
-                                        builder: (context) => EditPetEventPage(),
-                                      );
-                                    }
+                                    EditPetEventPage.showBottomSheet(context);
                                   }
                                 )
                               ),

@@ -1,13 +1,30 @@
+import 'dart:io';
+
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/dialog/editEventDialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class EditPetEventPage extends StatelessWidget {
+  static showBottomSheet(BuildContext context){
+    if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
+      showCupertinoModalBottomSheet(
+        context: context, 
+        builder: (context) => EditPetEventPage(),
+      );
+    }else{
+      showMaterialModalBottomSheet(
+        context: context, 
+        builder: (context) => EditPetEventPage(),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

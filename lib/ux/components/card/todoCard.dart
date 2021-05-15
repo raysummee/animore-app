@@ -36,17 +36,7 @@ class _TodoCardState extends State<TodoCard> {
       child: InkWell(
         onLongPress: (){
           HapticFeedback.heavyImpact();
-          if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
-            showCupertinoModalBottomSheet(
-              context: context, 
-              builder: (context) => EditPetTodosPage(),
-            );
-          }else{
-            showMaterialModalBottomSheet(
-              context: context, 
-              builder: (context) => EditPetTodosPage(),
-            );
-          }
+          EditPetTodosPage.showBottomSheet(context);
         },
         onTap: (){
           setState(() {

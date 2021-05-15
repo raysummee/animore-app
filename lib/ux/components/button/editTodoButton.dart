@@ -14,17 +14,7 @@ class EditTodoButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: (){
-            if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
-              showCupertinoModalBottomSheet(
-                context: context, 
-                builder: (context) => EditPetTodosPage(),
-              );
-            }else{
-              showMaterialModalBottomSheet(
-                context: context, 
-                builder: (context) => EditPetTodosPage(),
-              );
-            }
+            EditPetTodosPage.showBottomSheet(context);
           },
           splashColor: Colors.deepOrange,
           borderRadius: BorderRadius.circular(15),

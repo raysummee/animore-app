@@ -8,6 +8,7 @@ import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/ux/components/card/petCard.dart';
 import 'package:animore/ux/components/card/petEditCard.dart';
+import 'package:animore/ux/pages/main/pets/selectPetPage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -48,6 +49,7 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
                   sizeDuration: Duration(milliseconds: 300),
                 );
               } else {
+                
                 return PetCard("...", null);
               }
             }
