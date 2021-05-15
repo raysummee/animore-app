@@ -73,7 +73,7 @@ class TodosHelper{
   }
 
   Future<void> delete(ModelTodos todos, String weekName) async{
-    Box<ModelTodos> box = await openBox(weekName);
+    Box<ModelTodos> box = await openBoxFuture(weekName);
     await box.delete(todos.id);
   }
 
