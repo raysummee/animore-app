@@ -1,5 +1,6 @@
 import 'package:animore/logic/api/authentication/apiAuthentication.dart';
 import 'package:animore/logic/errors/infoError.dart';
+import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:animore/main.dart';
@@ -8,6 +9,7 @@ import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:animore/ux/pages/main/navPages.dart';
 import 'package:animore/ux/pages/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class Auth {
@@ -42,6 +44,7 @@ class Auth {
     print("logging out");
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     AuthenticationHelper().deleteUser();
+    Hive.deleteFromDisk();
     bool result = await ApiAuthentication().logout();
     print("result: $result");
     return result;

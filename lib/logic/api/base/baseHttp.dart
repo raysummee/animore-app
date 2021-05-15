@@ -34,6 +34,8 @@ Future get(
     "Accept": "application/json" 
   });
 
+  print(uri);
+
   var result = await _util(
     response: response, 
     onSuccess: onSuccess, 
