@@ -92,7 +92,7 @@ class _HomeWelcomePageState extends State<HomeWelcomePage> {
               ),
             )
           ),
-          AppearingFromBottomWidget(showOverViewButton, EditTodoButton())
+          // AppearingFromBottomWidget(showOverViewButton, EditTodoButton())
         ],
       ),
     );
