@@ -44,7 +44,7 @@ class Auth {
     print("logging out");
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => WelcomePage()), (route) => false);
     AuthenticationHelper().deleteUser();
-    Hive.deleteFromDisk();
+    await Hive.deleteFromDisk();
     bool result = await ApiAuthentication().logout();
     print("result: $result");
     return result;
