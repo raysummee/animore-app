@@ -63,7 +63,11 @@ class ProfileStatusQuick extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
                       color: Colors.white,
-                      child: Image(image: NetworkImage(Auth().user().image), fit: BoxFit.cover,)
+                      child: Image(
+                        image: NetworkImage(Auth().user().image),
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Image.asset("lib/assets/images/profile.png", fit: BoxFit.cover,),
+                      )
                     )
                   );
                 }else{

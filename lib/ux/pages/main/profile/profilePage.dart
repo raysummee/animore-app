@@ -47,7 +47,11 @@ class ProfilePage extends StatelessWidget {
                                 child: Builder(
                                   builder: (context) {
                                     if(Auth().user()!=null&&Auth().user().image!=null&&Auth().user().image!=""){
-                                      return Image(image: NetworkImage(Auth().user().image), fit: BoxFit.cover,);
+                                      return Image(
+                                        image: NetworkImage(Auth().user().image), 
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) => Image.asset("lib/assets/images/profile.png", fit: BoxFit.cover,),
+                                      );
                                     }else{
                                       return Image.asset("lib/assets/images/profile.png", fit: BoxFit.cover,);
                                     }
