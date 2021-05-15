@@ -8,6 +8,7 @@ import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/button/petSelectButton.dart';
+import 'package:animore/ux/components/card/petAddCard.dart';
 import 'package:animore/ux/components/complex/customDropdown/customDropdown.dart';
 import 'package:animore/ux/components/dialog/editTodosDialog.dart';
 import 'package:flutter/foundation.dart';
@@ -90,7 +91,23 @@ class SelectPetPage extends StatelessWidget {
         ),
         TextButton(
           onPressed: (){
-            // EditTodosDialog.show(context, weekName: provider.weekName);
+            if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
+              showBarModalBottomSheet(
+                context: context,
+                builder: (context) => ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15)
+                  ),
+                  child: Material(child: PetAddCard(bottom: true,))
+                ),
+              );
+            }else{
+              showMaterialModalBottomSheet(
+                context: context, 
+                builder: (context) => Material(child: PetAddCard(bottom: true,)),
+              );
+            }
           }, 
           child: Text("Add New Pet")
         ),
