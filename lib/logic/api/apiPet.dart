@@ -28,7 +28,7 @@ class ApiPet{
       "name": name,
       "bread": bread,
       "type": type,
-      "dob": DateFormat("mm/dd/yy").format(dob)
+      "dob": DateFormat("MM/dd/yy").format(dob)
     });
     
     return await http.post(
@@ -44,11 +44,12 @@ class ApiPet{
   Future<bool> edit(int petId, {String name, String bread, String type, DateTime dob}) async{
 
     var url = Uri.parse("$host/pet/$petId");
+    print(DateFormat("MM/dd/yy").format(dob));
     var inputBody = json.encode({
       "name": name,
       "bread": bread,
       "type": type,
-      "dob": DateFormat("mm/dd/yy").format(dob)
+      "dob": DateFormat("MM/dd/yy").format(dob)
     });
     
     return await http.post(

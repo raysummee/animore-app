@@ -27,13 +27,13 @@ class DateUtil{
 
   DateTime toDateTimeString(String dateTime){
     List<String> dateFormat = [
-      "dd/mm/yyyy", "dd/mm/yy", "dd/m/yyyy", "dd/m/yy", "d/mm/yyyy", "d/mm/yy", "d/m/yyyy", "d/m/yy",
-      "dd-mm-yyyy", "dd-mm-yy", "dd-m-yyyy", "dd-m-yy", "d-mm-yyyy", "d-mm-yy", "d-m-yyyy", "d-m-yy"
+      "dd/MM/yyyy", "dd/MM/yy", "dd/M/yyyy", "dd/M/yy", "d/MM/yyyy", "d/MM/yy", "d/M/yyyy", "d/M/yy",
+      "dd-MM-yyyy", "dd-MM-yy", "dd-M-yyyy", "dd-M-yy", "d-MM-yyyy", "d-MM-yy", "d-M-yyyy", "d-M-yy"
     ];
     DateTime date;
     dateFormat.forEach((element) { 
       if(date==null){
-        date = DateFormat("dd/mm/yyyy").parseLoose(dateTime);
+        date = DateFormat("dd/MM/yyyy").parseLoose(dateTime);
         if(date!=null){
           return date;
         }
