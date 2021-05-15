@@ -35,7 +35,7 @@ class _TodoCardState extends State<TodoCard> {
       color: Colors.transparent,
       child: InkWell(
         onLongPress: (){
-          HapticFeedback.selectionClick();
+          HapticFeedback.heavyImpact();
           if(!kIsWeb&&(Platform.isIOS||Platform.isMacOS)){
             showCupertinoModalBottomSheet(
               context: context, 

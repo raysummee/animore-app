@@ -21,17 +21,17 @@ class PetCard extends StatelessWidget {
     return Container( 
       width: double.infinity,
       height: 160,
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 16),
       padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow:[
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.08),
             spreadRadius: 1,
             blurRadius: 10,
-            offset: Offset(0, 3)
+            offset: Offset(0, 2)
           )
         ] 
       ),
