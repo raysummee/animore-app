@@ -26,19 +26,11 @@ class DateUtil{
   }
 
   DateTime toDateTimeString(String dateTime){
-    List<String> dateFormat = [
-      "dd/MM/yyyy", "dd/MM/yy", "dd/M/yyyy", "dd/M/yy", "d/MM/yyyy", "d/MM/yy", "d/M/yyyy", "d/M/yy",
-      "dd-MM-yyyy", "dd-MM-yy", "dd-M-yyyy", "dd-M-yy", "d-MM-yyyy", "d-MM-yy", "d-M-yyyy", "d-M-yy"
-    ];
     DateTime date;
-    dateFormat.forEach((element) { 
-      if(date==null){
-        date = DateFormat("dd/MM/yyyy").parseLoose(dateTime);
-        if(date!=null){
-          return date;
-        }
-      }
-    });
+    if(dateTime.contains("-")){
+      dateTime = dateTime.replaceAll("-", "/");
+    }
+    date = DateFormat("dd/MM/yyyy").parseLoose(dateTime);
     return date;
   }
 }
