@@ -19,6 +19,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class PetAddCard extends StatefulWidget {
+  final bool bottom;
+  PetAddCard({this.bottom:false});
 
   @override
   _PetAddCardState createState() => _PetAddCardState();
@@ -38,17 +40,16 @@ class _PetAddCardState extends State<PetAddCard> {
     breadController = TextEditingController();
     typeController = TextEditingController();
     dobController = TextEditingController();
-    dobController.addListener(() {
-      
-    });
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-
     return Container( 
+      height: widget.bottom?
+        MediaQuery.of(context).viewInsets.bottom + MediaQuery.of(context).padding.bottom + 425:
+        null,
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 16),
+      margin: widget.bottom? null :EdgeInsets.fromLTRB(10, 10, 10, 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -67,12 +68,12 @@ class _PetAddCardState extends State<PetAddCard> {
         ),
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.fromLTRB(26, 30, 26, 30),
+            padding: EdgeInsets.fromLTRB(26, 30, 26, widget.bottom?16:30),
             child: Form(
               key: _formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -158,7 +159,7 @@ class _PetAddCardState extends State<PetAddCard> {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       child: Text(
-                        "Create"
+                        "ADD"
                       ),
                       onPressed: () async{
                         if(!_formKey.currentState.validate()) return;
@@ -171,6 +172,9 @@ class _PetAddCardState extends State<PetAddCard> {
                           type: typeController.text
                         );
                         IndeterminateLoader.hide();
+                        if(widget.bottom){
+                          Navigator.of(context).pop();
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(100, 48),
