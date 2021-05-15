@@ -1,3 +1,4 @@
+import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
@@ -29,7 +30,10 @@ class PetHelper {
 
   Future<bool> add(ModelPet modelPet) async{
     Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false).id = modelPet.id;
+    await PetHelper().saveDefaultId(modelPet.id);
     (await Hive.openBox<ModelPet>("pet")).put(modelPet.id, modelPet);
+    await TodosHelper().todayFuture();
+    await TodosHelper().tomorrowFuture();
     return true;
   }
 
