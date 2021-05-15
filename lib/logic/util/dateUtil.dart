@@ -24,4 +24,21 @@ class DateUtil{
     DateTime now = DateTime.now();
     return DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
   }
+
+  DateTime toDateTimeString(String dateTime){
+    List<String> dateFormat = [
+      "dd/mm/yyyy", "dd/mm/yy", "dd/m/yyyy", "dd/m/yy", "d/mm/yyyy", "d/mm/yy", "d/m/yyyy", "d/m/yy",
+      "dd-mm-yyyy", "dd-mm-yy", "dd-m-yyyy", "dd-m-yy", "d-mm-yyyy", "d-mm-yy", "d-m-yyyy", "d-m-yy"
+    ];
+    DateTime date;
+    dateFormat.forEach((element) { 
+      if(date==null){
+        date = DateFormat("dd/mm/yyyy").parseLoose(dateTime);
+        if(date!=null){
+          return date;
+        }
+      }
+    });
+    return date;
+  }
 }
