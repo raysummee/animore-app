@@ -26,6 +26,7 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container(
+      alignment: Alignment.topCenter,
       child: ValueListenableBuilder(
         valueListenable: Hive.box<ModelImportantEvent>("importantEvent").listenable(),
         builder: (context, Box<ModelImportantEvent> box, child) {

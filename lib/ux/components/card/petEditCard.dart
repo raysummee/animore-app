@@ -44,7 +44,7 @@ class _PetEditCardState extends State<PetEditCard> {
 
     return Container( 
       height: 335,
-      width: double.infinity,
+      width: 800,
       margin: EdgeInsets.fromLTRB(10, 10, 10, 16),
       padding: EdgeInsets.fromLTRB(26, 20, 0, 20),
       decoration: BoxDecoration(
@@ -166,8 +166,8 @@ class _PetEditCardState extends State<PetEditCard> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 140,
+                  Expanded(
+                    // height: 140,
                     child: Image(image: AssetImage("lib/assets/images/dog_person.png")),
                   ),
                 ],

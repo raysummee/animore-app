@@ -10,6 +10,10 @@ class AvatarEditBig extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
+            constraints: BoxConstraints(
+              maxHeight: 200,
+              maxWidth: 200
+            ),
             width: MediaQuery.of(context).size.width-280,
             height: MediaQuery.of(context).size.width-280,
             child: Image.asset(
@@ -18,6 +22,10 @@ class AvatarEditBig extends StatelessWidget {
             ),
           ),
           Container(
+            constraints: BoxConstraints(
+              maxHeight: 200,
+              maxWidth: 200
+            ),
             width: MediaQuery.of(context).size.width-280,
             height: MediaQuery.of(context).size.width-280,
             decoration: BoxDecoration(
@@ -34,6 +42,10 @@ class AvatarEditBig extends StatelessWidget {
               splashColor: Colors.cyan.withOpacity(0.5),
               onTap: (){},
               child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: 200,
+                  maxWidth: 200
+                ),
                 width: MediaQuery.of(context).size.width-280,
                 height: MediaQuery.of(context).size.width-280,
               ),

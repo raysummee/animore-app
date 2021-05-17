@@ -19,7 +19,7 @@ class PetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<PetCardEditNotify>(context);
     return Container( 
-      width: double.infinity,
+      width: 800,
       height: 160,
       margin: EdgeInsets.fromLTRB(10, 10, 10, 16),
       padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
@@ -126,12 +126,14 @@ class PetCard extends StatelessWidget {
                             child: Material(
                               color: Colors.cyan,
                               child: InkWell(
-                                onTap: (){},
+                                onTap: (){
+                                  //TODO delete pet
+                                },
                                 splashColor: Colors.deepOrange,
                                 child: Container(
                                   height: 40,
                                   width: 40,
-                                  child: Icon(Icons.add_circle, color: Colors.white,),
+                                  child: Icon(Icons.remove_circle, color: Colors.white,),
                                 ),
                               ),
                             ),

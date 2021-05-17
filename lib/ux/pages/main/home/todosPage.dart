@@ -36,65 +36,75 @@ class _TodosPageState extends State<TodosPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       color: Colors.cyan.withOpacity(0.03),
       child: FutureBuilder<void>(
         future: fetchFromApi,
         builder: (context, snapshot) {
-          return ValueListenableBuilder(
-            valueListenable: TodosHelper().today().listenable(), 
-            builder: (context, Box<ModelTodos> box, child) {
-              if(box.isNotEmpty){
-                return ListView.separated(
-                  padding: EdgeInsets.fromLTRB(0, 110, 0, 150),
-                  controller: widget.controller,
-                  itemBuilder: (context, index) => TodoCard(box.getAt(index), index), 
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      indent: 30,
-                      height: 1,
-                      color: Colors.cyan,
-                      endIndent: 30,
+          return UnconstrainedBox(
+            constrainedAxis: Axis.vertical,
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 800,
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: ValueListenableBuilder(
+                valueListenable: TodosHelper().today().listenable(), 
+                builder: (context, Box<ModelTodos> box, child) {
+                  if(box.isNotEmpty){
+                    return ListView.separated(
+                      padding: EdgeInsets.fromLTRB(0, 110, 0, 150),
+                      controller: widget.controller,
+                      itemBuilder: (context, index) => TodoCard(box.getAt(index), index), 
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          indent: 30,
+                          height: 1,
+                          color: Colors.cyan,
+                          endIndent: 30,
+                        );
+                      }, 
+                      itemCount: box.length
                     );
-                  }, 
-                  itemCount: box.length
-                );
-              }else if(snapshot.connectionState!=ConnectionState.done){
-                return Center(
-                  child: CircularProgressIndicator()
-                );
-              }else{
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          "No Todos Added! Add some by clicking on it"
-                      ),
-                      SizedBox(height: 10,),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.cyan,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                  }else if(snapshot.connectionState!=ConnectionState.done){
+                    return Center(
+                      child: CircularProgressIndicator()
+                    );
+                  }else{
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                              "No Todos Added! Add some by clicking on it"
                           ),
-                          minimumSize: Size(50, 50),
-                        ),
-                        onPressed: (){
-                            EditPetTodosPage.showBottomSheet(context);
-                        }, 
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.today_outlined),
-                            Icon(Icons.add),
-                          ],
-                        )
-                      )
-                    ],
-                  ),
-                );
-              }
-            }
+                          SizedBox(height: 10,),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.cyan,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              minimumSize: Size(50, 50),
+                            ),
+                            onPressed: (){
+                                EditPetTodosPage.showBottomSheet(context);
+                            }, 
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.today_outlined),
+                                Icon(Icons.add),
+                              ],
+                            )
+                          )
+                        ],
+                      ),
+                    );
+                  }
+                }
+              ),
+            ),
           );
         }
       ),

@@ -46,9 +46,9 @@ class _PetAddCardState extends State<PetAddCard> {
   Widget build(BuildContext context) {
     return Container( 
       height: widget.bottom?
-        MediaQuery.of(context).viewInsets.bottom + MediaQuery.of(context).padding.bottom + 425:
+        MediaQuery.of(context).viewInsets.bottom + MediaQuery.of(context).padding.bottom + MediaQuery.of(context).size.height/2.5:
         null,
-      width: double.infinity,
+      width: 800,
       margin: widget.bottom? null :EdgeInsets.fromLTRB(10, 10, 10, 16),
       decoration: BoxDecoration(
         color: Colors.white,

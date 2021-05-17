@@ -59,6 +59,7 @@ class _EditTodosDialogState extends State<EditTodosDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 400,
       padding: const EdgeInsets.fromLTRB(16, 22, 16, 16),
       child: Container(
         child: Column(

@@ -54,6 +54,7 @@ class _EditEventDialogState extends State<EditEventDialog> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 22, 16, 16),
+      width: 400,
       child: Container(
         child: Column(
           mainAxisSize: MainAxisSize.min,
