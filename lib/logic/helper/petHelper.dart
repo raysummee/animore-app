@@ -50,6 +50,11 @@ class PetHelper {
     return true;
   }
 
+  Future<bool> delete(int petId) async{
+    (await Hive.openBox<ModelPet>("pet")).delete(petId);
+    return true;
+  }
+
   Future<List<ModelPet>> all() async{
     return (await Hive.openBox<ModelPet>("pet")).values.toList();
   }

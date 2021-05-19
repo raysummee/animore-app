@@ -60,4 +60,15 @@ class ApiPet{
       }
     );
   }
+
+   Future<bool> delete(int petId) async{
+    var url = Uri.parse("$host/pet/$petId");
+    
+    return await http.delete(
+      url,
+      onSuccess: (map) async{
+        return await PetHelper().delete(petId);
+      }
+    );
+  }
 }
