@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
+import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/ux/pages/main/pets/selectPetPage.dart';
 import 'package:flutter/foundation.dart';
@@ -11,9 +13,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class PetCard extends StatelessWidget {
-  final String petName;
+  final ModelPet pet;
   final ModelImportantEvent importantEvent;
-  PetCard(this.petName, this.importantEvent);
+  PetCard(this.pet, this.importantEvent);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class PetCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        petName.replaceRange(0, 1, petName[0].toUpperCase()),
+                        pet.name.replaceRange(0, 1, pet.name[0].toUpperCase()),
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold
@@ -127,7 +129,7 @@ class PetCard extends StatelessWidget {
                               color: Colors.cyan,
                               child: InkWell(
                                 onTap: (){
-                                  //TODO delete pet
+                                  ApiPet().delete(pet.id, pet.name);
                                 },
                                 splashColor: Colors.deepOrange,
                                 child: Container(

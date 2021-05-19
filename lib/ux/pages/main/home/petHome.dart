@@ -42,7 +42,7 @@ class _PetHomeState extends State<PetHome> with TickerProviderStateMixin {
                     ImportantEventHelper().all(), 
                   ):
                   PetCard(
-                    box.get(PetHelper().selectedId(navigatorKey.currentContext)).name,
+                    box.get(PetHelper().selectedId(navigatorKey.currentContext)),
                     ImportantEventHelper().recent()
                   ):
                   PetAddCard(),
