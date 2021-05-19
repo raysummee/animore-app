@@ -222,15 +222,13 @@ class _PetEditCardState extends State<PetEditCard> {
                       "Save"
                     ),
                     onPressed: () async{
-                      IndeterminateLoader.show(context);
-                      await ApiPet().edit(
+                      ApiPet().edit(
                         widget.pet.id,
                         bread: breadController.text,
                         dob: dob,
                         name: nameController.text,
                         type: typeController.text
                       );
-                      IndeterminateLoader.hide();
                       provider.isEditing = false;
                     },
                     style: ElevatedButton.styleFrom(
