@@ -2,6 +2,7 @@ import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
+import 'package:animore/logic/helper/importantEventHelper.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petSelectNotify.dart';
@@ -32,6 +33,7 @@ class PetHelper {
     Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false).id = modelPet.id;
     await PetHelper().saveDefaultId(modelPet.id);
     (await Hive.openBox<ModelPet>("pet")).put(modelPet.id, modelPet);
+    await ImportantEventHelper().deleteAll();
     await TodosHelper().todayFuture();
     await TodosHelper().tomorrowFuture();
     return true;
@@ -61,6 +63,8 @@ class PetHelper {
       await saveDefaultId(newId);
     }
     (await Hive.openBox<ModelPet>("pet")).delete(petId);
+    await ApiImportantEvent().all();
+    await ApiTodos().all();
     return true;
   }
 
