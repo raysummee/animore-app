@@ -32,7 +32,7 @@ dependencies:
   intl: ^0.17.0
   lottie: ^1.0.1
   flutter_pusher_client: ^0.3.1
-  flutter_spinkit: "^4.1.2"
+  flutter_spinkit: "^5.0.0"
 
 
 
