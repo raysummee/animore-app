@@ -29,6 +29,8 @@ class DateUtil{
     DateTime date;
     if(dateTime.contains("-")){
       dateTime = dateTime.replaceAll("-", "/");
+    }else if(dateTime.contains(".")){
+      dateTime = dateTime.replaceAll(".", "/");
     }
     date = DateFormat("dd/MM/yyyy").parseLoose(dateTime);
     return date;
