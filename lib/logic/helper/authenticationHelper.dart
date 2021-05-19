@@ -19,7 +19,11 @@ class AuthenticationHelper {
   }
 
   ModelUser getUser() {
-    return Hive.box<ModelUser>("user").get("user");
+    Box<ModelUser> box = Hive.box<ModelUser>("user");
+    if(box.isNotEmpty&&box.containsKey("user"))
+    return box.get("user");
+    else
+    return null;
   }
 
   Future<void> deleteUser() async {
