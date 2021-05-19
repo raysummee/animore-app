@@ -8,6 +8,7 @@ import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/main.dart';
 import 'package:animore/ux/components/dialog/confirmDialog.dart';
+import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
@@ -75,13 +76,19 @@ class ApiPet{
 
     if(!confirm)return false;
 
+    IndeterminateLoader.show(navigatorKey.currentContext);
+
     var url = Uri.parse("$host/pet/$petId");
     
-    return await http.delete(
+    bool status =  await http.delete(
       url,
       onSuccess: (map) async{
         return await PetHelper().delete(petId);
       }
     );
+
+    IndeterminateLoader.hide();
+
+    return status;
   }
 }
