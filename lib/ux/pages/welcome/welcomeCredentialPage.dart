@@ -53,7 +53,7 @@ class _WelcomeCredentialPageState extends State<WelcomeCredentialPage> {
                 child: SingleChildScrollView(
                   child: Container(
                     constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.height-49
+                      minHeight: MediaQuery.of(context).size.height-kToolbarHeight-kBottomNavigationBarHeight
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
