@@ -13,9 +13,7 @@ class ConfirmDialog extends StatelessWidget {
     @required String title, 
     @required String content, 
     @required String positiveButtonLabel, 
-    @required String negativeButtonLabel,
-    @required VoidCallback postiveButtonFunc,
-    @required VoidCallback negativeButtonFunc
+    @required String negativeButtonLabel
     }) async{
     return await showGeneralDialog<bool>(
       context: context, 
