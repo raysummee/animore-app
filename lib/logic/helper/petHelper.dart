@@ -51,6 +51,15 @@ class PetHelper {
   }
 
   Future<bool> delete(int petId) async{
+    var provider = Provider.of<PetSelectNotify>(navigatorKey.currentContext, listen: false);
+    if(provider.id==petId){
+      int newId = (await all()).first.id;
+      provider.id = newId;
+    }
+    if(defaultId()==petId){
+      int newId = (await all()).first.id;
+      await saveDefaultId(newId);
+    }
     (await Hive.openBox<ModelPet>("pet")).delete(petId);
     return true;
   }
