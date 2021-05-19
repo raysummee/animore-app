@@ -6,6 +6,8 @@ import 'package:animore/logic/api/base/baseHttp.dart' as http;
 import 'package:animore/logic/helper/authenticationHelper.dart';
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
+import 'package:animore/main.dart';
+import 'package:animore/ux/components/dialog/confirmDialog.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
@@ -61,7 +63,18 @@ class ApiPet{
     );
   }
 
-   Future<bool> delete(int petId) async{
+   Future<bool> delete(int petId, String petName) async{
+
+    bool confirm = await ConfirmDialog.show(
+      navigatorKey.currentContext, 
+      title: "Delete?", 
+      content: "'$petName' pet will be deleted! Do you want to continue?", 
+      positiveButtonLabel: "Delete", 
+      negativeButtonLabel: "Cancel"
+    );
+
+    if(!confirm)return false;
+
     var url = Uri.parse("$host/pet/$petId");
     
     return await http.delete(
