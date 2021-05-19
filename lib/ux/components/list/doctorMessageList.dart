@@ -5,11 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class DoctorMessagePage extends StatelessWidget {
+class DoctorMessagePage extends StatefulWidget {
+  @override
+  _DoctorMessagePageState createState() => _DoctorMessagePageState();
+}
+
+class _DoctorMessagePageState extends State<DoctorMessagePage> {
+  Future<void> allAppointment;
+  @override
+  void initState() {
+    allAppointment = ApiVeterinaryBook().allAppointmentAuthenticated();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ApiVeterinaryBook().allAppointmentAuthenticated(),
+      future: allAppointment,
       builder: (context, snapshot) {
         return ValueListenableBuilder(
           valueListenable: Hive.box<ModelVetBook>("vetBook").listenable(), 

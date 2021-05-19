@@ -6,7 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class HealPage extends StatelessWidget {
+class HealPage extends StatefulWidget {
+  @override
+  _HealPageState createState() => _HealPageState();
+}
+
+class _HealPageState extends State<HealPage> {
+  Future allVeterinary;
+  @override
+  void initState() {
+    allVeterinary = ApiVeterinary().all();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +65,7 @@ class HealPage extends StatelessWidget {
                       ),
                       MediicHeaderListHorizontal(),
                       FutureBuilder<void>(
-                        future: ApiVeterinary().all(),
+                        future: allVeterinary,
                         builder: (context, snapshot) {
                           return ValueListenableBuilder(
                             valueListenable: Hive.box<ModelDoctor>("veterinary").listenable(),
