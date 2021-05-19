@@ -4,6 +4,9 @@ import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
+import 'package:animore/logic/provider/petSelectNotify.dart';
+import 'package:animore/logic/util/dateUtil.dart';
+import 'package:animore/main.dart';
 import 'package:animore/ux/components/button/MediumRoundedButton.dart';
 import 'package:animore/ux/components/button/editTodoButton.dart';
 import 'package:animore/ux/components/button/mediumButton.dart';
@@ -17,6 +20,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 class TodosPage extends StatefulWidget {
   final ScrollController controller;
@@ -35,6 +39,7 @@ class _TodosPageState extends State<TodosPage> {
   }
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<PetSelectNotify>(context);
     return Container(
       width: double.infinity,
       color: Colors.cyan.withOpacity(0.03),
@@ -48,8 +53,8 @@ class _TodosPageState extends State<TodosPage> {
                 maxWidth: 800,
               ),
               width: MediaQuery.of(context).size.width,
-              child: ValueListenableBuilder(
-                valueListenable: TodosHelper().today().listenable(), 
+              child: Hive.isBoxOpen("Todos_${DateUtil().todayWeekName()}_${provider.id}")? ValueListenableBuilder(
+                valueListenable: Hive.box<ModelTodos>("Todos_${DateUtil().todayWeekName()}_${provider.id}").listenable(), 
                 builder: (context, Box<ModelTodos> box, child) {
                   if(box.isNotEmpty){
                     return ListView.separated(
@@ -103,6 +108,8 @@ class _TodosPageState extends State<TodosPage> {
                     );
                   }
                 }
+              ):Center(
+                child: CircularProgressIndicator()
               ),
             ),
           );
