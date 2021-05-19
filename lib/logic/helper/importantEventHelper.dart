@@ -40,4 +40,9 @@ class ImportantEventHelper{
     await box.deleteAt(index);
   }
 
+  Future<void> deleteAll() async{
+    Box<ModelImportantEvent> box = await Hive.openBox<ModelImportantEvent>("importantEvent");
+    await box.clear();
+  }
+
 }
