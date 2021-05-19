@@ -75,7 +75,7 @@ class EditPetTodosPage extends StatelessWidget {
                           weekName: provider.weekName
                         );
                       },
-                      subtitle: DateFormat("HH:mm aa").format(box.getAt(index).time),
+                      subtitle: DateFormat("hh:mm aa").format(box.getAt(index).time),
                     )
                   ),
                   itemCount: box.length
