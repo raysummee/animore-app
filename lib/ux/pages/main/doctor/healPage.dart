@@ -1,7 +1,6 @@
 import 'package:animore/logic/api/apiVeterinary.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:animore/ux/components/card/doctorCard.dart';
-import 'package:animore/ux/components/card/medicHeaderCard.dart';
 import 'package:animore/ux/components/list/medicHeaderListHorizontal.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

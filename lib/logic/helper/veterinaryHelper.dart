@@ -1,5 +1,4 @@
 import 'package:animore/logic/model/modelDoctor.dart';
-import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:hive/hive.dart';
 
 class VeterinaryHelper{

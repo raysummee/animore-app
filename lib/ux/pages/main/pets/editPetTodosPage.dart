@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:animore/logic/helper/todosHelper.dart';
-import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/components/button/cardButton.dart';

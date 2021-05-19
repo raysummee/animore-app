@@ -1,4 +1,3 @@
-import 'package:animore/logic/model/modelDoctor.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'modelTodos.g.dart';

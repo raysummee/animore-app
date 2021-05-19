@@ -1,5 +1,4 @@
 import 'package:animore/logic/api/authentication/auth.dart';
-import 'package:animore/logic/Helper/authenticationHelper.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:flutter/material.dart';
 

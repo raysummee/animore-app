@@ -3,7 +3,6 @@ import 'package:animore/logic/model/modelMessage.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
 import 'package:animore/ux/components/appbar/chatAppbar.dart';
 import 'package:animore/ux/components/group/chatInputGroup.dart';
-import 'package:animore/ux/components/others/customCircleAvatar.dart';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

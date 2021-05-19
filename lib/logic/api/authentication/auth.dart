@@ -1,9 +1,6 @@
 import 'package:animore/logic/api/authentication/apiAuthentication.dart';
-import 'package:animore/logic/errors/infoError.dart';
-import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/logic/Helper/authenticationHelper.dart';
-import 'package:animore/main.dart';
 import 'package:animore/ux/components/dialog/infoDialog.dart';
 import 'package:animore/ux/components/loader/IndeterminateLoader.dart';
 import 'package:animore/ux/pages/main/navPages.dart';

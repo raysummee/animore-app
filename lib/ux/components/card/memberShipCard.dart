@@ -1,4 +1,3 @@
-import 'package:animore/ux/components/complex/carousel/carouselList.dart';
 import 'package:flutter/material.dart';
 
 class MemberShipCard extends StatelessWidget {

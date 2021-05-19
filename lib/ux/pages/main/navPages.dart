@@ -5,7 +5,6 @@ import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/ux/components/button/navButton.dart';
 import 'package:animore/ux/pages/main/doctor/doctorPage.dart';
-import 'package:animore/ux/pages/main/shop/merchantPage.dart';
 import 'package:animore/ux/pages/main/shop/shopPage.dart';
 import 'package:animore/ux/pages/main/profile/profilePage.dart';
 import 'package:animore/ux/pages/main/doctor/healPage.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-import '../../../main.dart';
 
 
 class NavPages extends StatefulWidget {

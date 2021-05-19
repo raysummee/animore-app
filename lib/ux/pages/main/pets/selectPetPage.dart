@@ -1,24 +1,15 @@
 import 'dart:io';
 
 import 'package:animore/logic/helper/petHelper.dart';
-import 'package:animore/logic/helper/todosHelper.dart';
-import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
-import 'package:animore/logic/model/modelTodos.dart';
-import 'package:animore/logic/provider/weekSelectNotify.dart';
-import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/button/petSelectButton.dart';
 import 'package:animore/ux/components/card/petAddCard.dart';
-import 'package:animore/ux/components/complex/customDropdown/customDropdown.dart';
-import 'package:animore/ux/components/dialog/editTodosDialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 
 class SelectPetPage extends StatelessWidget {
   static showBottomSheet(BuildContext context){

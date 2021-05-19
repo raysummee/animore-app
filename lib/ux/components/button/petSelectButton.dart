@@ -1,14 +1,11 @@
 import 'package:animore/logic/api/apiImportantEvent.dart';
 import 'package:animore/logic/api/apiTodos.dart';
-import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petSelectNotify.dart';
 import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class PetSelectButton extends StatelessWidget {
   final ModelPet pet;

@@ -1,22 +1,11 @@
-import 'dart:io';
 
 import 'package:animore/logic/api/apiPet.dart';
-import 'package:animore/logic/model/modelImportantEvent.dart';
-import 'package:animore/logic/model/modelPet.dart';
-import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/logic/util/dateUtil.dart';
 import 'package:animore/logic/util/validator.dart';
 import 'package:animore/ux/components/complex/avatar/avatarEditBig.dart';
-import 'package:animore/ux/components/dialog/editEventDialog.dart';
 import 'package:animore/ux/components/loader/indeterminateLoader.dart';
-import 'package:animore/ux/pages/main/pets/editPetEventPage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 
 class PetAddCard extends StatefulWidget {
   final bool bottom;

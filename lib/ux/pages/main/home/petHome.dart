@@ -1,6 +1,4 @@
 import 'package:animated_size_and_fade/animated_size_and_fade.dart';
-import 'package:animore/logic/api/apiImportantEvent.dart';
-import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/helper/importantEventHelper.dart';
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';

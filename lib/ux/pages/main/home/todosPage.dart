@@ -1,25 +1,13 @@
-import 'dart:io';
 
 import 'package:animore/logic/api/apiTodos.dart';
-import 'package:animore/logic/helper/petHelper.dart';
-import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
 import 'package:animore/logic/provider/petSelectNotify.dart';
 import 'package:animore/logic/util/dateUtil.dart';
-import 'package:animore/main.dart';
-import 'package:animore/ux/components/button/MediumRoundedButton.dart';
-import 'package:animore/ux/components/button/editTodoButton.dart';
-import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/card/todoCard.dart';
-import 'package:animore/ux/pages/main/pets/editPetEventPage.dart';
 import 'package:animore/ux/pages/main/pets/editPetTodosPage.dart';
-import 'package:animore/ux/pages/main/pets/selectPetPage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class TodosPage extends StatefulWidget {

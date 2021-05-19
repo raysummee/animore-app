@@ -1,4 +1,3 @@
-import 'package:animore/logic/errors/infoError.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmDialog extends StatelessWidget {

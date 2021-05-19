@@ -1,4 +1,3 @@
-import 'package:animore/logic/api/apiTodos.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/socket/veterinarySocket.dart';
 import 'package:animore/logic/util/hiveLoader.dart';

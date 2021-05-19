@@ -1,4 +1,3 @@
-import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/button/MediumRoundedButton.dart';
 import 'package:flutter/material.dart';
 

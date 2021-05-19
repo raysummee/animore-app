@@ -1,10 +1,8 @@
-import 'dart:convert';
 
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/socket/pusher.dart';
 import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
-import 'package:animore/logic/helper/authenticationHelper.dart';
 import 'package:animore/logic/helper/veterinaryBookHelper.dart';
 import 'package:animore/logic/helper/veterinaryHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';

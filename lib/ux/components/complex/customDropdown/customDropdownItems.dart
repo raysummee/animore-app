@@ -1,6 +1,5 @@
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class CustomDropdownItems extends StatelessWidget {

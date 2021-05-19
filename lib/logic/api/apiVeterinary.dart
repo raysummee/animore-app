@@ -1,11 +1,7 @@
-import 'dart:convert';
 
 import 'package:animore/logic/api/apiConfig.dart';
-import 'package:animore/logic/enum/bookStatusEnum.dart';
-import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/helper/veterinaryHelper.dart';
 import 'package:animore/logic/model/modelDoctor.dart';
-import 'package:intl/intl.dart';
 
 import 'base/baseHttp.dart' as http;
 

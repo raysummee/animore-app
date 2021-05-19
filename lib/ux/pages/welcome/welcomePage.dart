@@ -1,9 +1,4 @@
-import 'package:animore/ux/components/button/MediumRoundedButton.dart';
-import 'package:animore/ux/components/button/cardButton.dart';
-import 'package:animore/ux/components/button/mediumButton.dart';
 import 'package:animore/ux/components/button/primaryIconButton.dart';
-import 'package:animore/ux/components/button/primaryRoundedButton.dart';
-import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:animore/ux/components/complex/carousel/carouselLanding.dart';
 import 'package:animore/ux/pages/welcome/welcomeCredentialPage.dart';
 import 'package:flutter/material.dart';

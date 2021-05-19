@@ -1,8 +1,5 @@
 import 'package:animore/logic/enum/bookStatusEnum.dart';
 import 'package:animore/logic/model/modelVetBook.dart';
-import 'package:animore/ux/components/button/mediumButton.dart';
-import 'package:animore/ux/components/button/primaryRoundedButton.dart';
-import 'package:animore/ux/components/button/smallRoundedButton.dart';
 import 'package:animore/ux/components/group/horizontalIconAndTextGroup.dart';
 import 'package:animore/ux/components/others/customCircleAvatar.dart';
 import 'package:animore/ux/pages/main/doctor/messageDoctorPage.dart';

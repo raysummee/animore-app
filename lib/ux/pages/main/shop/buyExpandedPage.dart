@@ -1,7 +1,4 @@
-import 'package:animore/logic/model/modelCart.dart';
 import 'package:animore/logic/model/modelShoppingCardItem.dart';
-import 'package:animore/ux/components/button/mediumButton.dart';
-import 'package:animore/ux/components/card/memberShipCard.dart';
 import 'package:animore/ux/components/card/starCard.dart';
 import 'package:animore/ux/components/dialog/bottomSheetBuy.dart';
 import 'package:animore/ux/components/dialog/dialogLogin.dart';

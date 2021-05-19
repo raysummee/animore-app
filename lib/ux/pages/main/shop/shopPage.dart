@@ -1,9 +1,6 @@
 import 'package:animore/logic/model/modelReviews.dart';
 import 'package:animore/logic/model/modelShoppingCardItem.dart';
-import 'package:animore/ux/components/button/mediumButton.dart';
-import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
 import 'package:animore/ux/components/grid/gridShopping.dart';
-import 'package:animore/ux/pages/main/moreViewBuy.dart';
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatelessWidget {

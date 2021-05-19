@@ -1,20 +1,8 @@
-import 'package:animore/logic/api/apiPet.dart';
-import 'package:animore/logic/api/apiTodos.dart';
-import 'package:animore/logic/model/modelPet.dart';
-import 'package:animore/logic/model/modelTodos.dart';
-import 'package:animore/logic/util/dateUtil.dart';
-import 'package:animore/ux/components/button/editTodoButton.dart';
-import 'package:animore/ux/components/card/petCard.dart';
-import 'package:animore/ux/components/card/todoCard.dart';
 import 'package:animore/ux/components/complex/profileStatusQuick.dart';
-import 'package:animore/ux/components/dialog/animalAbuseDialog.dart';
-import 'package:animore/ux/components/complex/animated/appearingFromBottomWidget.dart';
 import 'package:animore/ux/components/others/todayWeekCalender.dart';
 import 'package:animore/ux/pages/main/home/petHome.dart';
 import 'package:animore/ux/pages/main/home/todosPage.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class HomeWelcomePage extends StatefulWidget {
   final String type;

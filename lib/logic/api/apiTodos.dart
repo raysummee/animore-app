@@ -1,12 +1,10 @@
 
 import 'dart:convert';
 
-import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/api/base/baseHttp.dart' as http;
 import 'package:animore/logic/helper/petHelper.dart';
 import 'package:animore/logic/helper/todosHelper.dart';
 import 'package:animore/logic/model/modelTodos.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:animore/main.dart';
 import 'apiConfig.dart';
