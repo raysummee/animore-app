@@ -66,6 +66,9 @@ class ApiPet{
 
    Future<bool> delete(int petId, String petName) async{
 
+    int petCount = (await PetHelper().all()).length;
+    if(petCount==1) return false;
+
     bool confirm = await ConfirmDialog.show(
       navigatorKey.currentContext, 
       title: "Delete?", 
