@@ -3,6 +3,7 @@ import 'package:animore/logic/api/apiPet.dart';
 import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
+import 'package:animore/ux/components/loader/indeterminateLoader.dart';
 import 'package:animore/ux/pages/main/pets/editPetEventPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -217,7 +218,8 @@ class _PetEditCardState extends State<PetEditCard> {
                       "Save"
                     ),
                     onPressed: () async{
-                      ApiPet().edit(
+                      IndeterminateLoader.show(context);
+                      await ApiPet().edit(
                         widget.pet.id,
                         bread: breadController.text,
                         dob: dob,
@@ -225,6 +227,7 @@ class _PetEditCardState extends State<PetEditCard> {
                         type: typeController.text
                       );
                       provider.isEditing = false;
+                      IndeterminateLoader.hide();
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(80, 45),
