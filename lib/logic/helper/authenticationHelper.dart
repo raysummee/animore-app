@@ -19,6 +19,7 @@ class AuthenticationHelper {
   }
 
   ModelUser getUser() {
+    if(!Hive.isBoxOpen("user"))return null;
     Box<ModelUser> box = Hive.box<ModelUser>("user");
     if(box.isNotEmpty&&box.containsKey("user"))
     return box.get("user");
