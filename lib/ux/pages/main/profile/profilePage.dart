@@ -87,6 +87,12 @@ class ProfilePage extends StatelessWidget {
                         ),
                       );
                     }
+                  ),
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: BackButton(color: Colors.white,),
+                    )
                   )
                 ],
               ),

@@ -4,6 +4,7 @@ import 'package:animore/logic/model/modelImportantEvent.dart';
 import 'package:animore/logic/model/modelPet.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/ux/pages/main/pets/selectPetPage.dart';
+import 'package:animore/ux/pages/main/profile/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
@@ -126,13 +127,15 @@ class PetCard extends StatelessWidget {
                               color: Colors.cyan,
                               child: InkWell(
                                 onTap: (){
-                                  ApiPet().delete(pet.id, pet.name);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_)=> ProfilePage(), fullscreenDialog: true),
+                                  );
                                 },
                                 splashColor: Colors.deepOrange,
                                 child: Container(
                                   height: 40,
                                   width: 40,
-                                  child: Icon(Icons.remove_circle, color: Colors.white,),
+                                  child: Icon(Icons.settings, color: Colors.white,),
                                 ),
                               ),
                             ),
