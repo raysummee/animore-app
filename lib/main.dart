@@ -32,10 +32,8 @@ class Animore extends StatelessWidget {
     );
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<NavBarIndexNotify>(create: (_)=>NavBarIndexNotify(),),
         ChangeNotifierProvider<LandingPageCarouselNotify>(create: (_)=>LandingPageCarouselNotify()),
         ChangeNotifierProvider<PetCardEditNotify>(create: (_)=>PetCardEditNotify()),
-        ChangeNotifierProvider<VetBookSliderNotify>(create: (_)=>VetBookSliderNotify()),
         ChangeNotifierProvider<WeekSelectNotify>(create: (_)=>WeekSelectNotify()),
         ChangeNotifierProvider<PetSelectNotify>(create: (_)=>PetSelectNotify())
       ],
