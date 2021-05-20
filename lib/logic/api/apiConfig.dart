@@ -5,6 +5,6 @@ String stagingHost = "https://agile-mesa-13515.herokuapp.com";
 String prodHost = "https://animore-responsible-warthog-yw.eu-gb.mybluemix.net";
 
 
-String hostRoot = stagingHost;
+String hostRoot = prodHost;
 
 String host = "$hostRoot/api";
