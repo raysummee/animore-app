@@ -1,8 +1,6 @@
 import 'package:animore/logic/provider/landingPageCarouselNotify.dart';
-import 'package:animore/logic/provider/navBarIndexNotify.dart';
 import 'package:animore/logic/provider/petCardEditNotify.dart';
 import 'package:animore/logic/provider/petSelectNotify.dart';
-import 'package:animore/logic/provider/vetBookSliderNotify.dart';
 import 'package:animore/logic/provider/weekSelectNotify.dart';
 import 'package:animore/ux/pages/commons/startup.dart';
 import 'package:flutter/material.dart';

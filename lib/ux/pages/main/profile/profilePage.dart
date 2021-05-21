@@ -3,7 +3,6 @@ import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
-import 'package:animore/ux/pages/main/shop/cartPage.dart';
 import 'package:animore/ux/pages/main/profile/contactPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -107,9 +106,7 @@ class ProfilePage extends StatelessWidget {
                         border: Border.all(color: Colors.grey.shade200)
                       ),
                       child: CardButton("View Cart", Icons.shopping_cart, Colors.cyan.shade50, (){
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_)=> CartPage())
-                        );
+                        
                       })
                     ),
                     CardButton("Contact Us", Icons.unfold_less, Colors.white, (){
