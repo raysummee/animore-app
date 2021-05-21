@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/raysummee/animore">
+  <a href="https://github.com/raysummee/animore-app">
     <img src="android/app/src/main/ic_launcher-playstore.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -22,9 +22,9 @@
     <br />
     <a href="https://animore.web.app">View Web App</a>
     ·
-    <a href="https://github.com/raysummee/animore/issues">Report Bug</a>
+    <a href="https://github.com/raysummee/animore-app/issues">Report Bug</a>
     ·
-    <a href="https://github.com/raysummee/animore/issues">Request Feature</a>
+    <a href="https://github.com/raysummee/animore-app/issues">Request Feature</a>
   </p>
 </p>
 
@@ -57,7 +57,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][web-screenshot]](https://example.com) [![Product Name Screen Shot][mobile-screenshot]](https://example.com)
+[![Product Name Screen Shot][web-screenshot]](https://github.com/raysummee/animore-app/screenshots) [![Product Name Screen Shot][mobile-screenshot]](https://github.com/raysummee/animore-app/screenshots)
 
 Every one love pets, and might have one too. Taking care of the pet is crucial. They need regular activities: food, walk, bath, etc. When we have more than one pet, it become difficult. This app will help you dealing with the problems
 
@@ -100,7 +100,7 @@ To setup flutter environment, follow:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/raysummee/animore.git
+   git clone https://github.com/raysummee/animore-app.git
    ```
 3. Install pub packages
    ```sh
@@ -120,13 +120,13 @@ If your having any problem installing the flutter. You can check for any error w
 flutter doctor
 ```
 
-_For more info, please refer to the [Flutter.dev](https://flutter.ddev)_
+_For more info, please refer to the [Flutter.dev](https://flutter.dev)_
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-See the [open issues](https://github.com/raysummee/animore/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/raysummee/animore-app/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -152,7 +152,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Angshuman Barpujari - [@angshuman_barpujari](https://instagram.com/angshuman_barpujari) - raysummee@gmail.com
 
-Project Link: [https://github.com/raysummee/animore](https://github.com/raysummee/animore)
+Project Link: [https://github.com/raysummee/animore-app](https://github.com/raysummee/animore-app)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
