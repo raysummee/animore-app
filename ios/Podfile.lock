@@ -1,52 +1,27 @@
 PODS:
-  - CryptoSwift (0.15.0)
   - Flutter (1.0.0)
-  - flutter_pusher_client (0.3.1):
-    - Flutter
-    - PusherSwift (~> 7.2)
   - flutter_secure_storage (3.3.1):
     - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - PusherSwift (7.2.0):
-    - CryptoSwift (~> 0.9)
-    - ReachabilitySwift (= 4.3.0)
-    - Starscream (~> 3.0.5)
-  - ReachabilitySwift (4.3.0)
-  - Starscream (3.0.6)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_pusher_client (from `.symlinks/plugins/flutter_pusher_client/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-
-SPEC REPOS:
-  trunk:
-    - CryptoSwift
-    - PusherSwift
-    - ReachabilitySwift
-    - Starscream
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_pusher_client:
-    :path: ".symlinks/plugins/flutter_pusher_client/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
-  CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  flutter_pusher_client: c882bc29ad7af3e2d47b2c175b8252ab2ce7e9c6
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  PusherSwift: a5369a01e8a9106b4897e9186265af1426726062
-  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
 PODFILE CHECKSUM: 3dffd8c48b531d21ec0ec153c22dc8e3a6223bc9
 

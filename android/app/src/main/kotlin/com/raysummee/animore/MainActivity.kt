@@ -1,4 +1,4 @@
-package com.raysummee.animore.animore
+package com.raysummee.animore
 
 import io.flutter.embedding.android.FlutterActivity
 
