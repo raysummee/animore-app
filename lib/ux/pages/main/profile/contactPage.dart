@@ -51,11 +51,60 @@ class ContactPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                width: double.infinity,
                 color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: Container()
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 50),
+                      child: Container(
+                        child: SelectableText.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Hi, I'm "
+                              ),
+                              TextSpan(
+                                text: "Angshuman Barpujari ",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                                )
+                              ),
+                              TextSpan(
+                                text: "developer of the app Animore. I found that taking care of pet is quite difficult when you have more than one pet in your home. They need special care, regular activities: like food, walk, play, etc. This app will help you to manage them. You can create daily weekwise activities for each pet. I will try to provide this app to you free but as costing of server is there in account I hope for some donation. And if any developer want to contribute to this project can contact me"
+                              ),
+                              TextSpan(
+                                text: "\n\nEmail: "
+                              ),
+                              TextSpan(
+                                text: "raysummee@gmail.com",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                                )
+                              ),
+                              TextSpan(
+                                text: "\nGithub: "
+                              ),
+                              TextSpan(
+                                text: "github.com/raysummee",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                                )
+                              ),
+                              
+
+                            ]
+                          ),
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            height: 1.2,
+                            fontSize: 18
+                          ),
+                        ),
+                      )
+                    ),
+                  ),
                 ),
               ),
             )

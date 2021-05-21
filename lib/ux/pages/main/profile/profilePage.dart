@@ -1,11 +1,14 @@
+import 'package:animore/logic/api/apiConfig.dart';
 import 'package:animore/logic/api/authentication/auth.dart';
 import 'package:animore/logic/enum/roleEnum.dart';
 import 'package:animore/logic/model/modelUser.dart';
 import 'package:animore/ux/components/button/cardButton.dart';
 import 'package:animore/ux/components/complex/wave/waveBody.dart';
+import 'package:animore/ux/components/dialog/infoDialog.dart';
 import 'package:animore/ux/pages/main/profile/contactPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -105,8 +108,18 @@ class ProfilePage extends StatelessWidget {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade200)
                       ),
-                      child: CardButton("View Cart", Icons.shopping_cart, Colors.cyan.shade50, (){
-                        
+                      child: CardButton("Switch Server", FlutterIcons.server_faw, Colors.cyan.shade50, (){
+                        if(hostRoot==stagingHost){
+                          hostRoot = staging2Host;
+                        }else{
+                          hostRoot = stagingHost;
+                        }
+                        InfoDialog.show(
+                          context,
+                          title: "Switched Server: ${hostRoot.split(".")[1]}",
+                          content: "Server has been switched temporarily. If app doesn't work please switch back to default",
+                          buttonLabel: "I Understand"
+                        );
                       })
                     ),
                     CardButton("Contact Us", Icons.unfold_less, Colors.white, (){
