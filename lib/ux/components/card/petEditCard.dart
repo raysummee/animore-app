@@ -183,7 +183,7 @@ class _PetEditCardState extends State<PetEditCard> {
                         fontWeight: FontWeight.w500
                       ),
                       decoration: InputDecoration(
-                        hintText: "Bread",
+                        hintText: "Breed",
                       ),
                     ),
                   ),
